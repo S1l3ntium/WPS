@@ -1,0 +1,18 @@
+# Postman local files
+*.json~
+*.postman_backup.json
+
+# API credentials and tokens (never commit these!)
+# Update environments/*.json with your own values
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Postman local variables
+.env.local
+.env.*.local
