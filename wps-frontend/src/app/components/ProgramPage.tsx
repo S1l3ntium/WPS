@@ -3,7 +3,7 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { Download } from 'lucide-react';
 import { eventsAPI } from '../../services/api';
-import { useLocale } from '../../context/LocaleContext';
+import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 
 interface Event {
@@ -19,7 +19,7 @@ interface Event {
 
 export function ProgramPage() {
   const navigate = useLocaleNavigate();
-  const { locale, t } = useLocale();
+  const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState<'program' | 'architecture' | 'documents'>('program');
   const [selectedDate, setSelectedDate] = useState<string>('all');
   const [events, setEvents] = useState<Event[]>([]);
@@ -47,14 +47,14 @@ export function ProgramPage() {
         setEvents(transformedEvents);
       } catch (err) {
         console.error('Failed to fetch events:', err);
-        setError(locale === 'ru' ? 'Не удалось загрузить события. Пожалуйста, попробуйте позже.' : 'Failed to load events. Please try again later.');
+        setError(t('programPage.errorLoadingEvents'));
       } finally {
         setLoading(false);
       }
     };
 
     loadEvents();
-  }, [locale, t]);
+  }, [t]);
 
   const uniqueDates = ['all', ...Array.from(new Set(events.map(e => e.date)))];
   const allTags = Array.from(new Set(events.flatMap(e => e.tags)));
@@ -91,8 +91,8 @@ export function ProgramPage() {
         <section className="bg-white py-16">
           <div className="max-w-7xl mx-auto px-8">
             <h1 className="text-4xl mb-4 text-[#1a1f4d]">
-              {locale === 'ru' ? 'Программа' : 'Program'}<br />
-              {locale === 'ru' ? 'Всемирной Общественной Ассамблеи' : 'of the World Public Assembly'}
+              {t('programPage.pageTitle')}<br />
+              {t('programPage.subtitle')}
             </h1>
           </div>
         </section>
@@ -109,7 +109,7 @@ export function ProgramPage() {
                     : 'border-gray-300 text-gray-600 hover:border-gray-400'
                 }`}
               >
-                {locale === 'ru' ? 'Программа' : 'Program'}
+                {t('programPage.programTab')}
               </button>
               <button
                 onClick={() => setSelectedTab('architecture')}
@@ -119,7 +119,7 @@ export function ProgramPage() {
                     : 'border-gray-300 text-gray-600 hover:border-gray-400'
                 }`}
               >
-                {locale === 'ru' ? 'Архтектура программы' : 'Program Architecture'}
+                {t('programPage.architectureTab')}
               </button>
               <button
                 onClick={() => setSelectedTab('documents')}
@@ -129,7 +129,7 @@ export function ProgramPage() {
                     : 'border-gray-300 text-gray-600 hover:border-gray-400'
                 }`}
               >
-                {locale === 'ru' ? 'Итоговые документы' : 'Final Documents'}
+                {t('programPage.documentsTab')}
               </button>
             </div>
           </div>
@@ -149,7 +149,7 @@ export function ProgramPage() {
                         : 'bg-white text-gray-700 hover:bg-gray-50 border-r'
                     }`}
                   >
-                    {locale === 'ru' ? 'Все дни' : 'All Days'}
+                    {t('programPage.allDays')}
                   </button>
                   <button
                     onClick={() => setSelectedDate('19.09.2025')}
@@ -159,7 +159,7 @@ export function ProgramPage() {
                         : 'bg-white text-gray-700 hover:bg-gray-50 border-r'
                     }`}
                   >
-                    19.09.2025 {locale === 'ru' ? '(Пт)' : '(Fri)'}
+                    19.09.2025 (Пт)
                   </button>
                   <button
                     onClick={() => setSelectedDate('20.09.2025')}
@@ -169,7 +169,7 @@ export function ProgramPage() {
                         : 'bg-white text-gray-700 hover:bg-gray-50 border-r'
                     }`}
                   >
-                    20.09.2025 {locale === 'ru' ? '(Сб)' : '(Sat)'}
+                    20.09.2025 (Сб)
                   </button>
                   <button
                     onClick={() => setSelectedDate('21.09.2025')}
@@ -179,7 +179,7 @@ export function ProgramPage() {
                         : 'bg-white text-gray-700 hover:bg-gray-50'
                     }`}
                   >
-                    21.09.2025 {locale === 'ru' ? '(Вс)' : '(Sun)'}
+                    21.09.2025 (Вс)
                   </button>
                 </div>
               </div>
@@ -190,7 +190,7 @@ export function ProgramPage() {
               <div className="max-w-7xl mx-auto px-8">
                 {loading && (
                   <div className="text-center py-12 text-gray-500">
-                    {locale === 'ru' ? 'Загрузка мероприятий...' : 'Loading events...'}
+                    {t('programPage.loadingEvents')}
                   </div>
                 )}
                 {error && (
@@ -200,7 +200,7 @@ export function ProgramPage() {
                 )}
                 {!loading && !error && Object.keys(groupedEvents).length === 0 ? (
                   <div className="text-center py-12 text-gray-500">
-                    {locale === 'ru' ? 'Нет мероприятий по выбранным фильтрам' : 'No events match the selected filters'}
+                    {t('programPage.noEventsFound')}
                   </div>
                 ) : (
                   Object.entries(groupedEvents).map(([date, dateEvents]) => (
@@ -213,9 +213,7 @@ export function ProgramPage() {
                             className="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-lg transition-shadow cursor-pointer"
                           >
                             <div className="text-sm text-gray-900 mb-4">
-                              {event.date.split('.')[0]} {
-                                locale === 'ru' ? 'сентября' : 'September'
-                              } {event.time}
+                              {event.date.split('.')[0]} {t('programPage.september')} {event.time}
                             </div>
                             
                             <h3 className="text-lg mb-4 text-[#4db8b8] leading-snug">
@@ -228,10 +226,10 @@ export function ProgramPage() {
                             
                             <div className="flex gap-3">
                               <button className="px-6 py-2 bg-[#1a1f4d] text-white rounded-full text-sm hover:bg-[#2c3570] transition-colors">
-                                {locale === 'ru' ? 'Программа' : 'Program'}
+                                {t('programPage.programButton')}
                               </button>
                               <button className="px-6 py-2 bg-[#1a1f4d] text-white rounded-full text-sm hover:bg-[#2c3570] transition-colors">
-                                {locale === 'ru' ? 'Трансляция' : 'Stream'}
+                                {t('programPage.streamButton')}
                               </button>
                             </div>
                           </div>
@@ -250,33 +248,28 @@ export function ProgramPage() {
             <div className="max-w-7xl mx-auto px-8">
               <div className="bg-white rounded-lg border border-gray-200 p-8">
                 <h2 className="text-2xl mb-6 text-[#1a1f4d]">
-                  {locale === 'ru' ? 'Документы Ассамблеи' : 'Assembly Documents'}
+                  {t('programPage.documentsTitle')}
                 </h2>
                 <div className="space-y-4">
                   {[
                     {
-                      ru: 'Программа мероприятий (PDF)',
-                      en: 'Program of Events (PDF)',
+                      key: 'programPage.programDocuments',
                       size: '2.4 MB'
                     },
                     {
-                      ru: 'Итоговая декларация',
-                      en: 'Final Declaration',
+                      key: 'programPage.finalDeclaration',
                       size: '1.8 MB'
                     },
                     {
-                      ru: 'Устав Ассамблеи',
-                      en: 'Assembly Charter',
+                      key: 'programPage.assemblyCharter',
                       size: '3.2 MB'
                     },
                     {
-                      ru: 'Список участников',
-                      en: 'List of Participants',
+                      key: 'programPage.participantsList',
                       size: '1.1 MB'
                     },
                     {
-                      ru: 'Презентационные материалы',
-                      en: 'Presentation Materials',
+                      key: 'programPage.presentationMaterials',
                       size: '15.6 MB'
                     }
                   ].map((doc, idx) => (
@@ -285,12 +278,12 @@ export function ProgramPage() {
                       className="flex items-center justify-between p-4 border border-gray-200 rounded hover:bg-gray-50 transition-colors"
                     >
                       <div>
-                        <div className="mb-1">{locale === 'ru' ? doc.ru : doc.en}</div>
+                        <div className="mb-1">{t(doc.key as any)}</div>
                         <div className="text-sm text-gray-500">{doc.size}</div>
                       </div>
                       <button className="flex items-center gap-2 px-4 py-2 bg-[#1a1f4d] text-white rounded hover:bg-[#2c3570] transition-colors">
                         <Download className="w-4 h-4" />
-                        <span className="text-sm">{locale === 'ru' ? 'Скачать' : 'Download'}</span>
+                        <span className="text-sm">{t('programPage.download')}</span>
                       </button>
                     </div>
                   ))}

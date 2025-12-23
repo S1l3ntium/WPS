@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { useTranslation } from '../../i18n/useTranslation';
 
 export function OrganizersPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Header currentPage="organizers" />
@@ -11,7 +13,7 @@ export function OrganizersPage() {
       <main className="flex-1 px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-[#1a1f4d] mb-12">
-            Организаторы
+            {t('organizersPage.pageTitle')}
           </h1>
 
           <div className="bg-white rounded-lg p-8 border border-gray-200 mb-12">
@@ -28,31 +30,31 @@ export function OrganizersPage() {
               {/* Content */}
               <div className="lg:col-span-9">
                 <h2 className="text-[#1a1f4d] mb-6">
-                  Международный союз неправительственных организаций «Ассамблея Народов Мира»
+                  {t('organizersPage.assemblyTitle')}
                 </h2>
 
                 <div className="space-y-4 text-gray-700 leading-relaxed mb-8">
                   <p>
-                    Ассамблея Народов Мира, являясь одним из международных институтов общественной дипломатии, реализует мероприятия и проекты, направленные на поддержку общественных объединительных стратегий солидарности, отвечающих стратегии сотрудничества народов в условиях многополярного мира.
+                    {t('organizersPage.assemblyDescription1')}
                   </p>
 
                   <p>
-                    Ассамблея открыта для диалога и партнерства со всеми, кто разделяет идеи гармоничного взаимодействия, координации и взаимодополнения усилий государственных и негосударственных организаций в деле сохранения мира и укрепления дружбы между народами. Для обсуждения и решения вопросов конструктивного взаимодействия представителей международного сообщества Ассамблеей Народов Мира инициирована Всемирная Общественная Ассамблея.
+                    {t('organizersPage.assemblyDescription2')}
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-4 max-w-sm">
-                  <button 
+                  <button
                     className="w-full px-8 py-3 bg-[#1a1f4d] text-white rounded-lg hover:bg-[#252b5e] transition-colors"
                     onClick={() => window.open('https://worldpeoplesassembly.org/join', '_blank')}
                   >
-                    Вступить в Ассамблею
+                    {t('organizersPage.joinButton')}
                   </button>
-                  <button 
+                  <button
                     className="w-full px-8 py-3 bg-white text-[#1a1f4d] border-2 border-[#1a1f4d] rounded-lg hover:bg-gray-50 transition-colors"
                     onClick={() => window.open('https://worldpeoplesassembly.org', '_blank')}
                   >
-                    Сайт Ассамблеи
+                    {t('organizersPage.websiteButton')}
                   </button>
                 </div>
               </div>
@@ -65,21 +67,21 @@ export function OrganizersPage() {
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
               <img
                 src="placeholder.png"
-                alt="Мигель Анхель Моратинос"
+                alt={t('organizersPage.greetingPerson')}
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
                 <h3 className="text-[#1a1f4d] mb-3">
-                  Мигель Анхель Моратинос, Заместитель Генерального секретаря ООН
+                  {t('organizersPage.greetingPerson')}
                 </h3>
                 <p className="text-gray-700 text-sm mb-4 leading-relaxed">
-                  Всемирная Общественная Ассамблея и Альянс цивилизации Организации Объединенных Наций имеют общие цели в своей работе, поскольку обе организации стремятся прославлять единство в многообразии
+                  {t('organizersPage.greetingText')}
                 </p>
                 <p className="text-gray-500 text-sm mb-4">
-                  20.09.2025
+                  {t('organizersPage.greetingDate')}
                 </p>
                 <button className="w-full px-6 py-3 bg-[#1a1f4d] text-white rounded-lg hover:bg-[#252b5e] transition-colors">
-                  Читать приветствие
+                  {t('organizersPage.readButton')}
                 </button>
               </div>
             </div>

@@ -4,112 +4,114 @@ const partnershipImage = 'placeholder.png';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { PartnerPackage } from './PartnerPackage';
+import { useTranslation } from '../../i18n/useTranslation';
 
 const partnerPackages = [
   {
     id: 'strategic',
-    title: 'Стратегический партнер',
     category: 'strategic',
-    description: 'Ассамблеей народов Евразии предоставляет Партнеру возможность: создание и развитие Автономной некоммерческой организации «Евразийская Ассамблея народов» как экспертного органа по вопросам межнациональных отношений и этнокультурного развития.',
+    i18nKey: 'strategicPartner',
+    descriptionI18nKey: 'partnersPage.strategicDescription',
     benefits: [
-      'Упоминание названия компании / организации в информационных материалах о мероприятиях, которые проводятся или поддерживаются Ассамблеей',
-      'Размещение логотипа компании / организации в презентационных и иных материалах Ассамблеи',
-      'Упоминание информации о Партнере и цели в публикациях на сайте Ассамблеи и в социальных сетях',
-      'Обеспечение информационной и медийной поддержки мероприятиям и проектам Партнера',
-      'Совместная разработка проектов в соответствии с согласованными программами',
-      'Консультативная помощь по направлениям деятельности Ассамблеи и в организационных вопросах',
-      'Возможность выступить с приветственным словом на мероприятиях, проводимых в рамках Ассамблеи (по согласованию)',
-      'Предоставление полиграфической продукции Ассамблеи (каталоги, брошюры, журналы)',
-      'Возможность участия в качестве эксперта по вопросам мировой экономики, отраслевых проектов, этнокультурного и межнационального взаимодействия',
-      'Организация публичного подписания соглашения о сотрудничестве в присутствии руководителей Ассамблеи и СМИ (по согласованию)',
-      'Возможность размещения баннеров и брендированных конструкций партнера на площадках проведения мероприятий (по согласованию)',
-      'Возможность участия в выставках и иных проектах сопутствующих мероприятиям Ассамблеи'
+      'partnersPage.benefit1',
+      'partnersPage.benefit2',
+      'partnersPage.benefit3',
+      'partnersPage.benefit4',
+      'partnersPage.benefit5',
+      'partnersPage.benefit6',
+      'partnersPage.benefit7',
+      'partnersPage.benefit8',
+      'partnersPage.benefit9',
+      'partnersPage.benefit10',
+      'partnersPage.benefit11',
+      'partnersPage.benefit12'
     ],
     downloadLink: 'Стратегический_партнер_(АНЕ).docx',
-    price: 'От 5 000 000 ₽'
+    priceI18nKey: 'partnersPage.priceStrategic'
   },
   {
     id: 'general',
-    title: 'Генеральный партнер',
     category: 'general',
-    description: 'Соглашение предполагает сотрудничество с партнером на базе проведения им определенных мероприятий в рамках событийного календаря Ассамблеи, реализацию совместных проектов и программ.',
+    i18nKey: 'generalPartner',
+    descriptionI18nKey: 'partnersPage.generalDescription',
     benefits: [
-      'Упоминание названия компании / организации в информационных материалах об мероприятии',
-      'Размещение логотипа компании / организации в презентационных и иных материалах мероприятия',
-      'Размещение полиграфической и сувенирной продукции Партнера в пакетах участников мероприятий (по согласованию)',
-      'Упоминание информации о Партнере и целях сотрудничества на официальном сайте мероприятия, в социальных сетях',
-      'Консультативная помощь в подготовке и проведении мероприятий',
-      'Возможность выступить с приветственным словом на мероприятиях (по согласованию)',
-      'Информационная поддержка профессиональных праздников, юбилейных дат партнера',
-      'Организация публичного подписания соглашения о сотрудничестве в присутствии руководителей Ассамблеи и СМИ (по согласованию)',
-      'Возможность размещения баннеров и брендированных конструкций на площадке проведения мероприятий (по согласованию)',
-      'Возможность участия в выставках и иных проектах, сопутствующих мероприятиям Ассамблеи',
-      'Возможность проведения презентаций, мастер-классов в рамках мероприятий (по согласованию)',
-      'Предоставление выгодных условий размещения рекламы в изданиях Ассамблеи',
-      'Размещение постов о Партнере в аккаунте мероприятия (по согласованию)'
+      'partnersPage.generalBenefit1',
+      'partnersPage.generalBenefit2',
+      'partnersPage.generalBenefit3',
+      'partnersPage.generalBenefit4',
+      'partnersPage.generalBenefit5',
+      'partnersPage.generalBenefit6',
+      'partnersPage.generalBenefit7',
+      'partnersPage.generalBenefit8',
+      'partnersPage.generalBenefit9',
+      'partnersPage.generalBenefit10',
+      'partnersPage.generalBenefit11',
+      'partnersPage.generalBenefit12',
+      'partnersPage.generalBenefit13'
     ],
     downloadLink: 'Генеральный_партнер_(АНЕ).docx',
-    price: 'От 3 000 000 ₽'
+    priceI18nKey: 'partnersPage.priceGeneral'
   },
   {
     id: 'official',
-    title: 'Официальный партнер',
     category: 'official',
-    description: 'Соглашение предполагает установление делового сотрудничества на базе информационного обмена для развития деятельности Ассамблеи и реализации социально значимых проектов.',
+    i18nKey: 'officialPartner',
+    descriptionI18nKey: 'partnersPage.officialDescription',
     benefits: [
-      'Упоминание названия компании / организации в информационных материалах о мероприятиях',
-      'Размещение логотипа компании / организации в презентационных материалах',
-      'Информационная поддержка мероприятий и проектов партнера'
+      'partnersPage.officialBenefit1',
+      'partnersPage.officialBenefit2',
+      'partnersPage.officialBenefit3'
     ],
-    price: 'От 1 000 000 ₽'
+    priceI18nKey: 'partnersPage.priceOfficial'
   },
   {
     id: 'sessions',
-    title: 'Партнеры сессий и тематических площадок',
     category: 'sessions',
-    description: 'Корпоративные партнеры Ассамблеи, компании и организации участвующие в реализации программы мероприятий, как площадка для дискуссий.',
+    i18nKey: 'partnersPage.sessionPartner',
+    descriptionI18nKey: 'partnersPage.sessionsDescription',
     benefits: [
-      'Возможность организации тематической сессии или круглого стола',
-      'Брендирование площадки проведения сессии',
-      'Участие в программе мероприятия',
-      'Информационная поддержка'
+      'partnersPage.sessionBenefit1',
+      'partnersPage.sessionBenefit2',
+      'partnersPage.sessionBenefit3',
+      'partnersPage.sessionBenefit4'
     ],
-    price: 'От 500 000 ₽'
+    priceI18nKey: 'partnersPage.priceSessions'
   },
   {
     id: 'cultural',
-    title: 'Партнер межрегиональной культурной программы',
     category: 'cultural',
-    description: 'Соглашение предполагает организацию «Фестиваля национальных культур» - выступления творческих коллективов, выставки народных ремесел с представлением традиций различных народов, предоставление национальных костюмов и этнических атрибутов, демонстрация элементов культурного наследия народв России. Презентация национальных кухонь.',
+    i18nKey: 'partnersPage.culturalPartner',
+    descriptionI18nKey: 'partnersPage.culturalDescription',
     benefits: [
-      'Организация культурной программы в рамках мероприятий Ассамблеи',
-      'Презентация национальных традиций и культуры',
-      'Участие в фестивале национальных культур',
-      'Медийное освещение культурных мероприятий'
+      'partnersPage.culturalBenefit1',
+      'partnersPage.culturalBenefit2',
+      'partnersPage.culturalBenefit3',
+      'partnersPage.culturalBenefit4'
     ],
-    price: 'От 750 000 ₽'
+    priceI18nKey: 'partnersPage.priceCultural'
   },
   {
     id: 'supplier',
-    title: 'Официальный поставщик',
     category: 'supplier',
-    description: 'Компании или организации предоставляющие услуги или товары поставщика/подрядчика Ассамблеи в рамках договорных отношений: кейтеринг, организация транспортного обслуживания, гостиничное обслуживание, сопутствующее оборудование и прочие.',
+    i18nKey: 'partnersPage.supplierPartner',
+    descriptionI18nKey: 'partnersPage.supplierDescription',
     benefits: [
-      'Упоминание компании как официального поставщика',
-      'Размещение логотипа в информационных материалах',
-      'Возможность предоставления рекламной информации участникам',
-      'Долгосрочное сотрудничество'
+      'partnersPage.supplierBenefit1',
+      'partnersPage.supplierBenefit2',
+      'partnersPage.supplierBenefit3',
+      'partnersPage.supplierBenefit4'
     ],
-    price: 'Индивидуально по договоренности'
+    priceI18nKey: 'partnersPage.priceSupplier'
   }
 ];
 
 export function PartnersPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState<string>('all');
 
-  const filteredPackages = activeFilter === 'all' 
-    ? partnerPackages 
+  const filteredPackages = activeFilter === 'all'
+    ? partnerPackages
     : partnerPackages.filter(pkg => pkg.category === activeFilter);
 
   return (
@@ -123,26 +125,22 @@ export function PartnersPage() {
             <div className="flex items-center gap-16">
               <div className="flex-1">
                 <h1 className="text-5xl mb-8 text-[#1a1f4d] leading-tight">
-                  Партнерство<br />с Ассамблеей
+                  {t('partnersPage.pageTitle')}
                 </h1>
                 <p className="mb-6 leading-relaxed text-gray-700">
-                  Это возможность для организаций внести вклад в формирование 
-                  диалога на глобальном уровне, представить свои инициативы 
-                  в деловой и культурной программе, а также воспользоваться 
-                  эксклюзивными инструментами продвижения.
+                  {t('partnersPage.subtitle')}
                 </p>
                 <p className="mb-8 leading-relaxed text-[#1a1f4d]">
-                  Партнеры получают почетный статус, расширенные 
-                  привилегии и доступ к международной аудитории
+                  {t('partnersPage.benefitsDescription')}
                 </p>
                 <button className="bg-[#4db8b8] hover:bg-[#3da8a8] text-white px-8 py-3 rounded transition-colors">
-                  Скачать презентацию
+                  {t('buttons.downloadPresentation')}
                 </button>
               </div>
               <div className="flex-shrink-0">
-                <img 
-                  src={partnershipImage} 
-                  alt="Партнерство" 
+                <img
+                  src={partnershipImage}
+                  alt={t('partnersPage.pageTitle')}
                   className="w-[480px] h-auto rounded-lg"
                 />
               </div>
@@ -152,8 +150,8 @@ export function PartnersPage() {
 
         {/* Partner packages section */}
         <section className="py-16 max-w-7xl mx-auto">
-          <h2 className="text-3xl mb-8">Варианты партнерских пакетов</h2>
-          
+          <h2 className="text-3xl mb-8">{t('partnersPage.packagesSectionTitle')}</h2>
+
           {/* Filters */}
           <div className="flex gap-3 mb-8 flex-wrap">
             <button
@@ -164,7 +162,7 @@ export function PartnersPage() {
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Все партнерские пакеты
+              {t('partnersPage.allCategories')}
             </button>
             <button
               onClick={() => setActiveFilter('strategic')}
@@ -174,7 +172,7 @@ export function PartnersPage() {
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Стратегический партнер
+              {t('partnersPage.strategicPartner')}
             </button>
             <button
               onClick={() => setActiveFilter('general')}
@@ -184,7 +182,7 @@ export function PartnersPage() {
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Генеральный партнер
+              {t('partnersPage.generalPartner')}
             </button>
             <button
               onClick={() => setActiveFilter('specialized')}
@@ -194,7 +192,7 @@ export function PartnersPage() {
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Партнеры профильных направлений
+              {t('partnersPage.specializedPartners')}
             </button>
           </div>
 
@@ -207,12 +205,12 @@ export function PartnersPage() {
 
           {/* Contact section */}
           <div className="mt-16 border-t pt-8">
-            <h3 className="text-2xl mb-4">Количество стратегических партнеров ограничено</h3>
+            <h3 className="text-2xl mb-4">{t('partnersPage.limitedSpots')}</h3>
             <p className="mb-4 text-gray-600">
-              Для того чтобы оставить заявку на партнерство:
+              {t('partnersPage.applyInstructions')}
             </p>
             <button className="bg-[#1a1f4d] hover:bg-[#2c3570] text-white px-6 py-3 rounded transition-colors">
-              Связаться с нами
+              {t('buttons.contactUs')}
             </button>
           </div>
         </section>

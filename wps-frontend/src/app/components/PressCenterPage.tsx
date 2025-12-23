@@ -4,7 +4,7 @@ import { Footer } from './Footer';
 import { PhotoGallery } from './PhotoGallery';
 import { ChevronRight } from 'lucide-react';
 import { newsAPI } from '../../services/api';
-import { useLocale } from '../../context/LocaleContext';
+import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 
 const newsImage = 'placeholder.png';
@@ -30,7 +30,7 @@ interface Tab {
 
 export function PressCenterPage() {
   const navigate = useLocaleNavigate();
-  const { locale, t } = useLocale();
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<TabType>('all');
   const [publications, setPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
@@ -56,14 +56,14 @@ export function PressCenterPage() {
         setPublications(transformedNews);
       } catch (err) {
         console.error('Failed to fetch publications:', err);
-        setError(locale === 'ru' ? 'Не удалось загрузить публикации. Пожалуйста, попробуйте позже.' : 'Failed to load publications. Please try again later.');
+        setError(t('pressCenterPage.error.loadFailed'));
       } finally {
         setLoading(false);
       }
     };
 
     loadPublications();
-  }, [locale, t]);
+  }, [t]);
 
   const defaultPublications: Publication[] = [
     {
@@ -177,9 +177,9 @@ export function PressCenterPage() {
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <button onClick={() => navigate('/')} className="hover:text-[#4db8b8]">{locale === 'ru' ? 'Главная' : 'Home'}</button>
+            <button onClick={() => navigate('/')} className="hover:text-[#4db8b8]">{t('pressCenterPage.breadcrumbHome')}</button>
             <ChevronRight className="w-4 h-4" />
-            <button onClick={() => navigate('/press-center')} className="hover:text-[#4db8b8]">{locale === 'ru' ? 'Пресс-центр' : 'Press Center'}</button>
+            <button onClick={() => navigate('/press-center')} className="hover:text-[#4db8b8]">{t('pressCenterPage.breadcrumbPress')}</button>
             {activeTab !== 'all' && (
               <>
                 <ChevronRight className="w-4 h-4" />
@@ -220,7 +220,7 @@ export function PressCenterPage() {
             <>
               {loading && (
                 <div className="text-center py-16 text-gray-500">
-                  {locale === 'ru' ? 'Загрузка публикаций...' : 'Loading publications...'}
+                  {t('pressCenterPage.loading')}
                 </div>
               )}
               {error && (
@@ -252,7 +252,7 @@ export function PressCenterPage() {
                         className="border border-[#1a1f4d] text-[#1a1f4d] px-6 py-2 rounded hover:bg-[#1a1f4d] hover:text-white transition-colors"
                         onClick={() => navigate(`/news/${item.id}`)}
                       >
-                        {locale === 'ru' ? 'Подробнее' : 'Read more'}
+                        {t('pressCenterPage.readMore')}
                       </button>
                     </div>
                   </div>
@@ -263,9 +263,9 @@ export function PressCenterPage() {
                   {filteredPublications.length === 0 && (
                     <div className="text-center py-16">
                       {activeTab === 'video' ? (
-                        <p className="text-gray-500">{locale === 'ru' ? 'Видеоматериалы скоро появятся' : 'Videos coming soon'}</p>
+                        <p className="text-gray-500">{t('pressCenterPage.videosComingSoon')}</p>
                       ) : (
-                        <p className="text-gray-500">{locale === 'ru' ? 'Публикации в данной категории скоро появятся' : 'Publications in this category coming soon'}</p>
+                        <p className="text-gray-500">{t('pressCenterPage.publicationsComingSoon')}</p>
                       )}
                     </div>
                   )}

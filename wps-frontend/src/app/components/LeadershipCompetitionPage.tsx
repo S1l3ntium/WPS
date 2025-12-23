@@ -2,41 +2,45 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { ChevronRight } from 'lucide-react';
+import { useTranslation } from '../../i18n/useTranslation';
+import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 const groupImage = 'placeholder.png';
 
 export function LeadershipCompetitionPage() {
   const navigate = useNavigate();
+  const localeNavigate = useLocaleNavigate();
+  const { t } = useTranslation();
   const newsItems = [
     {
       image: groupImage,
-      date: '03.10.2025',
-      title: 'На полях Всемирной Общественной Ассамблеи объявили победителей IV Международного конкурса «Лидер народной дипломатии»',
-      excerpt: 'На полях Первой Всемирной Общественной Ассамблеи состоялись финальные состязания и церемония награждения лауреатов IV Конкурса',
-      highlight: '«Лидер народной дипломатии — 2025»'
+      date: t('leadershipCompetitionPage.news1Date'),
+      titleKey: 'leadershipCompetitionPage.news1Title',
+      excerptKey: 'leadershipCompetitionPage.news1Excerpt',
+      highlightKey: 'leadershipCompetitionPage.news1Highlight'
     },
     {
       image: groupImage,
-      date: '15.09.2025',
-      title: 'Объявлены финалисты IV Международного конкурса «Лидер народной дипломатии»',
-      excerpt: 'По результатам работы экспертного совета определены 60 финалистов, которые примут участие в церемонии награждения'
+      date: t('leadershipCompetitionPage.news2Date'),
+      titleKey: 'leadershipCompetitionPage.news2Title',
+      excerptKey: 'leadershipCompetitionPage.news2Excerpt'
     },
     {
       image: groupImage,
-      date: '31.07.2025',
-      title: 'Завершился образовательный интенсив для участников конкурса',
-      excerpt: 'Более 200 участников из разных стран мира прошли обучение в рамках образовательного онлайн-интенсива'
+      date: t('leadershipCompetitionPage.news3Date'),
+      titleKey: 'leadershipCompetitionPage.news3Title',
+      excerptKey: 'leadershipCompetitionPage.news3Excerpt'
     },
     {
       image: groupImage,
-      date: '15.07.2025',
-      title: 'Завершился прием заявок на участие в IV Международном конкурсе «Лидер народной дипломатии»',
-      excerpt: 'Организаторами Конкурса были получены и обработаны заявки от лидеров общественных организаций из 47 стран мира'
+      date: t('leadershipCompetitionPage.news4Date'),
+      titleKey: 'leadershipCompetitionPage.news4Title',
+      excerptKey: 'leadershipCompetitionPage.news4Excerpt'
     },
     {
       image: groupImage,
-      date: '16.04.2025',
-      title: 'Стартовал прием заявок на IV Международный конкурс «Лидер народной дипломатии»',
-      excerpt: 'Начался прием конкурсных материалов для участия в престижном международном конкурсе'
+      date: t('leadershipCompetitionPage.news5Date'),
+      titleKey: 'leadershipCompetitionPage.news5Title',
+      excerptKey: 'leadershipCompetitionPage.news5Excerpt'
     }
   ];
 
@@ -48,11 +52,11 @@ export function LeadershipCompetitionPage() {
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <button onClick={() => navigate('/')} className="hover:text-[#4db8b8]">Главная</button>
+            <button onClick={() => localeNavigate('/')} className="hover:text-[#4db8b8]">{t('leadershipCompetitionPage.breadcrumbHome')}</button>
             <ChevronRight className="w-4 h-4" />
-            <span>Гранты и конкурсы</span>
+            <span>{t('leadershipCompetitionPage.breadcrumbCompetitions')}</span>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-[#1a1f4d]">IV Международный конкурс «Лидер народной дипломатии»</span>
+            <span className="text-[#1a1f4d]">{t('leadershipCompetitionPage.breadcrumbLeadership')}</span>
           </div>
         </div>
       </div>
@@ -64,21 +68,16 @@ export function LeadershipCompetitionPage() {
             {/* Left Column - Text */}
             <div>
               <div className="text-gray-500 mb-3">
-                IV Международный конкурс
+                {t('leadershipCompetitionPage.competitionLabel')}
               </div>
               <h1 className="text-[#4db8b8] mb-6">
-                «Лидер народной<br />
-                дипломатии»
+                {t('leadershipCompetitionPage.competitionTitle')}
               </h1>
               <p className="text-gray-700 mb-8">
-                Конкурс поддерживает лидеров из разных стран, 
-                чья деятельность направлена на развитие народной 
-                дипломатии, укрепление межнационального 
-                и межрелигиозного мира и согласия, доверия 
-                и взаимопонимания между народами
+                {t('leadershipCompetitionPage.competitionDescription')}
               </p>
               <button className="bg-[#4db8b8] text-white px-8 py-3 rounded hover:bg-[#3da0a0] transition-colors">
-                Скачать Положение о Конкурсе
+                {t('leadershipCompetitionPage.downloadButton')}
               </button>
             </div>
 
@@ -100,11 +99,11 @@ export function LeadershipCompetitionPage() {
           <div className="grid md:grid-cols-2 gap-12">
             <div className="bg-white p-8 rounded-lg shadow-sm">
               <div className="text-5xl text-[#4db8b8] mb-2">4</div>
-              <p className="text-gray-700">континента</p>
+              <p className="text-gray-700">{t('leadershipCompetitionPage.continents')}</p>
             </div>
             <div className="bg-white p-8 rounded-lg shadow-sm">
               <div className="text-5xl text-[#4db8b8] mb-2">47</div>
-              <p className="text-gray-700">стран мира</p>
+              <p className="text-gray-700">{t('leadershipCompetitionPage.countries')}</p>
             </div>
           </div>
         </div>
@@ -116,22 +115,16 @@ export function LeadershipCompetitionPage() {
           <div className="grid lg:grid-cols-5 gap-12">
             {/* Left - Title */}
             <div className="lg:col-span-2">
-              <h2 className="text-[#4db8b8]">Кто может<br />участвовать</h2>
+              <h2 className="text-[#4db8b8]">{t('leadershipCompetitionPage.participationTitle')}</h2>
             </div>
 
             {/* Right - Content */}
             <div className="lg:col-span-3">
               <p className="text-gray-700 mb-4">
-                В Конкурсе могут принять участие представители неправительственных организаций 
-                (НПО), интернет-сообществ, а также соотечественники, проживающие за рубежом и 
-                иностранные граждане, реализующие проекты в сфере народной дипломатии, чья 
-                деятельность не противоречит российскому законодательству, в возрасте от 18 лет, 
-                имеющие опыт реализации проектов в сфере народной дипломатии в качестве лидера не 
-                менее двух лет.
+                {t('leadershipCompetitionPage.participationDescription')}
               </p>
               <p className="text-gray-700 italic">
-                Лидеры НПО, реализующие проекты в сфере народной дипломатии, не должны являться 
-                государственными и муниципальными служащими
+                {t('leadershipCompetitionPage.participationNote')}
               </p>
             </div>
           </div>
@@ -144,42 +137,39 @@ export function LeadershipCompetitionPage() {
           <div className="grid lg:grid-cols-5 gap-12">
             {/* Left - Title */}
             <div className="lg:col-span-2">
-              <h2 className="text-[#1a1f4d]">Все модели<br />участия</h2>
+              <h2 className="text-[#1a1f4d]">{t('leadershipCompetitionPage.modelsTitle')}</h2>
             </div>
 
             {/* Right - Content */}
             <div className="lg:col-span-3 space-y-4">
               <p className="text-gray-700">
-                В рамках III Международного конкурса «Лидер народной дипломатии» предусмотрено 
-                6 моделей участия в виде самостоятельных номинаций. Возможно участие в нескольких 
-                номинациях одновременно, при условии представления материалов по каждой номинации 
-                отдельно. Подробности в Положении о конкурсе.
+                {t('leadershipCompetitionPage.modelsDescription')}
               </p>
 
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-gray-700">Народная дипломатия</p>
+                  <p className="text-gray-700">{t('leadershipCompetitionPage.model1')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-gray-700">Содействие продвижению</p>
+                  <p className="text-gray-700">{t('leadershipCompetitionPage.model2')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-gray-700">Медиа-лидер</p>
+                  <p className="text-gray-700">{t('leadershipCompetitionPage.model3')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-gray-700">Лидер народной дипломатии</p>
+                  <p className="text-gray-700">{t('leadershipCompetitionPage.model4')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-gray-700">Социальная интеграция</p>
+                  <p className="text-gray-700">{t('leadershipCompetitionPage.model5')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-gray-700">Социальная повестка дня</p>
+                  <p className="text-gray-700">{t('leadershipCompetitionPage.model6')}</p>
                 </div>
               </div>
             </div>
@@ -193,47 +183,43 @@ export function LeadershipCompetitionPage() {
           <div className="grid lg:grid-cols-5 gap-12">
             {/* Left - Title */}
             <div className="lg:col-span-2">
-              <h2 className="text-[#1a1f4d]">Награждения<br />конкурса</h2>
+              <h2 className="text-[#1a1f4d]">{t('leadershipCompetitionPage.awardsTitle')}</h2>
             </div>
 
             {/* Right - Content */}
             <div className="lg:col-span-3">
               <p className="text-gray-700 mb-6">
-                По результатам конкурса определяются лауреаты по каждой номинации отдельно. 
-                Лауреаты получат памятные дипломы, соответствующие дипломатическому протоколу 
-                и смогут использовать их для дополнительного подтверждения международного статуса 
-                своих организаций и проектов.
+                {t('leadershipCompetitionPage.awardsIntro')}
               </p>
 
               <div className="space-y-4 mb-6">
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
                   <div>
-                    <h3 className="text-[#1a1f4d] mb-1">Сертификат участника конкурса</h3>
-                    <p className="text-gray-600 text-sm">Для всех участников и номинантов</p>
+                    <h3 className="text-[#1a1f4d] mb-1">{t('leadershipCompetitionPage.award1Title')}</h3>
+                    <p className="text-gray-600 text-sm">{t('leadershipCompetitionPage.award1Desc')}</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
                   <div>
-                    <h3 className="text-[#1a1f4d] mb-1">Специальные номинации Экспертного совета</h3>
-                    <p className="text-gray-600 text-sm">По решению жюри конкурса</p>
+                    <h3 className="text-[#1a1f4d] mb-1">{t('leadershipCompetitionPage.award2Title')}</h3>
+                    <p className="text-gray-600 text-sm">{t('leadershipCompetitionPage.award2Desc')}</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
                   <div>
-                    <h3 className="text-[#1a1f4d] mb-1">Гран-при конкурса</h3>
-                    <p className="text-gray-600 text-sm">Лучший из лучших среди всех номинантов</p>
+                    <h3 className="text-[#1a1f4d] mb-1">{t('leadershipCompetitionPage.award3Title')}</h3>
+                    <p className="text-gray-600 text-sm">{t('leadershipCompetitionPage.award3Desc')}</p>
                   </div>
                 </div>
               </div>
 
               <p className="text-gray-700">
-                Церемония награждения победителей пройдет в рамках Всемирной Общественной Ассамблеи 
-                в торжественной обстановке Таврического дворца 27-30 октября 2025 года.
+                {t('leadershipCompetitionPage.ceremonyInfo')}
               </p>
             </div>
           </div>
@@ -243,24 +229,21 @@ export function LeadershipCompetitionPage() {
       {/* Competition Stages */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-[#1a1f4d] text-center mb-12">Этапы проведения конкурса</h2>
+          <h2 className="text-[#1a1f4d] text-center mb-12">{t('leadershipCompetitionPage.stagesTitle')}</h2>
 
           <div className="space-y-0 divide-y divide-gray-200">
             {/* Stage 1 */}
             <div className="grid grid-cols-5 gap-12 py-8">
               <div className="col-span-1">
-                <div className="text-[#4db8b8]">Этап 1</div>
+                <div className="text-[#4db8b8]">{t('leadershipCompetitionPage.stage1Label')}</div>
               </div>
               <div className="col-span-4">
                 <h3 className="text-[#4db8b8] mb-3">
-                  Прием конкурсных материалов
+                  {t('leadershipCompetitionPage.stage1Title')}
                 </h3>
-                <p className="text-[#1a1f4d] mb-4">16 апреля — 15 июля 2025</p>
+                <p className="text-[#1a1f4d] mb-4">{t('leadershipCompetitionPage.stage1Date')}</p>
                 <p className="text-gray-700">
-                  Для участия в Международном конкурсе необходимо через форму приема 
-                  заявок направить документы в соответствии с Положением Конкурса 
-                  с приложением рекомендательных писем от организаций и/или их лидеров 
-                  на русском или английском языке.
+                  {t('leadershipCompetitionPage.stage1Desc')}
                 </p>
               </div>
             </div>
@@ -268,18 +251,18 @@ export function LeadershipCompetitionPage() {
             {/* Stage 2 */}
             <div className="grid grid-cols-5 gap-12 py-8">
               <div className="col-span-1">
-                <div className="text-[#4db8b8]">Этап 2</div>
+                <div className="text-[#4db8b8]">{t('leadershipCompetitionPage.stage2Label')}</div>
               </div>
               <div className="col-span-4">
                 <h3 className="text-[#4db8b8] mb-3">
-                  Образовательный интенсив
+                  {t('leadershipCompetitionPage.stage2Title')}
                 </h3>
-                <p className="text-[#1a1f4d] mb-4">21 — 31 июля 2025</p>
+                <p className="text-[#1a1f4d] mb-4">{t('leadershipCompetitionPage.stage2Date')}</p>
                 <p className="text-gray-700 mb-2">
-                  Для всех участников Конкурса проводится образовательный онлайн-интенсив.
+                  {t('leadershipCompetitionPage.stage2Desc1')}
                 </p>
                 <p className="text-gray-700">
-                  До 31 июля 2025 г. проводится отбор 120 полуфиналистов.
+                  {t('leadershipCompetitionPage.stage2Desc2')}
                 </p>
               </div>
             </div>
@@ -287,17 +270,15 @@ export function LeadershipCompetitionPage() {
             {/* Stage 3 */}
             <div className="grid grid-cols-5 gap-12 py-8">
               <div className="col-span-1">
-                <div className="text-[#4db8b8]">Этап 3</div>
+                <div className="text-[#4db8b8]">{t('leadershipCompetitionPage.stage3Label')}</div>
               </div>
               <div className="col-span-4">
                 <h3 className="text-[#4db8b8] mb-3">
-                  Отбор финалистов
+                  {t('leadershipCompetitionPage.stage3Title')}
                 </h3>
-                <p className="text-[#1a1f4d] mb-4">1 августа — 15 сентября 2025</p>
+                <p className="text-[#1a1f4d] mb-4">{t('leadershipCompetitionPage.stage3Date')}</p>
                 <p className="text-gray-700">
-                  Проводится отбор 60 финалистов из числа полуфиналистов для участия 
-                  в церемонии награждения на площадке Таврического дворца. 
-                  Результаты публикуются на сайте Ассамблеи до 15 сентября 2025 года.
+                  {t('leadershipCompetitionPage.stage3Desc')}
                 </p>
               </div>
             </div>
@@ -305,17 +286,15 @@ export function LeadershipCompetitionPage() {
             {/* Stage 4 */}
             <div className="grid grid-cols-5 gap-12 py-8">
               <div className="col-span-1">
-                <div className="text-[#4db8b8]">Этап 4</div>
+                <div className="text-[#4db8b8]">{t('leadershipCompetitionPage.stage4Label')}</div>
               </div>
               <div className="col-span-4">
                 <h3 className="text-[#4db8b8] mb-3">
-                  Церемония награждения
+                  {t('leadershipCompetitionPage.stage4Title')}
                 </h3>
-                <p className="text-[#1a1f4d] mb-4">27 — 30 октября 2025</p>
+                <p className="text-[#1a1f4d] mb-4">{t('leadershipCompetitionPage.stage4Date')}</p>
                 <p className="text-gray-700">
-                  Проводится в рамках Всемирной Общественной Ассамблеи в торжественной 
-                  обстановке Таврического дворца. Лауреаты Конкурса будут награждены 
-                  дипломами и памятными подарками.
+                  {t('leadershipCompetitionPage.stage4Desc')}
                 </p>
               </div>
             </div>
@@ -323,7 +302,7 @@ export function LeadershipCompetitionPage() {
 
           <div className="mt-12 text-center">
             <button className="bg-[#1a1f4d] text-white px-8 py-3 rounded hover:bg-[#252b5e] transition-colors">
-              Подать заявку на конкурс
+              {t('leadershipCompetitionPage.submitButton')}
             </button>
           </div>
         </div>
@@ -332,15 +311,15 @@ export function LeadershipCompetitionPage() {
       {/* Contact Section */}
       <section className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-8 text-center">
-          <h2 className="text-[#1a1f4d] mb-8">По всем вопросам проекта</h2>
-          
+          <h2 className="text-[#1a1f4d] mb-8">{t('leadershipCompetitionPage.contactTitle')}</h2>
+
           <div className="space-y-3">
             <div>
-              <p className="text-[#1a1f4d]">Бакланова Наталья</p>
-              <a href="tel:+79313331020" className="text-[#4db8b8] hover:underline">+7 (931) 333-10-20</a>
+              <p className="text-[#1a1f4d]">{t('leadershipCompetitionPage.contactPerson')}</p>
+              <a href="tel:+79313331020" className="text-[#4db8b8] hover:underline">{t('leadershipCompetitionPage.contactPhone')}</a>
             </div>
             <div>
-              <a href="mailto:diplomacy@n-mir.org" className="text-[#4db8b8] hover:underline">diplomacy@n-mir.org</a>
+              <a href="mailto:diplomacy@n-mir.org" className="text-[#4db8b8] hover:underline">{t('leadershipCompetitionPage.contactEmail')}</a>
             </div>
           </div>
         </div>
@@ -349,24 +328,24 @@ export function LeadershipCompetitionPage() {
       {/* News Section */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-[#4db8b8] mb-12">Актуальные новости</h2>
-          
+          <h2 className="text-[#4db8b8] mb-12">{t('leadershipCompetitionPage.newsTitle')}</h2>
+
           <div className="space-y-8">
             {newsItems.map((item, index) => (
               <div key={index} className="flex gap-6 hover:opacity-80 transition-opacity cursor-pointer">
-                <img 
-                  src={item.image} 
-                  alt={item.title}
+                <img
+                  src={item.image}
+                  alt={t(item.titleKey)}
                   className="w-72 h-48 object-cover rounded flex-shrink-0"
                 />
                 <div className="flex-1">
                   <p className="text-gray-500 text-sm mb-3">{item.date}</p>
                   <h3 className="text-[#1a1f4d] mb-3">
-                    {item.title}
+                    {t(item.titleKey)}
                   </h3>
-                  <p className="text-gray-700 mb-2">{item.excerpt}</p>
-                  {item.highlight && (
-                    <p className="text-[#1a1f4d]">{item.highlight}</p>
+                  <p className="text-gray-700 mb-2">{t(item.excerptKey)}</p>
+                  {item.highlightKey && (
+                    <p className="text-[#1a1f4d]">{t(item.highlightKey)}</p>
                   )}
                 </div>
               </div>

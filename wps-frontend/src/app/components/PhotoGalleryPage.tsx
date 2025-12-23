@@ -2,43 +2,47 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { ChevronRight } from 'lucide-react';
+import { useTranslation } from '../../i18n/useTranslation';
+import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 const galleryImage1 = 'placeholder.png';
 
 export function PhotoGalleryPage() {
   const navigate = useNavigate();
+  const localeNavigate = useLocaleNavigate();
+  const { t } = useTranslation();
   const photoGalleries = [
     {
       id: '1',
-      title: 'Всемирная Общественная Ассамблея 2025. День 1',
+      titleKey: 'photoGalleryPage.gallery1Title',
       image: galleryImage1,
       photosCount: 45
     },
     {
       id: '2',
-      title: 'Всемирная Общественная Ассамблея 2025. День 2',
+      titleKey: 'photoGalleryPage.gallery2Title',
       image: galleryImage1,
       photosCount: 52
     },
     {
       id: '3',
-      title: 'Всемирная Общественная Ассамблея 2025. День 3',
+      titleKey: 'photoGalleryPage.gallery3Title',
       image: galleryImage1,
       photosCount: 38
     },
     {
       id: '4',
-      title: 'Панельные дискуссии',
+      titleKey: 'photoGalleryPage.gallery4Title',
       image: galleryImage1,
       photosCount: 27
     }
   ];
 
   const tabs = [
-    { id: 'all', label: 'Все публикации', path: 'press-center' },
-    { id: 'news', label: 'Новости', path: 'press-center' },
-    { id: 'articles', label: 'Статьи', path: 'press-center' },
-    { id: 'photo', label: 'Фото', path: 'photo-gallery' },
-    { id: 'video', label: 'Видео', path: 'press-center' }
+    { id: 'all', labelKey: 'photoGalleryPage.tab1', path: 'press-center' },
+    { id: 'news', labelKey: 'photoGalleryPage.tab2', path: 'press-center' },
+    { id: 'articles', labelKey: 'photoGalleryPage.tab3', path: 'press-center' },
+    { id: 'photo', labelKey: 'photoGalleryPage.tab4', path: 'photo-gallery' },
+    { id: 'video', labelKey: 'photoGalleryPage.tab5', path: 'press-center' }
   ];
 
   return (
@@ -49,11 +53,11 @@ export function PhotoGalleryPage() {
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <button onClick={() => navigate('/')} className="hover:text-[#4db8b8]">Главная</button>
+            <button onClick={() => localeNavigate('/')} className="hover:text-[#4db8b8]">{t('photoGalleryPage.breadcrumbHome')}</button>
             <ChevronRight className="w-4 h-4" />
-            <button onClick={() => navigate('/press-center')} className="hover:text-[#4db8b8]">Пресс-центр</button>
+            <button onClick={() => localeNavigate('/press-center')} className="hover:text-[#4db8b8]">{t('photoGalleryPage.breadcrumbPress')}</button>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-[#1a1f4d]">Фото</span>
+            <span className="text-[#1a1f4d]">{t('photoGalleryPage.breadcrumbPhoto')}</span>
           </div>
         </div>
       </div>
@@ -62,7 +66,7 @@ export function PhotoGalleryPage() {
       <section className="flex-1 bg-white py-16">
         <div className="max-w-7xl mx-auto px-8">
           {/* Title */}
-          <h1 className="text-[#1a1f4d] text-center mb-12">Фото</h1>
+          <h1 className="text-[#1a1f4d] text-center mb-12">{t('photoGalleryPage.pageTitle')}</h1>
 
           {/* Tabs */}
           <div className="flex justify-center gap-4 mb-12 flex-wrap">
@@ -71,7 +75,7 @@ export function PhotoGalleryPage() {
                 key={tab.id}
                 onClick={() => {
                   if (tab.path === 'press-center') {
-                    navigate('/press-center');
+                    localeNavigate('/press-center');
                   }
                 }}
                 className={`px-6 py-3 rounded transition-colors ${
@@ -80,7 +84,7 @@ export function PhotoGalleryPage() {
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                {tab.label}
+                {t(tab.labelKey)}
               </button>
             ))}
           </div>
@@ -88,22 +92,21 @@ export function PhotoGalleryPage() {
           {/* Description */}
           <div className="max-w-4xl mx-auto mb-12 space-y-4 text-gray-700">
             <p>
-              ТАСС является генеральным информационным партнером Всемирной Общественной Ассамблеи и выступает официальным 
-              фотохост-агентством Ассамблеи.
+              {t('photoGalleryPage.description1')}
             </p>
             <p>
-              Фотографии доступны участникам Мероприятия, а также СМИ в целях освещения Мероприятия{' '}
-              <strong>с обязательным указанием имени автора и источника в следующем порядке: «Автор/Фотохост-агентство ТАСС».</strong>
+              {t('photoGalleryPage.description2')}{' '}
+              <strong>{t('photoGalleryPage.description2Bold')}</strong>
             </p>
             <p>
-              Подробные условия использования размещены по ссылке{' '}
-              <a 
-                href="https://picture.tass.photo/terms" 
-                target="_blank" 
+              {t('photoGalleryPage.description3')}{' '}
+              <a
+                href="https://picture.tass.photo/terms"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#4db8b8] hover:underline"
               >
-                worldpublicassembly.tass.photo/terms
+                {t('photoGalleryPage.description3Link')}
               </a>
             </p>
           </div>
@@ -112,17 +115,17 @@ export function PhotoGalleryPage() {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {photoGalleries.map(gallery => (
               <div key={gallery.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                <img 
-                  src={gallery.image} 
-                  alt={gallery.title}
+                <img
+                  src={gallery.image}
+                  alt={t(gallery.titleKey)}
                   className="w-full h-64 object-cover"
                 />
                 <div className="p-6">
                   <h3 className="text-[#1a1f4d] mb-4">
-                    {gallery.title}
+                    {t(gallery.titleKey)}
                   </h3>
                   <button className="bg-[#1a1f4d] text-white px-6 py-3 rounded hover:bg-[#252d6b] transition-colors w-full">
-                    Смотреть фото-материалы
+                    {t('photoGalleryPage.viewButton')}
                   </button>
                 </div>
               </div>

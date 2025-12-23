@@ -1,92 +1,94 @@
 import { useNavigate } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
-
-const committeeMembers = [
-  {
-    country: 'Россия',
-    name: 'Бельянинов Андрей Юрьевич',
-    position: 'Генеральный секретарь Ассамблеи Народов Мира, член Комиссии Российской Федерации по делам ЮНЕСКО, Председатель Оргкомитета'
-  },
-  {
-    country: 'Россия',
-    name: 'Смирнова Светлана Константиновна',
-    position: 'Председатель Генерального совета Ассамблеи Народов Мира, Заместитель Председателя Оргкомитета'
-  },
-  {
-    country: 'Россия',
-    name: 'Нефедова Ольга Владимировна',
-    position: 'Заместитель Исполнительного директора — руководитель аппарата Председателя Генерального совета Ассамблеи Народов Мира, ответственный секретарь Оргкомитета'
-  },
-  {
-    country: 'Иордания',
-    name: 'Алтваль Салам Фахри Ханна',
-    position: 'Руководитель Представительства Ассамблеи Народов Мира в Иорданском Хашимитском Королевстве, Президент «Авиценa», старший специалист Программы развития ООН'
-  },
-  {
-    country: 'Армения',
-    name: 'Аракелян Армен Леваевич',
-    position: 'Депутат Национального Собрания Республики Армения, член постоянной комиссии по вопросам обороны, национальной безопасности и внутренних дел'
-  },
-  {
-    country: 'Россия',
-    name: 'Артамонова Людмила Константиновна',
-    position: 'Исполнительный директор Института Всемирных Цивилизаций, член Правления Ассамблеи Народов Евразии, член Правления Ассамблеи Народов Мира'
-  },
-  {
-    country: 'Казахстан',
-    name: 'Байменов Амангельды Муратович',
-    position: 'Председатель Общественного объединения «Федерация Мира и Согласия», Председатель Совета старейшин Ассамблеи Народов Казахстана'
-  },
-  {
-    country: 'Россия',
-    name: 'Галумов Эдуард Аликович',
-    position: 'Международный эксперт в области связей с общественностью, доктор экономических наук, профессор МГУ им. М.В. Ломоносова'
-  },
-  {
-    country: 'Киргизия',
-    name: 'Джоробеков Самарбек Жапарович',
-    position: 'Депутат Жогорку Кенеша Кыргызской Республики, председатель Комитета по международным делам, обороне и безопасности'
-  },
-  {
-    country: 'Россия',
-    name: 'Кибовский Александр Владимирович',
-    position: 'Заместитель председателя Комитета Государственной Думы по развитию гражданского общества, вопросам общественных и религиозных объединений'
-  },
-  {
-    country: 'Монголия',
-    name: 'Лувсандорж Сумъяа',
-    position: 'Депутат Государственного Великого Хурала Монголии, Председатель Постоянного комитета по социальной политике, образованию, культуре и науке'
-  },
-  {
-    country: 'Узбекистан',
-    name: 'Нарзуллаев Ботир Саматович',
-    position: 'Заместитель председателя Сената Олий Мажлиса Республики Узбекистан, руководитель делегации Узбекистана в ПА ОБСЕ'
-  },
-  {
-    country: 'Иран',
-    name: 'Реза Наджафи',
-    position: 'Депутат Исламского консультативного собрания Исламской Республики Иран, председатель Комиссии по национальной безопасности и внешней политике'
-  },
-  {
-    country: 'Россия',
-    name: 'Савинова Людмила Юрьевна',
-    position: 'Заместитель председателя Комитета Совета Федерации по науке, образованию и культуре, член Комиссии РФ по делам ЮНЕСКО'
-  },
-  {
-    country: 'Таджикистан',
-    name: 'Саидов Зульфия Абдуллоевна',
-    position: 'Депутат Маджлиси намояндагон Маджлиси Оли Республики Таджикистан, заместитель председателя Комитета по международным делам, общественным объединениям и религии'
-  },
-  {
-    country: 'Беларусь',
-    name: 'Санникова Татьяна Давыдовна',
-    position: 'Заместитель председателя Постоянной комиссии Палаты представителей Национального собрания Республики Беларусь по образованию, культуре и науке'
-  }
-];
+import { useTranslation } from '../../i18n/useTranslation';
 
 export function OrgCommitteePage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const committeeMembers = [
+    {
+      country: t('orgCommitteePage.member1Country'),
+      nameKey: 'orgCommitteePage.member1Name',
+      positionKey: 'orgCommitteePage.member1Position'
+    },
+    {
+      country: t('orgCommitteePage.member2Country'),
+      nameKey: 'orgCommitteePage.member2Name',
+      positionKey: 'orgCommitteePage.member2Position'
+    },
+    {
+      country: t('orgCommitteePage.member3Country'),
+      nameKey: 'orgCommitteePage.member3Name',
+      positionKey: 'orgCommitteePage.member3Position'
+    },
+    {
+      country: t('orgCommitteePage.member4Country'),
+      nameKey: 'orgCommitteePage.member4Name',
+      positionKey: 'orgCommitteePage.member4Position'
+    },
+    {
+      country: t('orgCommitteePage.member5Country'),
+      nameKey: 'orgCommitteePage.member5Name',
+      positionKey: 'orgCommitteePage.member5Position'
+    },
+    {
+      country: t('orgCommitteePage.member6Country'),
+      nameKey: 'orgCommitteePage.member6Name',
+      positionKey: 'orgCommitteePage.member6Position'
+    },
+    {
+      country: t('orgCommitteePage.member7Country'),
+      nameKey: 'orgCommitteePage.member7Name',
+      positionKey: 'orgCommitteePage.member7Position'
+    },
+    {
+      country: t('orgCommitteePage.member8Country'),
+      nameKey: 'orgCommitteePage.member8Name',
+      positionKey: 'orgCommitteePage.member8Position'
+    },
+    {
+      country: t('orgCommitteePage.member9Country'),
+      nameKey: 'orgCommitteePage.member9Name',
+      positionKey: 'orgCommitteePage.member9Position'
+    },
+    {
+      country: t('orgCommitteePage.member10Country'),
+      nameKey: 'orgCommitteePage.member10Name',
+      positionKey: 'orgCommitteePage.member10Position'
+    },
+    {
+      country: t('orgCommitteePage.member11Country'),
+      nameKey: 'orgCommitteePage.member11Name',
+      positionKey: 'orgCommitteePage.member11Position'
+    },
+    {
+      country: t('orgCommitteePage.member12Country'),
+      nameKey: 'orgCommitteePage.member12Name',
+      positionKey: 'orgCommitteePage.member12Position'
+    },
+    {
+      country: t('orgCommitteePage.member13Country'),
+      nameKey: 'orgCommitteePage.member13Name',
+      positionKey: 'orgCommitteePage.member13Position'
+    },
+    {
+      country: t('orgCommitteePage.member14Country'),
+      nameKey: 'orgCommitteePage.member14Name',
+      positionKey: 'orgCommitteePage.member14Position'
+    },
+    {
+      country: t('orgCommitteePage.member15Country'),
+      nameKey: 'orgCommitteePage.member15Name',
+      positionKey: 'orgCommitteePage.member15Position'
+    },
+    {
+      country: t('orgCommitteePage.member16Country'),
+      nameKey: 'orgCommitteePage.member16Name',
+      positionKey: 'orgCommitteePage.member16Position'
+    }
+  ];
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Header currentPage="org-committee" />
@@ -94,12 +96,12 @@ export function OrgCommitteePage() {
       <main className="flex-1 px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-[#1a1f4d] mb-12">
-            Международный оргкомитет
+            {t('orgCommitteePage.pageTitle')}
           </h1>
 
           <div className="space-y-6">
             {committeeMembers.map((member, index) => (
-              <div 
+              <div
                 key={index}
                 className="border-b border-gray-200 pb-6 hover:bg-gray-50 transition-colors px-6 py-4 rounded-lg"
               >
@@ -111,10 +113,10 @@ export function OrgCommitteePage() {
                   </div>
                   <div className="md:col-span-10">
                     <h3 className="text-[#1a1f4d] mb-2">
-                      {member.name}
+                      {t(member.nameKey)}
                     </h3>
                     <p className="text-gray-600 leading-relaxed text-sm">
-                      {member.position}
+                      {t(member.positionKey)}
                     </p>
                   </div>
                 </div>

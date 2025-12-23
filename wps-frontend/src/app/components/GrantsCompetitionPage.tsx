@@ -2,27 +2,31 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight, ChevronDown } from 'lucide-react';
 import { Header } from './Header';
+import { useTranslation } from '../../i18n/useTranslation';
+import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 
 export function GrantsCompetitionPage() {
   const navigate = useNavigate();
+  const localeNavigate = useLocaleNavigate();
+  const { t } = useTranslation();
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const faqItems = [
     {
-      question: 'Кто может участвовать в конкурсе?',
-      answer: 'К участию приглашаются некоммерческие организации, реализующие проекты в сфере международного гуманитарного сотрудничества, общественной дипломатии и развития партнёрства между гражданскими институтами разных стран.'
+      question: t('grantsCompetitionPage.faq1Question'),
+      answer: t('grantsCompetitionPage.faq1Answer')
     },
     {
-      question: 'Обязательно ли наличие международного партнёрства?',
-      answer: 'Да, одним из обязательных условий является наличие партнёрских связей организации между странами (не менее двух стран).'
+      question: t('grantsCompetitionPage.faq2Question'),
+      answer: t('grantsCompetitionPage.faq2Answer')
     },
     {
-      question: 'В каком виде проект должен быть реализован?',
-      answer: 'Проект должен быть направлен на стимулирование международного гуманитарного сотрудничества и продвижение ценностей общественной дипломатии среди широких слоев населения.'
+      question: t('grantsCompetitionPage.faq3Question'),
+      answer: t('grantsCompetitionPage.faq3Answer')
     },
     {
-      question: 'Какова максимальная сумма запрашиваемого гранта?',
-      answer: 'Информация о максимальной сумме гранта указана в Положении о конкурсе, которое можно скачать на этой странице.'
+      question: t('grantsCompetitionPage.faq4Question'),
+      answer: t('grantsCompetitionPage.faq4Answer')
     }
   ];
 
@@ -33,11 +37,11 @@ export function GrantsCompetitionPage() {
       {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto px-8 py-6">
         <div className="flex items-center gap-2 text-sm text-gray-500">
-          <button onClick={() => navigate('/')} className="hover:text-[#4db8b8] transition-colors">
-            Главная
+          <button onClick={() => localeNavigate('/')} className="hover:text-[#4db8b8] transition-colors">
+            {t('grantsCompetitionPage.breadcrumbHome')}
           </button>
           <span>/</span>
-          <span className="text-[#4db8b8]">Гранты и конкурсы</span>
+          <span className="text-[#4db8b8]">{t('grantsCompetitionPage.breadcrumbGrants')}</span>
         </div>
       </div>
 
@@ -70,10 +74,10 @@ export function GrantsCompetitionPage() {
 
             {/* Info */}
             <div className="flex-1">
-              <div className="text-sm text-gray-600 mb-2">Грантовый конкурс «Ассамблеи Народов Мира»</div>
-              <h1 className="text-5xl mb-6 text-[#4db8b8]">«ДОВЕРИЕ И ЕДИНСТВО»</h1>
+              <div className="text-sm text-gray-600 mb-2">{t('grantsCompetitionPage.competitionLabel')}</div>
+              <h1 className="text-5xl mb-6 text-[#4db8b8]">{t('grantsCompetitionPage.competitionTitle')}</h1>
               <p className="text-gray-700 text-lg max-w-3xl">
-                Международный конкурс на поддержку проектов в сфере общественной дипломатии и гуманитарного сотрудничества
+                {t('grantsCompetitionPage.competitionDescription')}
               </p>
             </div>
           </div>
@@ -109,31 +113,31 @@ export function GrantsCompetitionPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid md:grid-cols-[300px_1fr] gap-12">
-            <h2 className="text-3xl text-[#4db8b8]">Кто может участвовать</h2>
+            <h2 className="text-3xl text-[#4db8b8]">{t('grantsCompetitionPage.participationTitle')}</h2>
             <div>
               <p className="text-gray-700 mb-6">
-                К участию приглашаются некоммерческие организации, реализующие проекты в сфере:
+                {t('grantsCompetitionPage.participationIntro')}
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-700">международного гуманитарного сотрудничества</span>
+                  <span className="text-gray-700">{t('grantsCompetitionPage.field1')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-700">общественной дипломатии</span>
+                  <span className="text-gray-700">{t('grantsCompetitionPage.field2')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-[#4db8b8] rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-700">развития партнерства между гражданскими институтами разных стран</span>
+                  <span className="text-gray-700">{t('grantsCompetitionPage.field3')}</span>
                 </li>
               </ul>
 
               {/* Условие subsection */}
               <div className="border-t-4 border-[#4db8b8] pt-6">
-                <h3 className="text-xl text-[#1a1f4d] mb-3">Условие</h3>
+                <h3 className="text-xl text-[#1a1f4d] mb-3">{t('grantsCompetitionPage.conditionTitle')}</h3>
                 <p className="text-gray-700">
-                  Наличие партнерства между организациями, представляющими разные страны (не менее двух стран)
+                  {t('grantsCompetitionPage.conditionText')}
                 </p>
               </div>
             </div>
@@ -145,10 +149,10 @@ export function GrantsCompetitionPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid md:grid-cols-[300px_1fr] gap-12">
-            <h2 className="text-3xl text-[#4db8b8]">Цель конкурса</h2>
+            <h2 className="text-3xl text-[#4db8b8]">{t('grantsCompetitionPage.goalTitle')}</h2>
             <div className="text-gray-700">
               <p className="mb-4">
-                Стимулирование международного гуманитарного сотрудничества и продвижение ценностей общественной дипломатии среди широких слоев населения, а также выявление и поддержка лучших практик и инициатив, способствующих укреплению доверия и партнёрства между народами
+                {t('grantsCompetitionPage.goalText')}
               </p>
             </div>
           </div>
@@ -159,31 +163,31 @@ export function GrantsCompetitionPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid md:grid-cols-[300px_1fr] gap-12">
-            <h2 className="text-3xl text-[#4db8b8]">Направления поддержки</h2>
+            <h2 className="text-3xl text-[#4db8b8]">{t('grantsCompetitionPage.directionsTitle')}</h2>
             <div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <ChevronRight className="w-5 h-5 text-[#4db8b8] flex-shrink-0 mt-1" />
                   <span className="text-gray-700">
-                    Поддержка общественных межгосударственных инициатив, например, международные диалоговые площадки, форумы, а также обмен опытом и лучшими практиками
+                    {t('grantsCompetitionPage.direction1')}
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <ChevronRight className="w-5 h-5 text-[#4db8b8] flex-shrink-0 mt-1" />
                   <span className="text-gray-700">
-                    Развитие и укрепление международной общественной дипломатии на всех уровнях: международном, региональном, локальном
+                    {t('grantsCompetitionPage.direction2')}
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <ChevronRight className="w-5 h-5 text-[#4db8b8] flex-shrink-0 mt-1" />
                   <span className="text-gray-700">
-                    Содействие деятельности культурологической направленности
+                    {t('grantsCompetitionPage.direction3')}
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <ChevronRight className="w-5 h-5 text-[#4db8b8] flex-shrink-0 mt-1" />
                   <span className="text-gray-700">
-                    Взаимодействие и поддержка в мультикультуральной сфере
+                    {t('grantsCompetitionPage.direction4')}
                   </span>
                 </li>
               </ul>
@@ -195,7 +199,7 @@ export function GrantsCompetitionPage() {
       {/* FAQ Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-3xl text-[#4db8b8] mb-8">Часто задаваемые вопросы</h2>
+          <h2 className="text-3xl text-[#4db8b8] mb-8">{t('grantsCompetitionPage.faqTitle')}</h2>
           <div className="space-y-4">
             {faqItems.map((item, index) => (
               <div key={index} className="border-b border-gray-200 pb-4">
@@ -223,7 +227,7 @@ export function GrantsCompetitionPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <button className="bg-[#1a1f4d] text-white px-12 py-4 rounded hover:bg-[#2a3f6d] transition-colors text-lg">
-            Положение о конкурсе
+            {t('grantsCompetitionPage.downloadButton')}
           </button>
         </div>
       </section>
@@ -231,7 +235,7 @@ export function GrantsCompetitionPage() {
       {/* Contact Info Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-3xl text-[#4db8b8] text-center mb-6">По всем вопросам проекта</h2>
+          <h2 className="text-3xl text-[#4db8b8] text-center mb-6">{t('grantsCompetitionPage.contactTitle')}</h2>
           <p className="text-center text-gray-700">
             <a href="mailto:worldcivilassembly@gmail.com" className="text-[#4db8b8] hover:underline">
               worldcivilassembly@gmail.com

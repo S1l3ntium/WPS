@@ -2,9 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { Award, Users, Globe, TrendingUp, CheckCircle } from 'lucide-react';
+import { useTranslation } from '../../i18n/useTranslation';
 
 export function AwardPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col min-h-dvh bg-white">
       <Header currentPage="award" />
@@ -20,9 +22,9 @@ export function AwardPage() {
         <div className="max-w-7xl mx-auto px-8 relative z-10">
           <div className="text-center">
             <h1 className="text-5xl mb-4 text-white">
-              За служение<br />человечеству
+              {t('awardPage.pageTitle')}
             </h1>
-            <p className="text-xl text-[#4db8b8]">Всемирная премия общественного признания</p>
+            <p className="text-xl text-[#4db8b8]">{t('awardPage.fullAwardName')}</p>
           </div>
         </div>
       </section>
@@ -33,10 +35,10 @@ export function AwardPage() {
           <div className="grid md:grid-cols-2 gap-12">
             <div className="text-gray-700 space-y-4">
               <p>
-                Всемирная Премия «Движущая сила» учреждена Ассамблеей Народов Мира.
+                {t('awardPage.awardDescription1')}
               </p>
               <p>
-                Премия присуждается лицам и организациям, внёсшим значимый вклад в деятельность, развития коммерческих инициатив, общественных, благотворительных проектов, служащих нормам и ценностям.
+                {t('awardPage.awardDescription2')}
               </p>
             </div>
             <div className="text-gray-700 space-y-4">
@@ -54,13 +56,13 @@ export function AwardPage() {
       {/* Goals Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-4xl mb-16 text-[#1a1f4d]">Цели и задачи Премии</h2>
-          
+          <h2 className="text-4xl mb-16 text-[#1a1f4d]">{t('awardPage.awardGoalsTitle')}</h2>
+
           <div className="grid md:grid-cols-3 gap-x-16 gap-y-12">
             {/* Goal 1 */}
             <div>
               <div className="w-4 h-4 bg-[#4db8b8] rounded-full mb-6"></div>
-              <h3 className="text-xl mb-4 text-[#4db8b8]">Поддержка и признание выдающихся достижений</h3>
+              <h3 className="text-xl mb-4 text-[#4db8b8]">{t('awardPage.awardGoal1')}</h3>
               <p className="text-gray-600">
                 в сфере общественной дипломатии, международного и межкультурного сотрудничества
               </p>
@@ -69,7 +71,7 @@ export function AwardPage() {
             {/* Goal 2 */}
             <div>
               <div className="w-4 h-4 bg-[#4db8b8] rounded-full mb-6"></div>
-              <h3 className="text-xl mb-4 text-[#4db8b8]">Признание конкретных заслуг</h3>
+              <h3 className="text-xl mb-4 text-[#4db8b8]">{t('awardPage.awardGoal2')}</h3>
               <p className="text-gray-600">
                 в служении человечеству и продвижении гуманистических ценностей
               </p>
@@ -78,7 +80,7 @@ export function AwardPage() {
             {/* Goal 3 */}
             <div>
               <div className="w-4 h-4 bg-[#4db8b8] rounded-full mb-6"></div>
-              <h3 className="text-xl mb-4 text-[#4db8b8]">Формирование международного сообщества</h3>
+              <h3 className="text-xl mb-4 text-[#4db8b8]">{t('awardPage.awardGoal3')}</h3>
               <p className="text-gray-600">
                 лидеров общественного мнения, продвигающих идеи осознанного единства, дружбы, согласия и добрососедства
               </p>
@@ -87,18 +89,9 @@ export function AwardPage() {
             {/* Goal 4 */}
             <div>
               <div className="w-4 h-4 bg-[#4db8b8] rounded-full mb-6"></div>
-              <h3 className="text-xl mb-4 text-[#4db8b8]">Популяризация</h3>
+              <h3 className="text-xl mb-4 text-[#4db8b8]">{t('awardPage.awardGoal4')}</h3>
               <p className="text-gray-600">
                 позитивных гуманитарных инициатив, формирование образа лидера общественного служения
-              </p>
-            </div>
-
-            {/* Goal 5 */}
-            <div>
-              <div className="w-4 h-4 bg-[#4db8b8] rounded-full mb-6"></div>
-              <h3 className="text-xl mb-4 text-[#4db8b8]">Привлечение внимания</h3>
-              <p className="text-gray-600">
-                к международной повестке и современным вызовам, развитие культуры служения и солидарности
               </p>
             </div>
           </div>
@@ -109,9 +102,9 @@ export function AwardPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid md:grid-cols-[320px_1fr] gap-12 items-start">
-            <h2 className="text-4xl text-[#4db8b8]">Кто может стать лауреатом</h2>
+            <h2 className="text-4xl text-[#4db8b8]">{t('awardPage.whoCanWinTitle')}</h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Общественные и политические деятели, лидеры науки, культуры, образования и другие гражданские лидеры, внёсшие вклад в укрепление доверия между народами
+              {t('awardPage.whoCanWinText')}
             </p>
           </div>
         </div>
@@ -120,12 +113,12 @@ export function AwardPage() {
       {/* Award Process Section */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-4xl mb-12 text-[#1a1f4d] text-center">Как присуждается Премия</h2>
-          
+          <h2 className="text-4xl mb-12 text-[#1a1f4d] text-center">{t('awardPage.awardProcessTitle')}</h2>
+
           <div className="space-y-8 max-w-4xl mx-auto">
             {/* Step 1 */}
             <div className="flex gap-6 items-start">
-              <div className="flex-shrink-0 w-20 text-[#4db8b8] text-xl">Этап 1</div>
+              <div className="flex-shrink-0 w-20 text-[#4db8b8] text-xl">{t('awardPage.submitApplication')}</div>
               <div>
                 <h3 className="text-xl mb-2 text-[#1a1f4d]">Выдвижение номинаций Организациями</h3>
               </div>
@@ -133,7 +126,7 @@ export function AwardPage() {
 
             {/* Step 2 */}
             <div className="flex gap-6 items-start">
-              <div className="flex-shrink-0 w-20 text-[#4db8b8] text-xl">Этап 2</div>
+              <div className="flex-shrink-0 w-20 text-[#4db8b8] text-xl">{t('awardPage.reviewProcess')}</div>
               <div>
                 <h3 className="text-xl mb-2 text-[#1a1f4d]">Отбор и определение Генеральным Советов Ассамблеи</h3>
               </div>
@@ -141,26 +134,16 @@ export function AwardPage() {
 
             {/* Step 3 */}
             <div className="flex gap-6 items-start">
-              <div className="flex-shrink-0 w-20 text-[#4db8b8] text-xl">Этап 3</div>
+              <div className="flex-shrink-0 w-20 text-[#4db8b8] text-xl">{t('awardPage.awardCeremony')}</div>
               <div>
                 <h3 className="text-xl mb-2 text-[#1a1f4d]">Утверждение списка лауреатов Генеральным секретарятом</h3>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="flex gap-6 items-start">
-              <div className="flex-shrink-0 w-20 text-[#4db8b8] text-xl">Этап 4</div>
-              <div>
-                <h3 className="text-xl mb-2 text-[#1a1f4d]">
-                  <span className="text-[#4db8b8]">21 сентября</span>, в Международный день мира, торжественное награждение лауреатов Премии во время Всемирной Общественной Ассамблеи
-                </h3>
               </div>
             </div>
           </div>
 
           <div className="text-center mt-12">
             <button className="bg-[#1a1f4d] hover:bg-[#2a3580] text-white px-8 py-4 rounded transition-colors">
-              Принять участие в Премии
+              {t('buttons.submitApplication')}
             </button>
           </div>
         </div>

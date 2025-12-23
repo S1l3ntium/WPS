@@ -4,14 +4,14 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { ChevronRight } from 'lucide-react';
 import { newsAPI } from '../../services/api';
-import { useLocale } from '../../context/LocaleContext';
+import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 const newsImage = 'placeholder.png';
 
 export function NewsPage() {
   const { newsId } = useParams<{ newsId: string }>();
   const navigate = useLocaleNavigate();
-  const { locale, t } = useLocale();
+  const { t } = useTranslation();
   const [news, setNews] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -51,14 +51,14 @@ export function NewsPage() {
         setNews(transformedNews);
       } catch (err) {
         console.error('Failed to fetch news:', err);
-        setError(locale === 'ru' ? 'Не удалось загрузить новость. Пожалуйста, попробуйте позже.' : 'Failed to load news. Please try again later.');
+        setError(t('newsPage.error.loadFailed'));
       } finally {
         setLoading(false);
       }
     };
 
     loadNews();
-  }, [newsId, locale, t]);
+  }, [newsId, t]);
 
   // Fallback content if API fails
   const defaultContent = [
@@ -128,11 +128,11 @@ export function NewsPage() {
       <div className="bg-white border-b">
         <div className="max-w-4xl mx-auto px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <button onClick={() => navigate('/')} className="hover:text-[#4db8b8]">{locale === 'ru' ? 'Главная' : 'Home'}</button>
+            <button onClick={() => navigate('/')} className="hover:text-[#4db8b8]">{t('newsPage.breadcrumbHome')}</button>
             <ChevronRight className="w-4 h-4" />
-            <button onClick={() => navigate('/press-center')} className="hover:text-[#4db8b8]">{locale === 'ru' ? 'Пресс-центр' : 'Press Center'}</button>
+            <button onClick={() => navigate('/press-center')} className="hover:text-[#4db8b8]">{t('newsPage.breadcrumbPressCenter')}</button>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-[#1a1f4d]">{locale === 'ru' ? 'Новости' : 'News'}</span>
+            <span className="text-[#1a1f4d]">{t('newsPage.breadcrumbNews')}</span>
           </div>
         </div>
       </div>
@@ -142,7 +142,7 @@ export function NewsPage() {
         <div className="max-w-4xl mx-auto px-8">
           {loading && (
             <div className="text-center py-12 text-gray-500">
-              {locale === 'ru' ? 'Загрузка новости...' : 'Loading news...'}
+              {t('newsPage.loading')}
             </div>
           )}
           {error && (
@@ -206,7 +206,7 @@ export function NewsPage() {
               className="text-[#4db8b8] hover:text-[#3da8a8] transition-colors flex items-center gap-2"
             >
               <ChevronRight className="w-4 h-4 rotate-180" />
-              {locale === 'ru' ? 'Вернуться к списку новостей' : 'Back to news list'}
+              {t('newsPage.backToNewsList')}
             </button>
           </div>
         </div>

@@ -3,13 +3,13 @@ import { Footer } from './Footer';
 import { Calendar, Clock, MapPin, ArrowLeft, X, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useLocale } from '../../context/LocaleContext';
+import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 
 export function EventPage() {
   const { eventId } = useParams<{ eventId: string }>();
   const navigate = useLocaleNavigate();
-  const { locale, t } = useLocale();
+  const { t } = useTranslation();
   const [openQuestionIndex, setOpenQuestionIndex] = useState<number | null>(0);
 
   // Mock data - в реальном приложении данные загружались бы по eventId
@@ -189,11 +189,11 @@ export function EventPage() {
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 text-sm text-gray-600 mb-8">
             <button onClick={() => navigate('/')} className="hover:text-[#4db8b8] transition-colors">
-              {locale === 'ru' ? 'Главная' : 'Home'}
+              {t('eventPage.breadcrumbHome')}
             </button>
             <span>/</span>
             <button onClick={() => navigate('/program')} className="hover:text-[#4db8b8] transition-colors">
-              {locale === 'ru' ? 'Программа' : 'Program'}
+              {t('eventPage.breadcrumbProgram')}
             </button>
           </div>
 
@@ -203,7 +203,7 @@ export function EventPage() {
             className="flex items-center gap-2 text-[#1a1f4d] hover:text-[#4db8b8] transition-colors mb-6"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span>{locale === 'ru' ? 'Назад к программе' : 'Back to program'}</span>
+            <span>{t('eventPage.backToProgram')}</span>
           </button>
 
           {/* Event Type */}
@@ -233,7 +233,7 @@ export function EventPage() {
           {/* Venue */}
           <div className="mb-8">
             <h3 className="text-sm mb-2 text-gray-600">
-              {locale === 'ru' ? 'Районная площадка:' : 'Venue:'}
+              {t('eventPage.venue')}
             </h3>
             <p className="text-gray-900">{event.venue}</p>
           </div>
@@ -248,7 +248,7 @@ export function EventPage() {
           <section className="mb-12">
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8 items-start">
               <h2 className="text-2xl text-[#4db8b8]">
-                {locale === 'ru' ? 'Цели сессии' : 'Session Goals'}
+                {t('eventPage.sessionGoals')}
               </h2>
               <ul className="space-y-3">
                 {event.goals.map((goal, idx) => (
@@ -265,7 +265,7 @@ export function EventPage() {
           <section className="mb-12">
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8 items-start">
               <h2 className="text-2xl text-[#4db8b8]">
-                {locale === 'ru' ? 'Формат' : 'Format'}
+                {t('eventPage.format')}
               </h2>
               <p className="text-gray-700">{event.format}</p>
             </div>
@@ -275,7 +275,7 @@ export function EventPage() {
           <section className="mb-12">
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8 items-start">
               <h2 className="text-2xl text-[#4db8b8]">
-                {locale === 'ru' ? 'Ключевые вопросы' : 'Key Questions'}
+                {t('eventPage.keyQuestions')}
               </h2>
               <ul className="space-y-3">
                 {event.questions.map((question, idx) => (
@@ -292,7 +292,7 @@ export function EventPage() {
           <section className="mb-12">
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8 items-start">
               <h2 className="text-2xl text-[#4db8b8]">
-                {locale === 'ru' ? 'Модераторы' : 'Moderators'}
+                {t('eventPage.moderators')}
               </h2>
               <div className="space-y-6">
                 {event.moderators.map((moderator, idx) => (
@@ -309,7 +309,7 @@ export function EventPage() {
           <section className="mb-12">
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8 items-start">
               <h2 className="text-2xl text-[#4db8b8]">
-                {locale === 'ru' ? 'Эксперты сессии' : 'Session Experts'}
+                {t('eventPage.sessionExperts')}
               </h2>
               <div className="space-y-6">
                 {event.experts.map((expert, idx) => (
@@ -325,7 +325,7 @@ export function EventPage() {
           {/* Speakers Section */}
           <section className="mb-12">
             <h2 className="text-2xl mb-8 text-[#4db8b8]">
-              {locale === 'ru' ? 'Спикеры' : 'Speakers'}
+              {t('eventPage.speakers')}
             </h2>
             <div className="space-y-4">
               {event.speakers.map((speaker, idx) => (
@@ -352,7 +352,7 @@ export function EventPage() {
                 {/* Left side - Title */}
                 <div className="flex-shrink-0 w-[45%] bg-white border-r border-gray-200 p-8">
                   <h2 className="text-2xl text-[#4db8b8] leading-tight">
-                    {locale === 'ru' ? 'Вопросы для обсуждения' : 'Discussion Topics'}
+                    {t('eventPage.discussionTopics')}
                   </h2>
                 </div>
 
@@ -390,7 +390,7 @@ export function EventPage() {
           {/* Schedule and Speakers Section */}
           <section className="mb-12">
             <h2 className="text-2xl mb-8 text-[#4db8b8] text-center">
-              {locale === 'ru' ? 'Расписание и спикеры' : 'Schedule and Speakers'}
+              {t('eventPage.scheduleAndSpeakers')}
             </h2>
             <div className="space-y-8">
               {event.schedule.map((item, idx) => (
@@ -423,7 +423,7 @@ export function EventPage() {
           {/* Presenters Section */}
           <section className="mb-12">
             <h2 className="text-2xl mb-8 text-[#4db8b8]">
-              {locale === 'ru' ? 'Выступающие' : 'Presenters'}
+              {t('eventPage.presenters')}
             </h2>
             <div className="space-y-8">
               {event.presenters.map((presenter, idx) => (

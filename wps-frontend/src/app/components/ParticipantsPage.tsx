@@ -4,7 +4,7 @@ import { Footer } from './Footer';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Plane, Users, MapPin, AlertCircle } from 'lucide-react';
 import { hotelsAPI } from '../../services/api';
-import { useLocale } from '../../context/LocaleContext';
+import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 
 type Tab = 'accommodation' | 'transfer' | 'badges';
@@ -84,7 +84,7 @@ const hotels = {
 
 export function ParticipantsPage() {
   const navigate = useLocaleNavigate();
-  const { locale, t } = useLocale();
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<Tab>('accommodation');
   const [hotelsByCategory, setHotelsByCategory] = useState<Record<string, any[]>>({ recommended: [], championship: [], verified: [] });
   const [loading, setLoading] = useState(true);
@@ -126,14 +126,14 @@ export function ParticipantsPage() {
         setHotelsByCategory(grouped);
       } catch (err) {
         console.error('Failed to fetch hotels:', err);
-        setError(locale === 'ru' ? 'Не удалось загрузить информацию об отелях. Пожалуйста, попробуйте позже.' : 'Failed to load hotel information. Please try again later.');
+        setError(t('participantsPage.errorLoadingHotels'));
       } finally {
         setLoading(false);
       }
     };
 
     loadHotels();
-  }, [locale, t]);
+  }, [t]);
 
   return (
     <div className="flex flex-col min-h-dvh bg-white">
