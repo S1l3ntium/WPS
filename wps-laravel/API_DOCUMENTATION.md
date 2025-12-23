@@ -448,22 +448,45 @@ Or for custom agreements:
 ## Testing the API
 
 ### Using cURL
+
+**Get all events:**
 ```bash
-# Get all events
 curl http://localhost:8000/api/events
+```
 
-# Get events filtered by date
+**Get events filtered by date:**
+```bash
 curl "http://localhost:8000/api/events?date=2025-09-20"
+```
 
-# Get single event
+**Get single event with full details:**
+```bash
 curl http://localhost:8000/api/events/1
+```
 
-# Get news filtered by type
+**Get news filtered by type:**
+```bash
 curl "http://localhost:8000/api/news?type=article"
 ```
 
+**Get hotels with pagination:**
+
+```bash
+curl "http://localhost:8000/api/hotels?page=1&per_page=10"
+```
+
+**Get competition FAQ:**
+
+```bash
+curl http://localhost:8000/api/competitions/1/faq
+```
+
 ### Using Postman
-Import the API endpoints and test them with the Postman collection.
+
+1. Import collection from `/postman/WPS_API.postman_collection.json`
+2. Select environment: Development or Production
+3. Run requests and inspect responses
+4. Test multilingual data by checking `title.ru` and `title.en`
 
 ---
 

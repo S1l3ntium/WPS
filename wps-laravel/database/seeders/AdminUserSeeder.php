@@ -9,11 +9,14 @@ class AdminUserSeeder extends Seeder
 {
     public function run(): void
     {
-        if (!User::where('email', 'admin@example.com')->exists()) {
+        $adminEmail = env('ADMIN_EMAIL', 'admin@example.com');
+        $adminPassword = env('ADMIN_PASSWORD', 'password');
+
+        if (!User::where('email', $adminEmail)->exists()) {
             User::create([
                 'name' => 'Admin',
-                'email' => 'admin@example.com',
-                'password' => bcrypt('secret'),
+                'email' => $adminEmail,
+                'password' => bcrypt($adminPassword),
             ]);
         }
     }
