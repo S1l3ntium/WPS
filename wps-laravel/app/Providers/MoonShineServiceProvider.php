@@ -9,6 +9,10 @@ use App\MoonShine\Resources\EventResource;
 use App\MoonShine\Resources\NewsResource;
 use App\MoonShine\Resources\PartnerResource;
 use App\MoonShine\Resources\AwardResource;
+use App\MoonShine\Resources\HotelResource;
+use App\MoonShine\Resources\CompetitionResource;
+use App\MoonShine\Resources\CommitteeMemberResource;
+use App\MoonShine\Resources\PartnerPackageResource;
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 
@@ -27,6 +31,10 @@ class MoonShineServiceProvider extends ServiceProvider
                 NewsResource::class,
                 PartnerResource::class,
                 AwardResource::class,
+                HotelResource::class,
+                CompetitionResource::class,
+                CommitteeMemberResource::class,
+                PartnerPackageResource::class,
             ])
             ->pages([
                 ...$config->getPages(),
