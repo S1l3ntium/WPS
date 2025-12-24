@@ -7,6 +7,26 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 // ==================== TYPES ====================
 
+export interface PaginationParams {
+  page?: number;
+  per_page?: number;
+  search?: string;
+  sort_by?: string;
+  sort_order?: 'asc' | 'desc';
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: {
+    current_page: number;
+    per_page: number;
+    total: number;
+    last_page: number;
+    from?: number;
+    to?: number;
+  };
+}
+
 export interface EventData {
   id: number;
   title: { ru: string; en: string };
@@ -117,6 +137,23 @@ export const getLocalized = (data: { ru?: string; en?: string } | string, locale
 };
 
 /**
+ * Build URL search params from pagination/filter params
+ */
+const buildParams = (params?: PaginationParams): string => {
+  if (!params) return '';
+  const searchParams = new URLSearchParams();
+
+  if (params.page) searchParams.append('page', params.page.toString());
+  if (params.per_page) searchParams.append('per_page', params.per_page.toString());
+  if (params.search) searchParams.append('search', params.search);
+  if (params.sort_by) searchParams.append('sort_by', params.sort_by);
+  if (params.sort_order) searchParams.append('sort_order', params.sort_order);
+
+  const queryString = searchParams.toString();
+  return queryString ? `?${queryString}` : '';
+};
+
+/**
  * Parse API response and extract data
  */
 const parseResponse = async (response: Response) => {
@@ -131,20 +168,25 @@ const parseResponse = async (response: Response) => {
 // ===== EVENTS =====
 export const eventsAPI = {
   /**
-   * Get all events with optional filtering
+   * Get all events with optional filtering, search, and pagination
    */
-  getAll: async (filters?: { date?: string; tags?: string }): Promise<EventData[]> => {
+  getAll: async (options?: { date?: string; tags?: string } & PaginationParams): Promise<PaginatedResponse<EventData>> => {
     let url = `${API_BASE_URL}/api/events`;
     const params = new URLSearchParams();
 
-    if (filters?.date) params.append('date', filters.date);
-    if (filters?.tags) params.append('tags', filters.tags);
+    if (options?.date) params.append('date', options.date);
+    if (options?.tags) params.append('tags', options.tags);
+    if (options?.page) params.append('page', options.page.toString());
+    if (options?.per_page) params.append('per_page', options.per_page.toString());
+    if (options?.search) params.append('search', options.search);
+    if (options?.sort_by) params.append('sort_by', options.sort_by);
+    if (options?.sort_order) params.append('sort_order', options.sort_order);
 
     if (params.toString()) url += `?${params.toString()}`;
 
     const response = await fetch(url);
     const data = await parseResponse(response);
-    return data.data || [];
+    return data;
   },
 
   /**
@@ -160,18 +202,24 @@ export const eventsAPI = {
 // ===== NEWS =====
 export const newsAPI = {
   /**
-   * Get all news with optional filtering
+   * Get all news with optional filtering, search, and pagination
    */
-  getAll: async (filters?: { type?: 'news' | 'article' }): Promise<NewsData[]> => {
+  getAll: async (options?: { type?: 'news' | 'article' } & PaginationParams): Promise<PaginatedResponse<NewsData>> => {
     let url = `${API_BASE_URL}/api/news`;
+    const params = new URLSearchParams();
 
-    if (filters?.type) {
-      url += `?type=${filters.type}`;
-    }
+    if (options?.type) params.append('type', options.type);
+    if (options?.page) params.append('page', options.page.toString());
+    if (options?.per_page) params.append('per_page', options.per_page.toString());
+    if (options?.search) params.append('search', options.search);
+    if (options?.sort_by) params.append('sort_by', options.sort_by);
+    if (options?.sort_order) params.append('sort_order', options.sort_order);
+
+    if (params.toString()) url += `?${params.toString()}`;
 
     const response = await fetch(url);
     const data = await parseResponse(response);
-    return data.data || [];
+    return data;
   },
 
   /**
@@ -187,18 +235,24 @@ export const newsAPI = {
 // ===== HOTELS =====
 export const hotelsAPI = {
   /**
-   * Get all hotels with optional category filter
+   * Get all hotels with optional filtering, search, and pagination
    */
-  getAll: async (filters?: { category?: string }): Promise<HotelData[]> => {
+  getAll: async (options?: { category?: string } & PaginationParams): Promise<PaginatedResponse<HotelData>> => {
     let url = `${API_BASE_URL}/api/hotels`;
+    const params = new URLSearchParams();
 
-    if (filters?.category) {
-      url += `?category=${filters.category}`;
-    }
+    if (options?.category) params.append('category', options.category);
+    if (options?.page) params.append('page', options.page.toString());
+    if (options?.per_page) params.append('per_page', options.per_page.toString());
+    if (options?.search) params.append('search', options.search);
+    if (options?.sort_by) params.append('sort_by', options.sort_by);
+    if (options?.sort_order) params.append('sort_order', options.sort_order);
+
+    if (params.toString()) url += `?${params.toString()}`;
 
     const response = await fetch(url);
     const data = await parseResponse(response);
-    return data.data || [];
+    return data;
   },
 
   /**
@@ -214,12 +268,23 @@ export const hotelsAPI = {
 // ===== COMMITTEE MEMBERS =====
 export const committeeMembersAPI = {
   /**
-   * Get all committee members
+   * Get all committee members with optional search and pagination
    */
-  getAll: async (): Promise<CommitteeMemberData[]> => {
-    const response = await fetch(`${API_BASE_URL}/api/committee-members`);
+  getAll: async (options?: PaginationParams): Promise<PaginatedResponse<CommitteeMemberData>> => {
+    let url = `${API_BASE_URL}/api/committee-members`;
+    const params = new URLSearchParams();
+
+    if (options?.page) params.append('page', options.page.toString());
+    if (options?.per_page) params.append('per_page', options.per_page.toString());
+    if (options?.search) params.append('search', options.search);
+    if (options?.sort_by) params.append('sort_by', options.sort_by);
+    if (options?.sort_order) params.append('sort_order', options.sort_order);
+
+    if (params.toString()) url += `?${params.toString()}`;
+
+    const response = await fetch(url);
     const data = await parseResponse(response);
-    return data.data || [];
+    return data;
   },
 
   /**
@@ -235,18 +300,24 @@ export const committeeMembersAPI = {
 // ===== PARTNER PACKAGES =====
 export const partnerPackagesAPI = {
   /**
-   * Get all partner packages with optional category filter
+   * Get all partner packages with optional filtering, search, and pagination
    */
-  getAll: async (filters?: { category?: string }): Promise<PartnerPackageData[]> => {
+  getAll: async (options?: { category?: string } & PaginationParams): Promise<PaginatedResponse<PartnerPackageData>> => {
     let url = `${API_BASE_URL}/api/partner-packages`;
+    const params = new URLSearchParams();
 
-    if (filters?.category) {
-      url += `?category=${filters.category}`;
-    }
+    if (options?.category) params.append('category', options.category);
+    if (options?.page) params.append('page', options.page.toString());
+    if (options?.per_page) params.append('per_page', options.per_page.toString());
+    if (options?.search) params.append('search', options.search);
+    if (options?.sort_by) params.append('sort_by', options.sort_by);
+    if (options?.sort_order) params.append('sort_order', options.sort_order);
+
+    if (params.toString()) url += `?${params.toString()}`;
 
     const response = await fetch(url);
     const data = await parseResponse(response);
-    return data.data || [];
+    return data;
   },
 
   /**
@@ -262,12 +333,23 @@ export const partnerPackagesAPI = {
 // ===== COMPETITIONS =====
 export const competitionsAPI = {
   /**
-   * Get all competitions
+   * Get all competitions with optional search and pagination
    */
-  getAll: async (): Promise<CompetitionData[]> => {
-    const response = await fetch(`${API_BASE_URL}/api/competitions`);
+  getAll: async (options?: PaginationParams): Promise<PaginatedResponse<CompetitionData>> => {
+    let url = `${API_BASE_URL}/api/competitions`;
+    const params = new URLSearchParams();
+
+    if (options?.page) params.append('page', options.page.toString());
+    if (options?.per_page) params.append('per_page', options.per_page.toString());
+    if (options?.search) params.append('search', options.search);
+    if (options?.sort_by) params.append('sort_by', options.sort_by);
+    if (options?.sort_order) params.append('sort_order', options.sort_order);
+
+    if (params.toString()) url += `?${params.toString()}`;
+
+    const response = await fetch(url);
     const data = await parseResponse(response);
-    return data.data || [];
+    return data;
   },
 
   /**
@@ -278,23 +360,49 @@ export const competitionsAPI = {
     const data = await parseResponse(response);
     return data.data;
   },
+
+  /**
+   * Get FAQ for a specific competition
+   */
+  getFaq: async (id: number, options?: PaginationParams): Promise<PaginatedResponse<CompetitionFaqData>> => {
+    let url = `${API_BASE_URL}/api/competitions/${id}/faq`;
+    const params = new URLSearchParams();
+
+    if (options?.page) params.append('page', options.page.toString());
+    if (options?.per_page) params.append('per_page', options.per_page.toString());
+    if (options?.search) params.append('search', options.search);
+    if (options?.sort_by) params.append('sort_by', options.sort_by);
+    if (options?.sort_order) params.append('sort_order', options.sort_order);
+
+    if (params.toString()) url += `?${params.toString()}`;
+
+    const response = await fetch(url);
+    const data = await parseResponse(response);
+    return data;
+  },
 };
 
 // ===== AWARDS =====
 export const awardsAPI = {
   /**
-   * Get all awards with optional year filter
+   * Get all awards with optional filtering, search, and pagination
    */
-  getAll: async (filters?: { year?: string }): Promise<AwardData[]> => {
+  getAll: async (options?: { year?: string } & PaginationParams): Promise<PaginatedResponse<AwardData>> => {
     let url = `${API_BASE_URL}/api/awards`;
+    const params = new URLSearchParams();
 
-    if (filters?.year) {
-      url += `?year=${filters.year}`;
-    }
+    if (options?.year) params.append('year', options.year);
+    if (options?.page) params.append('page', options.page.toString());
+    if (options?.per_page) params.append('per_page', options.per_page.toString());
+    if (options?.search) params.append('search', options.search);
+    if (options?.sort_by) params.append('sort_by', options.sort_by);
+    if (options?.sort_order) params.append('sort_order', options.sort_order);
+
+    if (params.toString()) url += `?${params.toString()}`;
 
     const response = await fetch(url);
     const data = await parseResponse(response);
-    return data.data || [];
+    return data;
   },
 
   /**
@@ -310,12 +418,23 @@ export const awardsAPI = {
 // ===== PARTNERS =====
 export const partnersAPI = {
   /**
-   * Get all partners
+   * Get all partners with optional search and pagination
    */
-  getAll: async (): Promise<PartnerData[]> => {
-    const response = await fetch(`${API_BASE_URL}/api/partners`);
+  getAll: async (options?: PaginationParams): Promise<PaginatedResponse<PartnerData>> => {
+    let url = `${API_BASE_URL}/api/partners`;
+    const params = new URLSearchParams();
+
+    if (options?.page) params.append('page', options.page.toString());
+    if (options?.per_page) params.append('per_page', options.per_page.toString());
+    if (options?.search) params.append('search', options.search);
+    if (options?.sort_by) params.append('sort_by', options.sort_by);
+    if (options?.sort_order) params.append('sort_order', options.sort_order);
+
+    if (params.toString()) url += `?${params.toString()}`;
+
+    const response = await fetch(url);
     const data = await parseResponse(response);
-    return data.data || [];
+    return data;
   },
 
   /**
