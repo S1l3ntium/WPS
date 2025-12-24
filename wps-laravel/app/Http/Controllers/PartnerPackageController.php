@@ -4,24 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Models\PartnerPackage;
 use App\Http\Resources\PartnerPackageResource;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Requests\FilterRequest;
 use Illuminate\Http\Request;
 
-class PartnerPackageController extends Controller
+class PartnerPackageController extends BaseController
 {
     /**
-     * Get partner packages
+     * Get partner packages with pagination and search
      */
-    public function index(Request $request)
+    public function index(FilterRequest $request)
     {
         $query = PartnerPackage::query();
+
+        // Apply search
+        if ($request->getSearch()) {
+            $query->search($request->getSearch());
+        }
 
         if ($request->has('category')) {
             $query->byCategory($request->category);
         }
 
-        $packages = $query->get();
+        // Apply sorting
+        $query->applySorting(
+            $request->getSortBy('created_at'),
+            $request->getSortOrder('desc')
+        );
 
-        return PartnerPackageResource::collection($packages);
+        // Get paginated results
+        $paginator = $this->paginate($query, $request->getPerPage());
+        $packages = PartnerPackageResource::collection($paginator->items());
+
+        return $this->respondWithPagination($packages, $paginator);
     }
 
     /**

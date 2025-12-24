@@ -5,25 +5,40 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Http\Resources\NewsResource;
 use App\Http\Resources\NewsDetailResource;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Requests\FilterRequest;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class NewsController extends BaseController
 {
     /**
-     * Get list of publications with filters
+     * Get list of publications with filters, search, and pagination
      */
-    public function index(Request $request)
+    public function index(FilterRequest $request)
     {
         $query = News::published();
+
+        // Apply search
+        if ($request->getSearch()) {
+            $query->search($request->getSearch());
+        }
 
         // Filter by type
         if ($request->has('type')) {
             $query->byType($request->type);
         }
 
-        $news = $query->latest('published_at')->get();
+        // Apply sorting
+        $query->applySorting(
+            $request->getSortBy('published_at'),
+            $request->getSortOrder('desc')
+        );
 
-        return NewsResource::collection($news);
+        // Get paginated results
+        $paginator = $this->paginate($query, $request->getPerPage());
+        $news = NewsResource::collection($paginator->items());
+
+        return $this->respondWithPagination($news, $paginator);
     }
 
     /**

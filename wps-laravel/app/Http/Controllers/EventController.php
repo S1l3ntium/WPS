@@ -5,16 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\EventDetailResource;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Requests\FilterRequest;
 use Illuminate\Http\Request;
 
-class EventController extends Controller
+class EventController extends BaseController
 {
     /**
-     * Get list of events with filters
+     * Get list of events with filters, search, and pagination
      */
-    public function index(Request $request)
+    public function index(FilterRequest $request)
     {
         $query = Event::published();
+
+        // Apply search
+        if ($request->getSearch()) {
+            $query->search($request->getSearch());
+        }
 
         // Filter by date
         if ($request->has('date')) {
@@ -29,9 +36,17 @@ class EventController extends Controller
             }
         }
 
-        $events = $query->orderBy('start_date', 'asc')->get();
+        // Apply sorting
+        $query->applySorting(
+            $request->getSortBy('start_date'),
+            $request->getSortOrder('asc')
+        );
 
-        return EventResource::collection($events);
+        // Get paginated results
+        $paginator = $this->paginate($query, $request->getPerPage());
+        $events = EventResource::collection($paginator->items());
+
+        return $this->respondWithPagination($events, $paginator);
     }
 
     /**

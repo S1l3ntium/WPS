@@ -25,6 +25,9 @@ Route::apiResource('committee-members', CommitteeMemberController::class)->only(
 Route::apiResource('competitions', CompetitionController::class)->only(['index', 'show']);
 Route::apiResource('awards', AwardController::class)->only(['index', 'show']);
 
+// Additional endpoints
+Route::get('competitions/{competition}/faq', [CompetitionController::class, 'faq']);
+
 // Admin API endpoints - protected by middleware (to be added)
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('events', EventController::class)->only(['store', 'update', 'destroy']);

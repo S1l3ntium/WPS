@@ -3,20 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Competition;
+use App\Models\CompetitionFaq;
 use App\Http\Resources\CompetitionResource;
 use App\Http\Resources\CompetitionDetailResource;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Requests\FilterRequest;
 use Illuminate\Http\Request;
 
-class CompetitionController extends Controller
+class CompetitionController extends BaseController
 {
     /**
-     * Get all competitions
+     * Get all competitions with pagination and search
      */
-    public function index()
+    public function index(FilterRequest $request)
     {
-        $competitions = Competition::all();
+        $query = Competition::query();
 
-        return CompetitionResource::collection($competitions);
+        // Apply search
+        if ($request->getSearch()) {
+            $query->search($request->getSearch());
+        }
+
+        // Apply sorting
+        $query->applySorting(
+            $request->getSortBy('created_at'),
+            $request->getSortOrder('desc')
+        );
+
+        // Get paginated results
+        $paginator = $this->paginate($query, $request->getPerPage());
+        $competitions = CompetitionResource::collection($paginator->items());
+
+        return $this->respondWithPagination($competitions, $paginator);
     }
 
     /**
@@ -75,6 +93,32 @@ class CompetitionController extends Controller
         $competition->update($validated);
 
         return new CompetitionDetailResource($competition->load('faqItems'));
+    }
+
+    /**
+     * Get FAQ items for a competition
+     */
+    public function faq(Competition $competition, FilterRequest $request)
+    {
+        $query = $competition->faqItems();
+
+        // Apply search
+        if ($request->getSearch()) {
+            $query->where('question', 'like', '%' . $request->getSearch() . '%')
+                  ->orWhere('answer', 'like', '%' . $request->getSearch() . '%');
+        }
+
+        // Apply sorting
+        $query->applySorting(
+            $request->getSortBy('created_at'),
+            $request->getSortOrder('desc')
+        );
+
+        // Get paginated results
+        $paginator = $this->paginate($query, $request->getPerPage());
+        $faqItems = $paginator->items();
+
+        return $this->respondWithPagination($faqItems, $paginator);
     }
 
     /**

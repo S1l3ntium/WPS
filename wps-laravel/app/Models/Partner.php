@@ -3,9 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\HasSearch;
+use App\Models\Traits\HasFilters;
+use App\Models\Traits\HasSorting;
 
 class Partner extends Model
 {
+    use HasSearch, HasFilters, HasSorting;
+
+    protected static array $searchable = ['name'];
+    protected static array $sortable = ['order', 'created_at', 'name'];
     protected $fillable = [
         'name',
         'logo',

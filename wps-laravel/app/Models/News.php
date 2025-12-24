@@ -3,9 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\HasSearch;
+use App\Models\Traits\HasFilters;
+use App\Models\Traits\HasSorting;
 
 class News extends Model
 {
+    use HasSearch, HasFilters, HasSorting;
+
+    protected static array $searchable = ['title', 'content', 'excerpt'];
+    protected static array $sortable = ['created_at', 'published_at', 'views_count'];
     protected $fillable = [
         'title',
         'excerpt',

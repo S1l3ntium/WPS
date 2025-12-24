@@ -4,17 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Partner;
 use App\Http\Resources\PartnerResource;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Requests\FilterRequest;
 use Illuminate\Http\Request;
 
-class PartnerController extends Controller
+class PartnerController extends BaseController
 {
     /**
-     * Get all active partners
+     * Get all active partners with pagination and search
      */
-    public function index()
+    public function index(FilterRequest $request)
     {
-        $partners = Partner::active()->ordered()->get();
-        return PartnerResource::collection($partners);
+        $query = Partner::active();
+
+        // Apply search
+        if ($request->getSearch()) {
+            $query->search($request->getSearch());
+        }
+
+        // Apply sorting
+        $query->applySorting(
+            $request->getSortBy('order'),
+            $request->getSortOrder('asc')
+        );
+
+        // Get paginated results
+        $paginator = $this->paginate($query, $request->getPerPage());
+        $partners = PartnerResource::collection($paginator->items());
+
+        return $this->respondWithPagination($partners, $paginator);
     }
 
     /**

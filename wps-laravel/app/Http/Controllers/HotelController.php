@@ -4,24 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Models\Hotel;
 use App\Http\Resources\HotelResource;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Requests\FilterRequest;
 use Illuminate\Http\Request;
 
-class HotelController extends Controller
+class HotelController extends BaseController
 {
     /**
-     * Get hotels by category
+     * Get hotels by category with pagination and search
      */
-    public function index(Request $request)
+    public function index(FilterRequest $request)
     {
         $query = Hotel::query();
+
+        // Apply search
+        if ($request->getSearch()) {
+            $query->search($request->getSearch());
+        }
 
         if ($request->has('category')) {
             $query->byCategory($request->category);
         }
 
-        $hotels = $query->get();
+        // Apply sorting
+        $query->applySorting(
+            $request->getSortBy('created_at'),
+            $request->getSortOrder('desc')
+        );
 
-        return HotelResource::collection($hotels);
+        // Get paginated results
+        $paginator = $this->paginate($query, $request->getPerPage());
+        $hotels = HotelResource::collection($paginator->items());
+
+        return $this->respondWithPagination($hotels, $paginator);
     }
 
     /**

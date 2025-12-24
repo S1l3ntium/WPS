@@ -4,9 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Traits\HasSearch;
+use App\Models\Traits\HasFilters;
+use App\Models\Traits\HasSorting;
 
 class Competition extends Model
 {
+    use HasSearch, HasFilters, HasSorting;
+
+    protected static array $searchable = ['name', 'description', 'type'];
+    protected static array $sortable = ['created_at', 'name', 'type'];
     protected $fillable = [
         'type',
         'name',

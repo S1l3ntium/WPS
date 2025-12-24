@@ -4,18 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\CommitteeMember;
 use App\Http\Resources\CommitteeMemberResource;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Requests\FilterRequest;
 use Illuminate\Http\Request;
 
-class CommitteeMemberController extends Controller
+class CommitteeMemberController extends BaseController
 {
     /**
-     * Get all committee members
+     * Get all committee members with pagination and search
      */
-    public function index()
+    public function index(FilterRequest $request)
     {
-        $members = CommitteeMember::ordered()->get();
+        $query = CommitteeMember::query();
 
-        return CommitteeMemberResource::collection($members);
+        // Apply search
+        if ($request->getSearch()) {
+            $query->search($request->getSearch());
+        }
+
+        // Apply sorting
+        $query->applySorting(
+            $request->getSortBy('order'),
+            $request->getSortOrder('asc')
+        );
+
+        // Get paginated results
+        $paginator = $this->paginate($query, $request->getPerPage());
+        $members = CommitteeMemberResource::collection($paginator->items());
+
+        return $this->respondWithPagination($members, $paginator);
     }
 
     /**

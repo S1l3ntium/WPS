@@ -4,16 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Award;
 use App\Http\Resources\AwardResource;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Requests\FilterRequest;
 use Illuminate\Http\Request;
 
-class AwardController extends Controller
+class AwardController extends BaseController
 {
     /**
-     * Get all awards
+     * Get all awards with pagination and search
      */
-    public function index(Request $request)
+    public function index(FilterRequest $request)
     {
         $query = Award::query();
+
+        // Apply search
+        if ($request->getSearch()) {
+            $query->search($request->getSearch());
+        }
 
         if ($request->has('year')) {
             $query->byYear($request->year);
@@ -23,9 +30,17 @@ class AwardController extends Controller
             $query->byType($request->type);
         }
 
-        $awards = $query->get();
+        // Apply sorting
+        $query->applySorting(
+            $request->getSortBy('created_at'),
+            $request->getSortOrder('desc')
+        );
 
-        return AwardResource::collection($awards);
+        // Get paginated results
+        $paginator = $this->paginate($query, $request->getPerPage());
+        $awards = AwardResource::collection($paginator->items());
+
+        return $this->respondWithPagination($awards, $paginator);
     }
 
     /**

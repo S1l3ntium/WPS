@@ -3,9 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\HasSearch;
+use App\Models\Traits\HasFilters;
+use App\Models\Traits\HasSorting;
 
 class PartnerPackage extends Model
 {
+    use HasSearch, HasFilters, HasSorting;
+
+    protected static array $searchable = ['title', 'description'];
+    protected static array $sortable = ['created_at', 'title', 'category'];
     protected $fillable = [
         'title',
         'category',
