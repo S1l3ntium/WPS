@@ -63,7 +63,7 @@ export function PressCenterPage() {
     };
 
     loadPublications();
-  }, [t]);
+  }, []); // Load publications only once on component mount
 
   const defaultPublications: Publication[] = [
     {

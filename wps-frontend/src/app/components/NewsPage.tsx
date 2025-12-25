@@ -58,7 +58,7 @@ export function NewsPage() {
     };
 
     loadNews();
-  }, [newsId, t]);
+  }, [newsId]); // Reload when newsId changes
 
   // Fallback content if API fails
   const defaultContent = [

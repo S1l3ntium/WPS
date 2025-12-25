@@ -1,5 +1,6 @@
 import { useLocale } from '../context/LocaleContext';
 import { translations } from './translations';
+import { useCallback } from 'react';
 
 type LocaleKey = 'ru' | 'en';
 type NestedKeyOf<T> = T extends object
@@ -37,8 +38,14 @@ function getTranslation(locale: LocaleKey, key: string): string {
 export function useTranslation() {
   const { locale } = useLocale();
 
+  // Memoize the translation function to prevent unnecessary useEffect triggers
+  const t = useCallback(
+    (key: TranslationKey): string => getTranslation(locale as LocaleKey, key),
+    [locale]
+  );
+
   return {
-    t: (key: TranslationKey): string => getTranslation(locale as LocaleKey, key),
+    t,
     locale,
   };
 }
