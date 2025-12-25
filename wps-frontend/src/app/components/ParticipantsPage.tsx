@@ -133,7 +133,7 @@ export function ParticipantsPage() {
     };
 
     loadHotels();
-  }, []); // Load hotels only once on component mount
+  }, [locale]); // Reload when language changes
 
   return (
     <div className="flex flex-col min-h-dvh bg-white">

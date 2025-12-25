@@ -63,7 +63,7 @@ export function PressCenterPage() {
     };
 
     loadPublications();
-  }, []); // Load publications only once on component mount
+  }, [locale]); // Reload when language changes
 
   const defaultPublications: Publication[] = [
     {
