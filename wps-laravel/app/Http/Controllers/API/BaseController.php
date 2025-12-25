@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class BaseController extends Controller
 {
@@ -18,9 +18,9 @@ class BaseController extends Controller
      *
      * @param Builder $query
      * @param int|null $perPage
-     * @return Paginator
+     * @return LengthAwarePaginator
      */
-    protected function paginate(Builder $query, ?int $perPage = null): Paginator
+    protected function paginate(Builder $query, ?int $perPage = null): LengthAwarePaginator
     {
         return $query->paginate($perPage ?? $this->perPage);
     }
@@ -29,11 +29,11 @@ class BaseController extends Controller
      * Return paginated response
      *
      * @param mixed $data
-     * @param Paginator $paginator
+     * @param LengthAwarePaginator $paginator
      * @param int $code
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithPagination($data, Paginator $paginator, int $code = 200)
+    protected function respondWithPagination($data, LengthAwarePaginator $paginator, int $code = 200)
     {
         return response()->json([
             'data' => $data,
