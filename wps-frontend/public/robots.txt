@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Allow: /ru/
+Allow: /en/
+
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+
+Crawl-delay: 1
+
+Sitemap: https://worldpublicsummit.test/sitemap.xml
+Sitemap: https://worldpublicsummit.test/sitemap-ru.xml
+Sitemap: https://worldpublicsummit.test/sitemap-en.xml
