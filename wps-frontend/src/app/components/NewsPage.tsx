@@ -6,6 +6,8 @@ import { ChevronRight } from 'lucide-react';
 import { newsAPI, getLocalized } from '../../services/api';
 import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
+import { useSEO } from '../../hooks/useSEO';
+import { Helmet } from 'react-helmet-async';
 const newsImage = 'placeholder.png';
 
 export function NewsPage() {
@@ -59,6 +61,27 @@ export function NewsPage() {
 
     loadNews();
   }, [newsId, locale, t]); // Reload when newsId or language changes
+
+  // SEO Configuration - update when news is loaded
+  const seoConfig = {
+    title: news?.title
+      ? `${news.title} - ${locale === 'ru' ? 'Новости' : 'News'}`
+      : locale === 'ru'
+        ? 'Новости - Всемирное публичное собрание'
+        : 'News - World Public Assembly',
+    description: news?.lead
+      ? news.lead.substring(0, 160)
+      : locale === 'ru'
+        ? 'Последние новости и обновления Всемирного публичного собрания'
+        : 'Latest news and updates from the World Public Assembly',
+    keywords: locale === 'ru'
+      ? ['новости', 'публичное собрание', 'события', 'форум']
+      : ['news', 'public assembly', 'events', 'forum'],
+    image: news?.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1200',
+    ogType: 'article'
+  };
+
+  useSEO(seoConfig);
 
   // Fallback content if API fails
   const defaultContent = [

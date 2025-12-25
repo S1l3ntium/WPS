@@ -5,6 +5,8 @@ import { Download } from 'lucide-react';
 import { eventsAPI, getLocalized } from '../../services/api';
 import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
+import { useSEO } from '../../hooks/useSEO';
+import { Helmet } from 'react-helmet-async';
 
 interface Event {
   id: string;
@@ -25,6 +27,23 @@ export function ProgramPage() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // SEO Configuration
+  const seoConfig = {
+    title: locale === 'ru'
+      ? 'Программа - Всемирное публичное собрание'
+      : 'Program - World Public Assembly',
+    description: locale === 'ru'
+      ? 'Полная программа Всемирного публичного собрания с расписанием событий, выступлениями, панель-дискуссий и деловыми встречами по всем направлениям конференции.'
+      : 'Complete program of the World Public Assembly with event schedule, speeches, panel discussions and business meetings across all conference directions.',
+    keywords: locale === 'ru'
+      ? ['программа конференции', 'расписание', 'события', 'панель-дискуссия', 'выступления']
+      : ['conference program', 'schedule', 'events', 'panel discussions', 'speeches'],
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1200',
+    ogType: 'website'
+  };
+
+  useSEO(seoConfig);
 
   useEffect(() => {
     const loadEvents = async () => {

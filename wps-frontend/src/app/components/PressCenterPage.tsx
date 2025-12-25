@@ -6,6 +6,8 @@ import { ChevronRight } from 'lucide-react';
 import { newsAPI, getLocalized } from '../../services/api';
 import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
+import { useSEO } from '../../hooks/useSEO';
+import { Helmet } from 'react-helmet-async';
 
 const newsImage = 'placeholder.png';
 
@@ -35,6 +37,23 @@ export function PressCenterPage() {
   const [publications, setPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // SEO Configuration
+  const seoConfig = {
+    title: locale === 'ru'
+      ? 'Пресс-центр - Всемирное публичное собрание'
+      : 'Press Center - World Public Assembly',
+    description: locale === 'ru'
+      ? 'Пресс-центр Всемирного публичного собрания. Новости, статьи, пресс-релизы, фото- и видеоматериалы конференции.'
+      : 'Press Center of the World Public Assembly. News, articles, press releases, photos and videos of the conference.',
+    keywords: locale === 'ru'
+      ? ['пресс-центр', 'новости', 'пресс-релиз', 'фотографии', 'видео', 'конференция']
+      : ['press center', 'news', 'press release', 'photos', 'video', 'conference'],
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1200',
+    ogType: 'website'
+  };
+
+  useSEO(seoConfig);
 
   useEffect(() => {
     const loadPublications = async () => {

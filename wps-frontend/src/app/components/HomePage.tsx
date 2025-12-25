@@ -1,16 +1,39 @@
 import { Search } from 'lucide-react';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 import { useTranslation } from '../../i18n/useTranslation';
+import { useLocale } from '../../context/LocaleContext';
+import { useSEO } from '../../hooks/useSEO';
+import { generateEventSchema, generateOrganizationSchema } from '../../utils/seo';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import Slider from 'react-slick';
+import { Helmet } from 'react-helmet-async';
 
 const mainImage = 'placeholder.png';
 
 export function HomePage() {
   const navigate = useLocaleNavigate();
   const { t } = useTranslation();
+  const { locale } = useLocale();
+
+  // SEO Configuration
+  const seoConfig = {
+    title: locale === 'ru'
+      ? 'Всемирное публичное собрание - Международный форум'
+      : 'World Public Assembly - International Forum',
+    description: locale === 'ru'
+      ? 'Всемирное публичное собрание - площадка для диалога лидеров, экспертов и общественных деятелей из более чем 150 стран. Обсуждение актуальных вызовов развития мира.'
+      : 'World Public Assembly - a platform for dialogue between leaders, experts and public figures from over 150 countries. Discussion of global development challenges.',
+    keywords: locale === 'ru'
+      ? ['всемирное собрание', 'международный форум', 'диалог культур', 'публичная дипломатия', 'мировая политика']
+      : ['world assembly', 'international forum', 'dialogue of cultures', 'public diplomacy', 'world politics'],
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1200',
+    ogType: 'website'
+  };
+
+  useSEO(seoConfig);
+
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -22,8 +45,39 @@ export function HomePage() {
     arrows: false
   };
 
+  // Event schema data
+  const eventData = {
+    name: locale === 'ru' ? 'Всемирное публичное собрание' : 'World Public Assembly',
+    description: seoConfig.description,
+    startDate: '2025-12-15T09:00:00Z',
+    endDate: '2025-12-17T18:00:00Z',
+    location: locale === 'ru' ? 'Москва, Россия' : 'Moscow, Russia',
+    image: seoConfig.image,
+    url: `https://worldpublicsummit.test/${locale}/`
+  };
+
+  const organizationData = {
+    name: 'World Public Assembly',
+    description: seoConfig.description,
+    url: 'https://worldpublicsummit.test',
+    logo: 'https://worldpublicsummit.test/logo.svg',
+    contactPoint: {
+      type: 'ContactPoint',
+      telephone: '+7-800-XXX-XXXX',
+      contactType: 'Customer Service'
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-dvh bg-white">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(generateEventSchema(eventData))}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(generateOrganizationSchema(organizationData))}
+        </script>
+      </Helmet>
       <Header currentPage="home" />
 
       <main className="flex-1">
