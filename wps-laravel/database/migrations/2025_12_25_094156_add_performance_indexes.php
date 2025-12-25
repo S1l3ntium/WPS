@@ -36,7 +36,6 @@ return new class extends Migration
         // Competitions table indexes
         Schema::table('competitions', function (Blueprint $table) {
             $table->index('type', 'idx_competitions_type');
-            $table->index('status', 'idx_competitions_status');
             $table->index('created_at', 'idx_competitions_created_at');
         });
 
@@ -90,7 +89,6 @@ return new class extends Migration
 
         Schema::table('competitions', function (Blueprint $table) {
             $table->dropIndex('idx_competitions_type');
-            $table->dropIndex('idx_competitions_status');
             $table->dropIndex('idx_competitions_created_at');
         });
 
