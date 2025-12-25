@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 type Locale = 'ru' | 'en';
 
@@ -37,7 +37,6 @@ const setStoredLocale = (locale: Locale): void => {
 };
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  const { locale: urlLocale } = useParams<{ locale?: string }>();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -47,13 +46,22 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     return DEFAULT_LOCALE;
   };
 
-  // Get initial locale with priority: URL > localStorage > browser language > default
+  // Extract locale from URL pathname (e.g., "/en/press-center" -> "en")
+  // This works reliably because it doesn't depend on useParams timing
+  const extractLocaleFromPathname = (): Locale => {
+    const pathname = location.pathname;
+    if (pathname.startsWith('/en')) return 'en';
+    if (pathname.startsWith('/ru')) return 'ru';
+    return DEFAULT_LOCALE;
+  };
+
+  // Get initial locale with priority: URL pathname > localStorage > browser language > default
   const getInitialLocale = (): Locale => {
-    // Priority 1: URL locale parameter
-    if (urlLocale) {
-      const normalized = normalizeLocale(urlLocale);
-      setStoredLocale(normalized);
-      return normalized;
+    // Priority 1: URL pathname (extracted directly)
+    const pathnameLocale = extractLocaleFromPathname();
+    if (pathnameLocale !== DEFAULT_LOCALE) {
+      setStoredLocale(pathnameLocale);
+      return pathnameLocale;
     }
 
     // Priority 2: Saved in localStorage
@@ -80,14 +88,14 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
   const [locale, setLocaleState] = useState<Locale>(getInitialLocale);
 
-  // Sync state with URL changes
+  // Sync state with URL pathname changes (more reliable than useParams)
   useEffect(() => {
-    const normalized = normalizeLocale(urlLocale);
-    if (normalized !== locale) {
-      setLocaleState(normalized);
-      setStoredLocale(normalized);
+    const pathnameLocale = extractLocaleFromPathname();
+    if (pathnameLocale !== locale) {
+      setLocaleState(pathnameLocale);
+      setStoredLocale(pathnameLocale);
     }
-  }, [urlLocale]);
+  }, [location.pathname, locale]);
 
   // Handle locale change and navigate to new URL with new locale
   const setLocale = (newLocale: Locale) => {
