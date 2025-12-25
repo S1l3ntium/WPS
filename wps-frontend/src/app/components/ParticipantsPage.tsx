@@ -95,7 +95,7 @@ export function ParticipantsPage() {
       try {
         setLoading(true);
         setError(null);
-        const apiHotels = await hotelsAPI.getAll();
+        const response = await hotelsAPI.getAll();
 
         const grouped = {
           recommended: [] as any[],
@@ -103,7 +103,7 @@ export function ParticipantsPage() {
           verified: [] as any[]
         };
 
-        apiHotels.forEach((hotel: any) => {
+        response.data.forEach((hotel: any) => {
           const transformedHotel = {
             id: hotel.id,
             name: t(hotel.name || ''),
@@ -133,7 +133,7 @@ export function ParticipantsPage() {
     };
 
     loadHotels();
-  }, [t]);
+  }, []); // Load hotels only once on component mount
 
   return (
     <div className="flex flex-col min-h-dvh bg-white">
