@@ -5,6 +5,8 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { PartnerPackage } from './PartnerPackage';
 import { useTranslation } from '../../i18n/useTranslation';
+import { useSEO } from '../../hooks/useSEO';
+import { Helmet } from 'react-helmet-async';
 
 const partnerPackages = [
   {
@@ -107,8 +109,25 @@ const partnerPackages = [
 
 export function PartnersPage() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [activeFilter, setActiveFilter] = useState<string>('all');
+
+  // SEO Configuration
+  const seoConfig = {
+    title: locale === 'ru'
+      ? 'Партнёры - Всемирное публичное собрание'
+      : 'Partners - World Public Assembly',
+    description: locale === 'ru'
+      ? 'Станьте партнёром Всемирного публичного собрания. Различные уровни партнёрства: стратегические, генеральные, сессионные, культурные партнёры. Узнайте о преимуществах и условиях сотрудничества.'
+      : 'Become a partner of the World Public Assembly. Various partnership levels: strategic, general, session, and cultural partners. Learn about benefits and cooperation terms.',
+    keywords: locale === 'ru'
+      ? ['партнёры', 'партнёрство', 'спонсорство', 'сотрудничество', 'конференция']
+      : ['partners', 'partnership', 'sponsorship', 'cooperation', 'conference'],
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1200',
+    ogType: 'website' as const
+  };
+
+  useSEO(seoConfig);
 
   const filteredPackages = activeFilter === 'all'
     ? partnerPackages

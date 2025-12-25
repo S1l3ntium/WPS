@@ -4,12 +4,31 @@ import { Footer } from './Footer';
 import { ChevronRight, ArrowRight } from 'lucide-react';
 import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
+import { useSEO } from '../../hooks/useSEO';
+import { Helmet } from 'react-helmet-async';
 const venueImage = 'placeholder.png';
 
 export function VenuePage() {
   const navigate = useNavigate();
   const localeNavigate = useLocaleNavigate();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
+
+  // SEO Configuration
+  const seoConfig = {
+    title: locale === 'ru'
+      ? 'Место проведения - Всемирное публичное собрание'
+      : 'Venue - World Public Assembly',
+    description: locale === 'ru'
+      ? 'Всемирное публичное собрание проходит в Москве. Информация о месте проведения, адресе, транспортной доступности, на территории выставочного центра в центре Москвы.'
+      : 'The World Public Assembly takes place in Moscow. Information about the venue location, address, transport accessibility at the exhibition center in central Moscow.',
+    keywords: locale === 'ru'
+      ? ['место проведения', 'москва', 'центр выставочный', 'адрес', 'транспорт', 'доступность']
+      : ['venue', 'moscow', 'exhibition center', 'address', 'transport', 'accessibility'],
+    image: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1200',
+    ogType: 'website' as const
+  };
+
+  useSEO(seoConfig);
   return (
     <div className="flex flex-col min-h-dvh bg-gray-50">
       <Header currentPage="home" />

@@ -6,6 +6,8 @@ import { Plane, Users, MapPin, AlertCircle } from 'lucide-react';
 import { hotelsAPI, getLocalized } from '../../services/api';
 import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
+import { useSEO } from '../../hooks/useSEO';
+import { Helmet } from 'react-helmet-async';
 
 type Tab = 'accommodation' | 'transfer' | 'badges';
 
@@ -89,6 +91,23 @@ export function ParticipantsPage() {
   const [hotelsByCategory, setHotelsByCategory] = useState<Record<string, any[]>>({ recommended: [], championship: [], verified: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // SEO Configuration
+  const seoConfig = {
+    title: locale === 'ru'
+      ? 'Участникам - Всемирное публичное собрание'
+      : 'Participants - World Public Assembly',
+    description: locale === 'ru'
+      ? 'Информация для участников Всемирного публичного собрания. Размещение, трансферы, аккредитация, необходимые документы. Рекомендуемые отели в Москве.'
+      : 'Information for participants of the World Public Assembly. Accommodation, transfers, accreditation, required documents. Recommended hotels in Moscow.',
+    keywords: locale === 'ru'
+      ? ['участники', 'размещение', 'отели', 'аккредитация', 'трансфер', 'Москва']
+      : ['participants', 'accommodation', 'hotels', 'accreditation', 'transfer', 'Moscow'],
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1200',
+    ogType: 'website' as const
+  };
+
+  useSEO(seoConfig);
 
   useEffect(() => {
     const loadHotels = async () => {
