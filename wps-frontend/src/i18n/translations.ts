@@ -808,6 +808,18 @@ export const translations = {
       noPhotos: "Фотографий не найдено",
       photosCount: "фотографий",
     },
+    // PhotoGallery component
+    photoGallery: {
+      day1: "Всемирная Общественная Ассамблея 2025. День 1",
+      day2: "Всемирная Общественная Ассамблея 2025. День 2",
+      day3: "Всемирная Общественная Ассамблея 2025. День 3",
+      panelDiscussions: "Панельные дискуссии",
+      viewPhotos: "Смотреть фото-материалы",
+      tassPartner: "ТАСС является генеральным информационным партнером Всемирной Общественной Ассамблеи и выступает официальным фотохост-агентством Ассамблеи.",
+      photosAvailable: "Фотографии доступны участникам Мероприятия, а также СМИ в целях освещения Мероприятия с обязательным указанием имени автора и источника в следующем порядке: «Автор/Фотохост-агентство ТАСС».",
+      usageTerms: "Подробные условия использования размещены по ссылке",
+      usageTermsLink: "worldpublicassembly.tass.photo/terms",
+    },
   },
   en: {
     // Navigation
@@ -1582,6 +1594,18 @@ export const translations = {
       closeGallery: "Close Gallery",
       noPhotos: "No photos found",
       photosCount: "photos",
+    },
+    // PhotoGallery component
+    photoGallery: {
+      day1: "World Public Assembly 2025. Day 1",
+      day2: "World Public Assembly 2025. Day 2",
+      day3: "World Public Assembly 2025. Day 3",
+      panelDiscussions: "Panel Discussions",
+      viewPhotos: "View Photos",
+      tassPartner: "TASS is the general information partner of the World Public Assembly and serves as the official photo host agency of the Assembly.",
+      photosAvailable: "Photos are available to event participants as well as media for event coverage with mandatory author and source attribution in the following format: «Author/Photo Host Agency TASS».",
+      usageTerms: "Detailed terms of use are available at",
+      usageTermsLink: "worldpublicassembly.tass.photo/terms",
     },
   },
 };
