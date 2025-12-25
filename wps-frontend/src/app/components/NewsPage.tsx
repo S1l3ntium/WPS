@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { ChevronRight } from 'lucide-react';
-import { newsAPI } from '../../services/api';
+import { newsAPI, getLocalized } from '../../services/api';
 import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 const newsImage = 'placeholder.png';
@@ -11,7 +11,7 @@ const newsImage = 'placeholder.png';
 export function NewsPage() {
   const { newsId } = useParams<{ newsId: string }>();
   const navigate = useLocaleNavigate();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [news, setNews] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -31,7 +31,7 @@ export function NewsPage() {
           contentText = apiNews.content;
         } else if (apiNews.content && typeof apiNews.content === 'object' && !Array.isArray(apiNews.content)) {
           // Handle localized content { ru: "...", en: "..." }
-          contentText = t(apiNews.content || '');
+          contentText = getLocalized(apiNews.content || '', locale as 'ru' | 'en');
         }
 
         const contentBlocks = Array.isArray(apiNews.content)
@@ -42,8 +42,8 @@ export function NewsPage() {
           id: newsId,
           date: apiNews.date,
           category: apiNews.category,
-          title: t(apiNews.title || ''),
-          lead: t(apiNews.lead || ''),
+          title: getLocalized(apiNews.title || '', locale as 'ru' | 'en'),
+          lead: getLocalized(apiNews.lead || '', locale as 'ru' | 'en'),
           image: apiNews.image,
           content: contentBlocks
         };
@@ -58,7 +58,7 @@ export function NewsPage() {
     };
 
     loadNews();
-  }, [newsId]); // Reload when newsId changes
+  }, [newsId, locale, t]); // Reload when newsId or language changes
 
   // Fallback content if API fails
   const defaultContent = [
