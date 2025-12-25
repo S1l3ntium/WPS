@@ -41,9 +41,9 @@ export function PressCenterPage() {
       try {
         setLoading(true);
         setError(null);
-        const apiNews = await newsAPI.getAll();
+        const response = await newsAPI.getAll();
 
-        const transformedNews: Publication[] = apiNews.map((item: any) => ({
+        const transformedNews: Publication[] = response.data.map((item: any) => ({
           id: item.id,
           type: item.type,
           image: item.image,

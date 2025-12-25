@@ -31,9 +31,9 @@ export function ProgramPage() {
       try {
         setLoading(true);
         setError(null);
-        const apiEvents = await eventsAPI.getAll();
+        const response = await eventsAPI.getAll();
 
-        const transformedEvents: Event[] = apiEvents.map((apiEvent: any) => ({
+        const transformedEvents: Event[] = response.data.map((apiEvent: any) => ({
           id: String(apiEvent.id),
           date: apiEvent.date,
           time: apiEvent.time,
