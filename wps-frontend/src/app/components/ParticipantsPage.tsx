@@ -3,7 +3,7 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Plane, Users, MapPin, AlertCircle } from 'lucide-react';
-import { hotelsAPI } from '../../services/api';
+import { hotelsAPI, getLocalized } from '../../services/api';
 import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 
@@ -84,7 +84,7 @@ const hotels = {
 
 export function ParticipantsPage() {
   const navigate = useLocaleNavigate();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [activeTab, setActiveTab] = useState<Tab>('accommodation');
   const [hotelsByCategory, setHotelsByCategory] = useState<Record<string, any[]>>({ recommended: [], championship: [], verified: [] });
   const [loading, setLoading] = useState(true);
@@ -106,9 +106,9 @@ export function ParticipantsPage() {
         response.data.forEach((hotel: any) => {
           const transformedHotel = {
             id: hotel.id,
-            name: t(hotel.name || ''),
-            address: t(hotel.address || ''),
-            metro: t(hotel.metro || ''),
+            name: getLocalized(hotel.name, locale as 'ru' | 'en'),
+            address: getLocalized(hotel.address, locale as 'ru' | 'en'),
+            metro: getLocalized(hotel.metro, locale as 'ru' | 'en'),
             price: hotel.price,
             image: hotel.image,
             category: hotel.category

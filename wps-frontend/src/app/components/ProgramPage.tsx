@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { Download } from 'lucide-react';
-import { eventsAPI } from '../../services/api';
+import { eventsAPI, getLocalized } from '../../services/api';
 import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 
@@ -19,7 +19,7 @@ interface Event {
 
 export function ProgramPage() {
   const navigate = useLocaleNavigate();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [selectedTab, setSelectedTab] = useState<'program' | 'architecture' | 'documents'>('program');
   const [selectedDate, setSelectedDate] = useState<string>('all');
   const [events, setEvents] = useState<Event[]>([]);
@@ -37,9 +37,9 @@ export function ProgramPage() {
           id: String(apiEvent.id),
           date: apiEvent.date,
           time: apiEvent.time,
-          title: t(apiEvent.title || ''),
-          description: t(apiEvent.description || ''),
-          location: t(apiEvent.location || ''),
+          title: getLocalized(apiEvent.title, locale as 'ru' | 'en'),
+          description: getLocalized(apiEvent.description, locale as 'ru' | 'en'),
+          location: getLocalized(apiEvent.location, locale as 'ru' | 'en'),
           tags: apiEvent.tags || [],
           downloadLink: apiEvent.downloadLink
         }));

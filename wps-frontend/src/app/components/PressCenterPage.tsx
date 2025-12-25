@@ -3,7 +3,7 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { PhotoGallery } from './PhotoGallery';
 import { ChevronRight } from 'lucide-react';
-import { newsAPI } from '../../services/api';
+import { newsAPI, getLocalized } from '../../services/api';
 import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 
@@ -30,7 +30,7 @@ interface Tab {
 
 export function PressCenterPage() {
   const navigate = useLocaleNavigate();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [activeTab, setActiveTab] = useState<TabType>('all');
   const [publications, setPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
@@ -48,8 +48,8 @@ export function PressCenterPage() {
           type: item.type,
           image: item.image,
           category: item.category,
-          title: t(item.title || ''),
-          excerpt: t(item.excerpt || ''),
+          title: getLocalized(item.title, locale as 'ru' | 'en'),
+          excerpt: getLocalized(item.excerpt, locale as 'ru' | 'en'),
           date: item.date
         }));
 
