@@ -11,6 +11,31 @@ interface LocaleContextType {
 
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
+// Constants for localStorage and defaults
+const LOCALE_STORAGE_KEY = 'wps_locale';
+const DEFAULT_LOCALE: Locale = 'ru';
+
+// Utility function to safely access localStorage
+const getStoredLocale = (): Locale | null => {
+  try {
+    const saved = localStorage.getItem(LOCALE_STORAGE_KEY);
+    if (saved === 'en' || saved === 'ru') {
+      return saved;
+    }
+  } catch (e) {
+    console.warn('localStorage not available:', e);
+  }
+  return null;
+};
+
+const setStoredLocale = (locale: Locale): void => {
+  try {
+    localStorage.setItem(LOCALE_STORAGE_KEY, locale);
+  } catch (e) {
+    console.warn('Failed to save locale to localStorage:', e);
+  }
+};
+
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const { locale: urlLocale } = useParams<{ locale?: string }>();
   const navigate = useNavigate();
@@ -19,34 +44,57 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   // Normalize locale from URL (ensure it's 'ru' or 'en')
   const normalizeLocale = (loc: string | undefined): Locale => {
     if (loc === 'en') return 'en';
-    return 'ru';
+    return DEFAULT_LOCALE;
   };
 
-  // Get initial locale from URL or localStorage
+  // Get initial locale with priority: URL > localStorage > browser language > default
   const getInitialLocale = (): Locale => {
+    // Priority 1: URL locale parameter
     if (urlLocale) {
-      return normalizeLocale(urlLocale);
+      const normalized = normalizeLocale(urlLocale);
+      setStoredLocale(normalized);
+      return normalized;
     }
-    const saved = localStorage.getItem('locale') as Locale | null;
-    if (saved && (saved === 'en' || saved === 'ru')) {
-      return saved;
+
+    // Priority 2: Saved in localStorage
+    const stored = getStoredLocale();
+    if (stored) {
+      return stored;
     }
-    return 'ru';
+
+    // Priority 3: Browser language preference
+    try {
+      const browserLang = navigator.language.toLowerCase();
+      if (browserLang.startsWith('en')) {
+        setStoredLocale('en');
+        return 'en';
+      }
+    } catch (e) {
+      console.warn('Could not determine browser language:', e);
+    }
+
+    // Priority 4: Default locale
+    setStoredLocale(DEFAULT_LOCALE);
+    return DEFAULT_LOCALE;
   };
 
   const [locale, setLocaleState] = useState<Locale>(getInitialLocale);
 
-  // Update locale when URL changes
+  // Sync state with URL changes
   useEffect(() => {
     const normalized = normalizeLocale(urlLocale);
-    setLocaleState(normalized);
+    if (normalized !== locale) {
+      setLocaleState(normalized);
+      setStoredLocale(normalized);
+    }
   }, [urlLocale]);
 
   // Handle locale change and navigate to new URL with new locale
   const setLocale = (newLocale: Locale) => {
+    if (newLocale === locale) return; // No change needed
+
     setLocaleState(newLocale);
-    // Persist to localStorage
-    localStorage.setItem('locale', newLocale);
+    setStoredLocale(newLocale);
 
     // Get current pathname without locale prefix
     let currentPath = location.pathname;
