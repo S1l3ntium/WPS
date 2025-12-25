@@ -7,12 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 trait HasSearch
 {
     /**
-     * Searchable fields for this model
-     * Override in model to customize
-     */
-    protected static array $searchable = [];
-
-    /**
      * Scope for searching by query
      */
     public function scopeSearch(Builder $query, ?string $searchQuery): Builder

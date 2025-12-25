@@ -11,7 +11,7 @@ class News extends Model
 {
     use HasSearch, HasFilters, HasSorting;
 
-    protected static array $searchable = ['title', 'content', 'excerpt'];
+    protected static array $searchable = ['type'];
     protected static array $sortable = ['created_at', 'published_at', 'views_count'];
     protected $fillable = [
         'title',

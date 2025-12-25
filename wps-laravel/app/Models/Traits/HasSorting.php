@@ -7,12 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 trait HasSorting
 {
     /**
-     * Sortable fields for this model
-     * Override in model to customize
-     */
-    protected static array $sortable = [];
-
-    /**
      * Apply sorting to query
      */
     public function scopeApplySorting(Builder $query, ?string $sortBy = null, ?string $sortOrder = 'desc'): Builder

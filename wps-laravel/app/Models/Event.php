@@ -12,7 +12,7 @@ class Event extends Model
 {
     use HasSearch, HasFilters, HasSorting;
 
-    protected static array $searchable = ['title', 'description', 'type'];
+    protected static array $searchable = ['type'];
     protected static array $sortable = ['created_at', 'start_date', 'title'];
 
     protected $fillable = [
