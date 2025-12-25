@@ -443,6 +443,13 @@ export const translations = {
       sortTitle: "По названию",
       noEventsFound: "События не найдены",
       viewDetails: "Подробнее",
+      loadingEvents: "Загрузка событий...",
+      errorLoadingEvents: "Ошибка при загрузке событий",
+      download: "Скачать",
+      streamButton: "Смотреть трансляцию",
+      programButton: "Программа",
+      documentsTitle: "Документы",
+      september: "Сентябрь",
     },
     // EventPage (detail)
     eventPage: {
