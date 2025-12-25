@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate'
 import { useLocale } from '../../context/LocaleContext'
 import { useTranslation } from '../../i18n/useTranslation'
+import logo from '../../assets/logo.svg'
 
 interface HeaderProps {
 	currentPage?: string
@@ -141,7 +142,7 @@ export function Header({ currentPage = '' }: HeaderProps) {
               <div>THE</div>
               <div className="text-xs opacity-80">ASSEMBLY</div>
             </div> */}
-						<img src='../../assets/logo.svg' alt='' className='h-10' />
+						<img src={logo} alt='World Public Assembly Logo' className='h-10' />
 					</button>
 
 					<nav className='hidden lg:flex gap-6' style={{ fontSize: '14px' }}>
