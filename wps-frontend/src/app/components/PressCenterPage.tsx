@@ -63,7 +63,7 @@ export function PressCenterPage() {
     };
 
     loadPublications();
-  }, [locale]); // Reload when language changes
+  }, [locale, t]); // Reload when language changes
 
   const defaultPublications: Publication[] = [
     {

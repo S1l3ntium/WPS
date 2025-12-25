@@ -54,7 +54,7 @@ export function ProgramPage() {
     };
 
     loadEvents();
-  }, [locale]); // Reload when language changes
+  }, [locale, t]); // Reload when language changes
 
   const uniqueDates = ['all', ...Array.from(new Set(events.map(e => e.date)))];
   const allTags = Array.from(new Set(events.flatMap(e => e.tags)));

@@ -133,7 +133,7 @@ export function ParticipantsPage() {
     };
 
     loadHotels();
-  }, [locale]); // Reload when language changes
+  }, [locale, t]); // Reload when language changes
 
   return (
     <div className="flex flex-col min-h-dvh bg-white">
