@@ -9,6 +9,8 @@ use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Image;
+use MoonShine\UI\Fields\Date;
 
 /**
  * @extends ModelResource<Competition>
@@ -42,12 +44,25 @@ class CompetitionResource extends ModelResource
                 ])
                 ->object()
                 ->nullable(),
-            Text::make('Срок подачи заявок', 'timeline_application_deadline')->nullable(),
-            Text::make('Дата объявления победителей', 'timeline_award_date')->nullable(),
-            Text::make('Начало реализации', 'timeline_implementation_start')->nullable(),
-            Text::make('Конец реализации', 'timeline_implementation_end')->nullable(),
-            Text::make('Тип организации', 'eligibility_organization_type')->nullable(),
-            Number::make('Минимум стран', 'eligibility_min_countries')->default(1),
+            Image::make('Логотип конкурса', 'logo_path')
+                ->disk('public')
+                ->dir('competitions/logos')
+                ->allowedExtensions(['jpg', 'png', 'jpeg', 'gif', 'svg'])
+                ->nullable(),
+            Date::make('Открытие подачи', 'timeline_opening')->nullable(),
+            Date::make('Конец открытия подачи', 'timeline_opening_end_date')->nullable(),
+            Date::make('Закрытие подачи', 'timeline_closing')->nullable(),
+            Date::make('Конец закрытия подачи', 'timeline_closing_end_date')->nullable(),
+            Date::make('Объявление результатов', 'timeline_announcement')->nullable(),
+            Date::make('Конец объявления результатов', 'timeline_announcement_end_date')->nullable(),
+            Number::make('Минимальный возраст', 'eligibility_age_min')->nullable(),
+            Number::make('Максимальный возраст', 'eligibility_age_max')->nullable(),
+            Json::make('Требования к участникам', 'eligibility_requirements')
+                ->fields([
+                    Textarea::make('Значения', 'values'),
+                ])
+                ->object()
+                ->nullable(),
             Json::make('Направления поддержки', 'support_areas')
                 ->fields([
                     Textarea::make('Значения', 'values'),
@@ -73,8 +88,9 @@ class CompetitionResource extends ModelResource
         return [
             ID::make('id'),
             Text::make('Название (RU)', 'name->ru')->sortable(),
-            Text::make('Тип', 'type'),
-            Text::make('Минимум стран', 'eligibility_min_countries')->sortable(),
+            Text::make('Тип', 'type')->sortable(),
+            Date::make('Открытие подачи', 'timeline_opening')->sortable(),
+            Image::make('Логотип', 'logo_path'),
         ];
     }
 
