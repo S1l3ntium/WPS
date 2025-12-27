@@ -1,5 +1,5 @@
 import { Search, ChevronDown, Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate'
 import { useLocale } from '../../context/LocaleContext'
 import { useTranslation } from '../../i18n/useTranslation'
@@ -22,9 +22,28 @@ export function Header({ currentPage = '' }: HeaderProps) {
 	const { t } = useTranslation()
 	const [isSearchOpen, setIsSearchOpen] = useState(false)
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+	const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false)
+	const languageDropdownRef = useRef<HTMLDivElement>(null)
+
+	// Close language dropdown when clicking outside
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (languageDropdownRef.current && !languageDropdownRef.current.contains(event.target as Node)) {
+				setIsLanguageDropdownOpen(false)
+			}
+		}
+
+		if (isLanguageDropdownOpen) {
+			document.addEventListener('mousedown', handleClickOutside)
+			return () => {
+				document.removeEventListener('mousedown', handleClickOutside)
+			}
+		}
+	}, [isLanguageDropdownOpen])
 
 	// Navigation structure with translation keys
 	const navItems: NavItem[] = [
+		// 1. About - EXPANDED SUBMENU
 		{
 			label: t('nav.about'),
 			translationKey: 'nav.about',
@@ -46,28 +65,33 @@ export function Header({ currentPage = '' }: HeaderProps) {
 					path: '/organizers',
 				},
 				{ label: t('nav.venue'), translationKey: 'nav.venue', path: '/venue' },
+				{ label: t('nav.partners'), translationKey: 'nav.partners', path: '/partners' },
 			],
 		},
+		// 2. Summit Participation - NEW
 		{
-			label: t('nav.program'),
-			translationKey: 'nav.program',
-			path: '/program',
+			label: t('nav.summitParticipation'),
+			translationKey: 'nav.summitParticipation',
+			submenu: [
+				{
+					label: t('nav.programDocuments'),
+					translationKey: 'nav.programDocuments',
+					path: '/program',
+				},
+				{
+					label: t('nav.forParticipants'),
+					translationKey: 'nav.forParticipants',
+					path: '/participants',
+				},
+			],
 		},
-		{
-			label: t('nav.participants'),
-			translationKey: 'nav.participants',
-			path: '/participants',
-		},
-		{
-			label: t('nav.partners'),
-			translationKey: 'nav.partners',
-			path: '/partners',
-		},
+		// 3. Award - UNCHANGED
 		{
 			label: t('nav.award'),
 			translationKey: 'nav.award',
 			path: '/award',
 		},
+		// 4. Grants - UNCHANGED
 		{
 			label: t('nav.grants'),
 			translationKey: 'nav.grants',
@@ -78,17 +102,53 @@ export function Header({ currentPage = '' }: HeaderProps) {
 					path: '/grants-competition',
 				},
 				{
-					label: 'Leadership',
-					translationKey: 'nav.grants',
+					label: t('nav.leadership'),
+					translationKey: 'nav.leadership',
 					path: '/leadership-competition',
 				},
 			],
 		},
+		// 5. Summits - NEW
+		{
+			label: t('nav.summits'),
+			translationKey: 'nav.summits',
+			submenu: [
+				{
+					label: t('nav.summitIraq'),
+					translationKey: 'nav.summitIraq',
+					path: '/',
+				},
+				{
+					label: t('nav.summitLatinAmerica'),
+					translationKey: 'nav.summitLatinAmerica',
+					path: '/',
+				},
+				{
+					label: t('nav.summitAfrica'),
+					translationKey: 'nav.summitAfrica',
+					path: '/',
+				},
+			],
+		},
+		// 6. Press - UNCHANGED
 		{
 			label: t('nav.press'),
 			translationKey: 'nav.press',
 			path: '/press-center',
 		},
+		// 7. Archive - NEW
+		{
+			label: t('nav.archive'),
+			translationKey: 'nav.archive',
+			submenu: [
+				{
+					label: t('nav.archive2025'),
+					translationKey: 'nav.archive2025',
+					path: '/',
+				},
+			],
+		},
+		// 8. Contacts - UNCHANGED
 		{
 			label: t('nav.contacts'),
 			translationKey: 'nav.contacts',
@@ -137,19 +197,18 @@ export function Header({ currentPage = '' }: HeaderProps) {
 						onClick={() => navigate('/')}
 						className='flex items-center gap-2 hover:opacity-80 transition-opacity flex-shrink-0'
 					>
-						<img src={logo} alt='World Public Assembly Logo' className='h-10' />
+						<img src={logo} alt='World Public Assembly Logo' className='h-8 sm:h-10' />
 					</button>
 
 					{/* Desktop Navigation */}
-					<nav className='hidden lg:flex gap-6' style={{ fontSize: '14px' }}>
+					<nav className='hidden lg:flex gap-4 text-sm'>
 						{navItems.map((item, index) => {
 							if (item.submenu) {
 								return (
 									<div key={index} className='relative group'>
 										<button
 											onClick={() => handleNavClick(item.submenu?.[0].path)}
-											className='hover:text-[#4db8b8] transition-colors flex items-center gap-1 py-3'
-											style={{ fontSize: '14px' }}
+											className='hover:text-[#4db8b8] transition-colors flex items-center gap-1 py-3 text-sm'
 										>
 											{item.label}
 											<ChevronDown className='w-3 h-3' />
@@ -158,13 +217,12 @@ export function Header({ currentPage = '' }: HeaderProps) {
 										{/* Dropdown submenu */}
 										<div className='absolute left-0 top-full opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto z-40'>
 											<div className='pt-2'>
-												<div className='bg-white text-[#1a1f4d] rounded shadow-xl py-2 min-w-[280px]'>
+												<div className='bg-white text-[#1a1f4d] rounded shadow-xl py-2 min-w-[200px] sm:min-w-[280px]'>
 													{item.submenu.map((subItem, subIndex) => (
 														<button
 															key={subIndex}
 															onClick={() => handleNavClick(subItem.path)}
-															className='block w-full text-left px-6 py-2 hover:bg-[#4db8b8] hover:text-white transition-colors'
-															style={{ fontSize: '14px' }}
+															className='block w-full text-left px-6 py-2 hover:bg-[#4db8b8] hover:text-white transition-colors text-sm'
 														>
 															{subItem.label}
 														</button>
@@ -180,13 +238,9 @@ export function Header({ currentPage = '' }: HeaderProps) {
 								<button
 									key={index}
 									onClick={() => handleNavClick(item.path)}
-									className={`hover:text-[#4db8b8] transition-colors ${
-										(item.translationKey === 'nav.partners' &&
-											currentPage === 'partners') ||
-										(item.translationKey === 'nav.program' &&
-											currentPage === 'program') ||
-										(item.translationKey === 'nav.participants' &&
-											currentPage === 'participants') ||
+									className={`hover:text-[#4db8b8] transition-colors text-sm ${
+										(item.translationKey === 'nav.summitParticipation' &&
+											(currentPage === 'program' || currentPage === 'participants')) ||
 										(item.translationKey === 'nav.award' &&
 											currentPage === 'award') ||
 										(item.translationKey === 'nav.press' &&
@@ -196,7 +250,6 @@ export function Header({ currentPage = '' }: HeaderProps) {
 											? 'text-[#4db8b8]'
 											: ''
 									}`}
-									style={{ fontSize: '14px' }}
 								>
 									{item.label}
 								</button>
@@ -212,33 +265,44 @@ export function Header({ currentPage = '' }: HeaderProps) {
 						>
 							<Search className='w-5 h-5' />
 						</button>
-						<div className='relative group'>
-							<button className='flex items-center gap-1 px-2 sm:px-3 py-1 bg-[#2c3570] hover:bg-[#3d4680] rounded transition-colors text-sm sm:text-base'>
+						<div className='relative group' ref={languageDropdownRef}>
+							<button
+								onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+								className='flex items-center gap-1 px-2 sm:px-3 py-1 bg-[#2c3570] hover:bg-[#3d4680] rounded transition-colors text-sm sm:text-base'
+							>
 								<span>{locale.toUpperCase()}</span>
 								<ChevronDown className='w-3 h-3 sm:w-4 sm:h-4' />
 							</button>
 
-							{/* Dropdown menu */}
-							<div className='absolute right-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-40'>
-								<div className='bg-white text-[#1a1f4d] rounded shadow-xl py-2 min-w-[100px]'>
+							{/* Dropdown menu - visible on hover (desktop) or click state (mobile) */}
+							<div className={`absolute right-0 top-full pt-2 transition-all duration-200 z-40 group-hover:opacity-100 group-hover:visible ${
+								isLanguageDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+							}`}>
+								<div className='bg-white text-[#1a1f4d] rounded shadow-xl py-2 min-w-[80px] sm:min-w-[100px]'>
 									<button
-										onClick={() => setLocale('ru')}
+										onClick={() => {
+											setLocale('ru')
+											setIsLanguageDropdownOpen(false)
+										}}
 										className='flex items-center justify-between w-full px-4 py-2 hover:bg-[#4db8b8] hover:text-white transition-colors'
 									>
 										<span>Ru</span>
 										{locale === 'ru' && (
-											<span className='text-[#4db8b8] group-hover:text-white'>
+											<span className='text-[#4db8b8] hover:text-white'>
 												✓
 											</span>
 										)}
 									</button>
 									<button
-										onClick={() => setLocale('en')}
+										onClick={() => {
+											setLocale('en')
+											setIsLanguageDropdownOpen(false)
+										}}
 										className='flex items-center justify-between w-full px-4 py-2 hover:bg-[#4db8b8] hover:text-white transition-colors'
 									>
 										<span>En</span>
 										{locale === 'en' && (
-											<span className='text-[#4db8b8] group-hover:text-white'>
+											<span className='text-[#4db8b8] hover:text-white'>
 												✓
 											</span>
 										)}

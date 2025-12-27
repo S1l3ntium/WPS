@@ -10,11 +10,26 @@ export const translations = {
       grants: "Гранты и конкурсы",
       press: "Пресс-центр",
       contacts: "Контакты",
+      // New main menu items
+      summitParticipation: "Участие в саммите",
+      summits: "Саммиты",
+      archive: "Архив",
       // About submenu
       mission: "Миссия, цели и задачи",
       committee: "Оргкомитет",
       organizers: "Организаторы",
       venue: "Площадка",
+      // Summit Participation submenu
+      programDocuments: "Программа и документы",
+      forParticipants: "Участникам",
+      // Summits submenu
+      summitIraq: "Ирак",
+      summitLatinAmerica: "Латинская Америка",
+      summitAfrica: "Африка",
+      // Archive submenu
+      archive2025: "2025",
+      // Leadership
+      leadership: "Лидерство",
     },
     // Buttons
     buttons: {
@@ -832,11 +847,26 @@ export const translations = {
       grants: "Grants and Competitions",
       press: "Press Center",
       contacts: "Contacts",
+      // New main menu items
+      summitParticipation: "Summit Participation",
+      summits: "Summits",
+      archive: "Archive",
       // About submenu
       mission: "Mission, Goals and Tasks",
       committee: "Organizing Committee",
       organizers: "Organizers",
       venue: "Venue",
+      // Summit Participation submenu
+      programDocuments: "Program and Documents",
+      forParticipants: "For Participants",
+      // Summits submenu
+      summitIraq: "Iraq",
+      summitLatinAmerica: "Latin America",
+      summitAfrica: "Africa",
+      // Archive submenu
+      archive2025: "2025",
+      // Leadership
+      leadership: "Leadership",
     },
     // Buttons
     buttons: {
