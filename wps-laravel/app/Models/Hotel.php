@@ -29,8 +29,30 @@ class Hotel extends Model
         'metro' => 'array',
     ];
 
+    protected $appends = ['name_with_language', 'metro_with_language'];
+
     public function scopeByCategory($query, $category)
     {
         return $query->where('category', $category);
+    }
+
+    public function getNameWithLanguageAttribute(): string
+    {
+        $ru = $this->name['ru'] ?? '';
+        $en = $this->name['en'] ?? '';
+        if ($ru && $en) {
+            return "{$ru} / {$en}";
+        }
+        return $ru ?: ($en ?: '—');
+    }
+
+    public function getMetroWithLanguageAttribute(): string
+    {
+        $ru = $this->metro['ru'] ?? '';
+        $en = $this->metro['en'] ?? '';
+        if ($ru && $en) {
+            return "{$ru} / {$en}";
+        }
+        return $ru ?: ($en ?: '—');
     }
 }

@@ -60,9 +60,9 @@ class CommitteeMemberResource extends ModelResource
     {
         return [
             ID::make('id'),
-            Text::make('Имя (RU)', 'name->ru')->sortable(),
-            Text::make('Должность (RU)', 'position->ru'),
-            Text::make('Страна', 'country'),
+            Text::make('Имя', 'name_with_language')->sortable(),
+            Text::make('Должность', 'position_with_language')->default('—'),
+            Text::make('Страна', 'country')->default('—'),
             Number::make('Порядок', 'order')->sortable(),
         ];
     }

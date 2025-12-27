@@ -45,6 +45,18 @@ class Competition extends Model
         'timeline_announcement_end_date' => 'date',
     ];
 
+    protected $appends = ['name_with_language'];
+
+    public function getNameWithLanguageAttribute(): string
+    {
+        $ru = $this->name['ru'] ?? '';
+        $en = $this->name['en'] ?? '';
+        if ($ru && $en) {
+            return "{$ru} / {$en}";
+        }
+        return $ru ?: ($en ?: '—');
+    }
+
     public function faqItems(): HasMany
     {
         return $this->hasMany(CompetitionFaq::class);

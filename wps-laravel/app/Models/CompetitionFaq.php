@@ -20,6 +20,28 @@ class CompetitionFaq extends Model
         'answer' => 'array',
     ];
 
+    protected $appends = ['question_with_language', 'answer_with_language'];
+
+    public function getQuestionWithLanguageAttribute(): string
+    {
+        $ru = $this->question['ru'] ?? '';
+        $en = $this->question['en'] ?? '';
+        if ($ru && $en) {
+            return "{$ru} / {$en}";
+        }
+        return $ru ?: ($en ?: '—');
+    }
+
+    public function getAnswerWithLanguageAttribute(): string
+    {
+        $ru = $this->answer['ru'] ?? '';
+        $en = $this->answer['en'] ?? '';
+        if ($ru && $en) {
+            return "{$ru} / {$en}";
+        }
+        return $ru ?: ($en ?: '—');
+    }
+
     public function competition(): BelongsTo
     {
         return $this->belongsTo(Competition::class);

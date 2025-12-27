@@ -11,6 +11,7 @@ use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Date;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
 
 /**
  * @extends ModelResource<Competition>
@@ -69,6 +70,8 @@ class CompetitionResource extends ModelResource
                 ])
                 ->object()
                 ->nullable(),
+            HasMany::make('FAQ', 'faqItems', null, 'App\\MoonShine\\Resources\\CompetitionFaqResource')
+                ->creatable(),
         ];
     }
 
@@ -87,9 +90,9 @@ class CompetitionResource extends ModelResource
     {
         return [
             ID::make('id'),
-            Text::make('Название (RU)', 'name->ru')->sortable(),
+            Text::make('Название', 'name_with_language')->sortable(),
             Text::make('Тип', 'type')->sortable(),
-            Date::make('Открытие подачи', 'timeline_opening')->sortable(),
+            Date::make('Открытие подачи', 'timeline_opening')->sortable()->default('—'),
             Image::make('Логотип', 'logo_path'),
         ];
     }

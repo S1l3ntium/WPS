@@ -10,6 +10,7 @@ use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Image;
 
 /**
  * @extends ModelResource<Award>
@@ -50,6 +51,11 @@ class AwardResource extends ModelResource
                 ])
                 ->object()
                 ->nullable(),
+            Image::make('Изображение', 'image')
+                ->disk('public')
+                ->dir('awards')
+                ->allowedExtensions(['jpg', 'png', 'jpeg', 'gif', 'webp'])
+                ->nullable(),
             Number::make('award_year', 'Год')
                 ->required()
                 ->sortable(),
@@ -83,14 +89,14 @@ class AwardResource extends ModelResource
     {
         return [
             ID::make('id'),
-            Text::make('Название (RU)', 'title->ru')->sortable(),
-            Text::make('Победитель', 'winner_name'),
+            Text::make('Название', 'title_with_language')->sortable(),
+            Text::make('Победитель', 'winner_name')->default('—'),
             Number::make('Год', 'award_year')->sortable(),
             Select::make('Тип', 'award_type')->options([
                 'prize' => 'Премия',
                 'contest' => 'Конкурс',
                 'cert' => 'Сертификат',
-            ]),
+            ])->sortable(),
         ];
     }
 

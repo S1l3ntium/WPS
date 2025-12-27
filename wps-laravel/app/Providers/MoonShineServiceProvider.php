@@ -11,6 +11,7 @@ use App\MoonShine\Resources\PartnerResource;
 use App\MoonShine\Resources\AwardResource;
 use App\MoonShine\Resources\HotelResource;
 use App\MoonShine\Resources\CompetitionResource;
+use App\MoonShine\Resources\CompetitionFaqResource;
 use App\MoonShine\Resources\CommitteeMemberResource;
 use App\MoonShine\Resources\PartnerPackageResource;
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
@@ -33,6 +34,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 AwardResource::class,
                 HotelResource::class,
                 CompetitionResource::class,
+                CompetitionFaqResource::class,
                 CommitteeMemberResource::class,
                 PartnerPackageResource::class,
             ])

@@ -74,12 +74,12 @@ class PartnerResource extends ModelResource
     {
         return [
             ID::make('id'),
-            Text::make('Название (RU)', 'name->ru')->sortable(),
+            Text::make('Название', 'name_with_language')->sortable(),
             Select::make('Категория', 'category')->options([
                 'general' => 'Генеральный партнер',
                 'info' => 'Информационный партнер',
                 'tech' => 'Технологический партнер',
-            ]),
+            ])->sortable(),
             Select::make('Статус', 'status')->options([
                 'active' => 'Активен',
                 'inactive' => 'Неактивен',

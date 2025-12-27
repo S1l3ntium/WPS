@@ -5,8 +5,7 @@ import { ProgramPage } from './components/ProgramPage';
 import { EventPage } from './components/EventPage';
 import { ParticipantsPage } from './components/ParticipantsPage';
 import { AwardPage } from './components/AwardPage';
-import { GrantsCompetitionPage } from './components/GrantsCompetitionPage';
-import { LeadershipCompetitionPage } from './components/LeadershipCompetitionPage';
+import { AwardDetailPage } from './components/AwardDetailPage';
 import { CompetitionPage } from './components/CompetitionPage';
 import { PressCenterPage } from './components/PressCenterPage';
 import { NewsPage } from './components/NewsPage';
@@ -47,12 +46,8 @@ const nestedRoutes: RouteObject[] = [
     element: <AwardPage />,
   },
   {
-    path: 'grants-competition',
-    element: <GrantsCompetitionPage />,
-  },
-  {
-    path: 'leadership-competition',
-    element: <LeadershipCompetitionPage />,
+    path: 'award/:id',
+    element: <AwardDetailPage />,
   },
   {
     path: 'competition/:id',

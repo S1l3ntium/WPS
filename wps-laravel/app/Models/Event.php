@@ -46,6 +46,28 @@ class Event extends Model
         'discussion_questions' => 'array',
     ];
 
+    protected $appends = ['title_with_language', 'description_with_language'];
+
+    public function getTitleWithLanguageAttribute(): string
+    {
+        $ru = $this->title['ru'] ?? '';
+        $en = $this->title['en'] ?? '';
+        if ($ru && $en) {
+            return "{$ru} / {$en}";
+        }
+        return $ru ?: ($en ?: '—');
+    }
+
+    public function getDescriptionWithLanguageAttribute(): string
+    {
+        $ru = $this->description['ru'] ?? '';
+        $en = $this->description['en'] ?? '';
+        if ($ru && $en) {
+            return "{$ru} / {$en}";
+        }
+        return $ru ?: ($en ?: '—');
+    }
+
     public function moderators(): HasMany
     {
         return $this->hasMany(EventPerson::class, 'event_id')->where('role', 'moderator');

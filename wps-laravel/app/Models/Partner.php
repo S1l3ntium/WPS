@@ -25,6 +25,18 @@ class Partner extends Model
         'name' => 'array',
     ];
 
+    protected $appends = ['name_with_language'];
+
+    public function getNameWithLanguageAttribute(): string
+    {
+        $ru = $this->name['ru'] ?? '';
+        $en = $this->name['en'] ?? '';
+        if ($ru && $en) {
+            return "{$ru} / {$en}";
+        }
+        return $ru ?: ($en ?: '—');
+    }
+
     public function getLocalizedAttribute(string $attribute): string
     {
         $value = $this->getAttribute($attribute);

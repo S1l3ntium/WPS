@@ -20,8 +20,14 @@ class EventResource extends JsonResource
             'date' => $this->start_date->format('d.m.Y'),
             'time' => $this->start_date->format('H:i') . ' - ' . ($this->end_date?->format('H:i') ?? ''),
             'location' => $this->location,
+            'venue' => $this->venue,
+            'additionalInfo' => $this->additional_info,
+            'goals' => $this->goals ?? [],
+            'format' => $this->format,
+            'discussionQuestions' => $this->discussion_questions ?? [],
             'tags' => $this->tags ?? [],
             'downloadLink' => $this->download_link,
+            'status' => $this->status,
         ];
     }
 }

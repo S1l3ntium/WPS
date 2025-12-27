@@ -15,6 +15,9 @@ use App\MoonShine\Resources\EventResource;
 use App\MoonShine\Resources\NewsResource;
 use App\MoonShine\Resources\PartnerResource;
 use App\MoonShine\Resources\AwardResource;
+use App\MoonShine\Resources\CompetitionResource;
+use App\MoonShine\Resources\PartnerPackageResource;
+use App\MoonShine\Resources\HotelResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -36,8 +39,11 @@ final class MoonShineLayout extends AppLayout
             MenuGroup::make(static fn () => 'Контент', [
                 MenuItem::make(EventResource::class),
                 MenuItem::make(NewsResource::class),
-                MenuItem::make(PartnerResource::class),
                 MenuItem::make(AwardResource::class),
+                MenuItem::make(CompetitionResource::class),
+                MenuItem::make(PartnerPackageResource::class),
+                MenuItem::make(HotelResource::class),
+                MenuItem::make(PartnerResource::class),
             ]),
             ...parent::menu(),
         ];

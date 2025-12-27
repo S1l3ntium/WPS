@@ -11,6 +11,7 @@ use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Image;
 
 /**
  * @extends ModelResource<News>
@@ -50,6 +51,25 @@ class NewsResource extends ModelResource
                 ])
                 ->object()
                 ->required(),
+            Json::make('Лид', 'lead')
+                ->fields([
+                    Textarea::make('Русский', 'ru'),
+                    Textarea::make('English', 'en'),
+                ])
+                ->object()
+                ->nullable(),
+            Image::make('Изображение', 'image')
+                ->disk('public')
+                ->dir('news')
+                ->allowedExtensions(['jpg', 'png', 'jpeg', 'gif', 'webp'])
+                ->nullable(),
+            Select::make('Тип', 'type')
+                ->options([
+                    'news' => 'Новость',
+                    'article' => 'Статья',
+                ])
+                ->required(),
+            Text::make('Категория', 'category')->nullable(),
             Date::make('published_at', 'Дата публикации')->sortable(),
             Number::make('Просмотров', 'views_count')
                 ->nullable()
@@ -76,13 +96,13 @@ class NewsResource extends ModelResource
     {
         return [
             ID::make('id'),
-            Text::make('Заголовок (RU)', 'title->ru')->sortable(),
+            Text::make('Заголовок', 'title_with_language')->sortable(),
             Date::make('Дата публикации', 'published_at')->sortable(),
             Number::make('Просмотров', 'views_count')->sortable(),
             Select::make('Статус', 'status')->options([
                 'published' => 'Опубликовано',
                 'archived' => 'Архив',
-            ]),
+            ])->sortable(),
         ];
     }
 

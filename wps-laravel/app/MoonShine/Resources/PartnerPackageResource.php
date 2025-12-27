@@ -75,6 +75,8 @@ class PartnerPackageResource extends ModelResource
             ID::make('id'),
             Text::make('Название (RU)', 'title->ru')->sortable(),
             Text::make('Категория', 'category')->sortable(),
+            Text::make('Цена (RUB)', 'price->rub')->sortable()->default('—'),
+            Text::make('Цена (USD)', 'price->usd')->sortable()->default('—'),
         ];
     }
 

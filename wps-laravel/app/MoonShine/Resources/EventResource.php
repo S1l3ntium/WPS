@@ -27,6 +27,7 @@ class EventResource extends ModelResource
     {
         return [
             ID::make('id'),
+            Text::make('Тип', 'type')->required(),
             Json::make('Заголовок', 'title')
                 ->fields([
                     Text::make('Русский', 'ru')->required(),
@@ -42,23 +43,6 @@ class EventResource extends ModelResource
                 ])
                 ->object()
                 ->nullable(),
-            Json::make('Контент', 'content')
-                ->fields([
-                    Textarea::make('Русский', 'ru'),
-                    Textarea::make('English', 'en'),
-                ])
-                ->object()
-                ->nullable(),
-            Select::make('Категория', 'category')->options([
-                'culture' => 'Культура',
-                'education' => 'Образование',
-                'sport' => 'Спорт',
-                'youth' => 'Молодежь',
-            ])->required(),
-            Date::make('start_date', 'Дата начала')
-                ->required()
-                ->sortable(),
-            Date::make('end_date', 'Дата окончания')->required(),
             Json::make('Место проведения', 'location')
                 ->fields([
                     Text::make('Русский', 'ru'),
@@ -66,7 +50,50 @@ class EventResource extends ModelResource
                 ])
                 ->object()
                 ->nullable(),
-            Text::make('discussion_count', 'Площадок')->nullable(),
+            Json::make('Площадка/Зал', 'venue')
+                ->fields([
+                    Text::make('Русский', 'ru'),
+                    Text::make('English', 'en'),
+                ])
+                ->object()
+                ->nullable(),
+            Date::make('start_date', 'Дата начала')
+                ->required()
+                ->sortable(),
+            Date::make('end_date', 'Дата окончания')->required(),
+            Json::make('Дополнительная информация', 'additional_info')
+                ->fields([
+                    Textarea::make('Русский', 'ru'),
+                    Textarea::make('English', 'en'),
+                ])
+                ->object()
+                ->nullable(),
+            Json::make('Цели события', 'goals')
+                ->fields([
+                    Textarea::make('Значения', 'values'),
+                ])
+                ->object()
+                ->nullable(),
+            Json::make('Формат', 'format')
+                ->fields([
+                    Textarea::make('Русский', 'ru'),
+                    Textarea::make('English', 'en'),
+                ])
+                ->object()
+                ->nullable(),
+            Json::make('Ключевые вопросы', 'discussion_questions')
+                ->fields([
+                    Textarea::make('Значения', 'values'),
+                ])
+                ->object()
+                ->nullable(),
+            Json::make('Теги', 'tags')
+                ->fields([
+                    Textarea::make('Значения', 'values'),
+                ])
+                ->object()
+                ->nullable(),
+            Text::make('Ссылка для скачивания', 'download_link')->nullable(),
             Select::make('Статус', 'status')->options([
                 'published' => 'Опубликовано',
                 'draft' => 'Черновик',
@@ -89,18 +116,13 @@ class EventResource extends ModelResource
     {
         return [
             ID::make('id'),
-            Text::make('Заголовок (RU)', 'title->ru')->sortable(),
-            Select::make('Категория', 'category')->options([
-                'culture' => 'Культура',
-                'education' => 'Образование',
-                'sport' => 'Спорт',
-                'youth' => 'Молодежь',
-            ]),
+            Text::make('Заголовок', 'title_with_language')->sortable(),
+            Text::make('Тип', 'type')->sortable(),
             Date::make('Дата начала', 'start_date')->sortable(),
             Select::make('Статус', 'status')->options([
                 'published' => 'Опубликовано',
                 'draft' => 'Черновик',
-            ]),
+            ])->sortable(),
         ];
     }
 

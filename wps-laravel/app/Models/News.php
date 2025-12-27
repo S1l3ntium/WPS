@@ -34,6 +34,18 @@ class News extends Model
         'lead' => 'array',
     ];
 
+    protected $appends = ['title_with_language'];
+
+    public function getTitleWithLanguageAttribute(): string
+    {
+        $ru = $this->title['ru'] ?? '';
+        $en = $this->title['en'] ?? '';
+        if ($ru && $en) {
+            return "{$ru} / {$en}";
+        }
+        return $ru ?: ($en ?: '—');
+    }
+
     public function getLocalizedAttribute(string $attribute): string
     {
         $value = $this->getAttribute($attribute);

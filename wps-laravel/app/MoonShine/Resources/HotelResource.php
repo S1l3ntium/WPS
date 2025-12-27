@@ -10,6 +10,7 @@ use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Image;
 
 /**
  * @extends ModelResource<Hotel>
@@ -50,7 +51,11 @@ class HotelResource extends ModelResource
                 ->object()
                 ->nullable(),
             Text::make('Цена', 'price')->required(),
-            Text::make('Изображение', 'image')->nullable(),
+            Image::make('Изображение', 'image')
+                ->disk('public')
+                ->dir('hotels')
+                ->allowedExtensions(['jpg', 'png', 'jpeg', 'gif', 'webp'])
+                ->nullable(),
             Select::make('Категория', 'category')->options([
                 'recommended' => 'Рекомендуемые',
                 'championship' => 'Чемпионатные',
@@ -75,13 +80,15 @@ class HotelResource extends ModelResource
     {
         return [
             ID::make('id'),
-            Text::make('Название (RU)', 'name->ru')->sortable(),
+            Text::make('Название', 'name_with_language')->sortable(),
+            Text::make('Метро', 'metro_with_language')->default('—'),
             Select::make('Категория', 'category')->options([
                 'recommended' => 'Рекомендуемые',
                 'championship' => 'Чемпионатные',
                 'verified' => 'Проверенные',
-            ]),
+            ])->sortable(),
             Text::make('Цена', 'price')->sortable(),
+            Switcher::make('Спец. тариф', 'special_tariff'),
         ];
     }
 
