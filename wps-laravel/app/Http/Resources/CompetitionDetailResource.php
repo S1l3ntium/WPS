@@ -17,18 +17,20 @@ class CompetitionDetailResource extends JsonResource
             'type' => $this->type,
             'name' => $this->name,
             'description' => $this->description,
-            'timeline' => [
-                'applicationDeadline' => $this->timeline_application_deadline,
-                'awardDate' => $this->timeline_award_date,
-                'implementationStart' => $this->timeline_implementation_start,
-                'implementationEnd' => $this->timeline_implementation_end,
-            ],
-            'eligibility' => [
-                'organizationType' => $this->eligibility_organization_type,
-                'minCountries' => $this->eligibility_min_countries,
-            ],
-            'supportAreas' => $this->support_areas ?? [],
-            'faq' => CompetitionFaqResource::collection($this->whenLoaded('faqItems')),
+            'logo_path' => $this->logo_path,
+            'logo_url' => $this->getLogoUrl(),
+            'has_custom_logo' => $this->hasCustomLogo(),
+            'timeline_opening' => $this->timeline_opening,
+            'timeline_opening_formatted' => $this->getFormattedOpeningDate(),
+            'timeline_closing' => $this->timeline_closing,
+            'timeline_closing_formatted' => $this->getFormattedClosingDate(),
+            'timeline_announcement' => $this->timeline_announcement,
+            'timeline_announcement_formatted' => $this->getFormattedAnnouncementDate(),
+            'eligibility_age_min' => $this->eligibility_age_min,
+            'eligibility_age_max' => $this->eligibility_age_max,
+            'eligibility_requirements' => $this->eligibility_requirements ?? [],
+            'support_areas' => $this->support_areas ?? [],
+            'faqItems' => CompetitionFaqResource::collection($this->whenLoaded('faqItems')),
         ];
     }
 }

@@ -93,29 +93,29 @@ export function OrgCommitteePage() {
     <div className="min-h-screen bg-white flex flex-col">
       <Header currentPage="org-committee" />
       
-      <main className="flex-1 px-4 sm:px-6 lg:px-8 py-16">
+      <main className="flex-1 px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-[#1a1f4d] mb-12">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl text-[#1a1f4d] mb-8 sm:mb-10 md:mb-12">
             {t('orgCommitteePage.pageTitle')}
           </h1>
 
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-5 md:space-y-6">
             {committeeMembers.map((member, index) => (
               <div
                 key={index}
-                className="border-b border-gray-200 pb-6 hover:bg-gray-50 transition-colors px-6 py-4 rounded-lg"
+                className="border-b border-gray-200 pb-4 sm:pb-5 md:pb-6 hover:bg-gray-50 transition-colors px-3 sm:px-4 md:px-6 py-3 sm:py-3.5 md:py-4 rounded-lg"
               >
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-                  <div className="md:col-span-2">
-                    <span className="text-[#4db8b8]">
+                <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] md:grid-cols-12 gap-3 sm:gap-4">
+                  <div className="sm:col-span-1 md:col-span-2">
+                    <span className="text-xs sm:text-sm text-[#4db8b8] font-medium">
                       {member.country}
                     </span>
                   </div>
-                  <div className="md:col-span-10">
-                    <h3 className="text-[#1a1f4d] mb-2">
+                  <div className="sm:col-span-1 md:col-span-10">
+                    <h3 className="text-base sm:text-lg text-[#1a1f4d] mb-1 sm:mb-1.5">
                       {t(member.nameKey)}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed text-sm">
+                    <p className="text-gray-600 leading-relaxed text-xs sm:text-sm">
                       {t(member.positionKey)}
                     </p>
                   </div>

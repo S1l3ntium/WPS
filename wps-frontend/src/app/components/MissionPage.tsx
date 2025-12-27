@@ -12,35 +12,35 @@ export function MissionPage() {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-white py-16 px-4 sm:px-6 lg:px-8">
+        <section className="bg-white py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-[#1a1f4d] mb-16">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl text-[#1a1f4d] mb-10 sm:mb-12 md:mb-16">
               {t('missionPage.title')}
             </h1>
 
             {/* Миссия */}
-            <div className="mb-16">
-              <h2 className="text-[#4db8b8] mb-6">
+            <div className="mb-10 sm:mb-12 md:mb-16">
+              <h2 className="text-xl sm:text-2xl md:text-3xl text-[#4db8b8] mb-4 sm:mb-5 md:mb-6">
                 {t('missionPage.missionTitle')}
               </h2>
-              <p className="text-[#1a1f4d] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#1a1f4d] leading-relaxed">
                 {t('missionPage.missionText')}
               </p>
             </div>
 
             {/* Цель */}
-            <div className="mb-16">
-              <h2 className="text-[#4db8b8] mb-6">
+            <div className="mb-10 sm:mb-12 md:mb-16">
+              <h2 className="text-xl sm:text-2xl md:text-3xl text-[#4db8b8] mb-4 sm:mb-5 md:mb-6">
                 {t('missionPage.goalTitle')}
               </h2>
-              <p className="text-[#1a1f4d] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#1a1f4d] leading-relaxed">
                 {t('missionPage.goalText')}
               </p>
             </div>
 
             {/* Задачи */}
-            <div className="mb-16">
-              <h2 className="text-[#4db8b8] mb-6">
+            <div className="mb-10 sm:mb-12 md:mb-16">
+              <h2 className="text-xl sm:text-2xl md:text-3xl text-[#4db8b8] mb-4 sm:mb-5 md:mb-6">
                 {t('missionPage.objectivesTitle')}
               </h2>
               <ul className="space-y-4">

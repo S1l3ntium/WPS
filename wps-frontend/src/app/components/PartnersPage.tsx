@@ -139,20 +139,20 @@ export function PartnersPage() {
 
       <main className="flex-1">
         {/* Hero section */}
-        <section className="bg-white px-8 py-20">
+        <section className="bg-white px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-center gap-16">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 sm:gap-8 md:gap-12 lg:gap-16">
               <div className="flex-1">
-                <h1 className="text-5xl mb-8 text-[#1a1f4d] leading-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 sm:mb-6 md:mb-8 text-[#1a1f4d] leading-tight">
                   {t('partnersPage.pageTitle')}
                 </h1>
-                <p className="mb-6 leading-relaxed text-gray-700">
+                <p className="mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base text-gray-700">
                   {t('partnersPage.subtitle')}
                 </p>
-                <p className="mb-8 leading-relaxed text-[#1a1f4d]">
+                <p className="mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base text-[#1a1f4d]">
                   {t('partnersPage.benefitsDescription')}
                 </p>
-                <button className="bg-[#4db8b8] hover:bg-[#3da8a8] text-white px-8 py-3 rounded transition-colors">
+                <button onClick={() => window.location.href = '/api/documents/download/partnership-presentation'} className="bg-[#4db8b8] hover:bg-[#3da8a8] text-white px-4 sm:px-6 md:px-8 py-3 rounded transition-colors">
                   {t('buttons.downloadPresentation')}
                 </button>
               </div>
@@ -160,7 +160,7 @@ export function PartnersPage() {
                 <img
                   src={partnershipImage}
                   alt={t('partnersPage.pageTitle')}
-                  className="w-[480px] h-auto rounded-lg"
+                  className="w-full max-w-sm md:max-w-md lg:max-w-2xl h-auto rounded-lg"
                 />
               </div>
             </div>
@@ -228,7 +228,7 @@ export function PartnersPage() {
             <p className="mb-4 text-gray-600">
               {t('partnersPage.applyInstructions')}
             </p>
-            <button className="bg-[#1a1f4d] hover:bg-[#2c3570] text-white px-6 py-3 rounded transition-colors">
+            <button onClick={() => navigate('/contacts')} className="bg-[#1a1f4d] hover:bg-[#2c3570] text-white px-6 py-3 rounded transition-colors">
               {t('buttons.contactUs')}
             </button>
           </div>

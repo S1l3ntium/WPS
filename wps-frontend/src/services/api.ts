@@ -93,9 +93,15 @@ export interface CompetitionData {
   type: string;
   name: { ru: string; en: string };
   description: { ru: string; en: string };
+  logo_path?: string;
+  logo_url?: string;
+  has_custom_logo?: boolean;
   timeline_opening?: string;
+  timeline_opening_formatted?: string;
   timeline_closing?: string;
+  timeline_closing_formatted?: string;
   timeline_announcement?: string;
+  timeline_announcement_formatted?: string;
   eligibility_age_min?: number;
   eligibility_age_max?: number;
   eligibility_requirements?: string[];
@@ -105,6 +111,19 @@ export interface CompetitionData {
 export interface CompetitionFaqData {
   question: { ru: string; en: string };
   answer: { ru: string; en: string };
+}
+
+// Competition type labels with localization
+export const COMPETITION_TYPES = {
+  grant: { ru: 'Грант', en: 'Grant' },
+  award: { ru: 'Премия', en: 'Award' },
+  fellowship: { ru: 'Стипендия', en: 'Fellowship' },
+  scholarship: { ru: 'Стипендия', en: 'Scholarship' },
+} as const;
+
+export function getCompetitionTypeLabel(type: string, locale: 'ru' | 'en' = 'en'): string {
+  const typeKey = type.toLowerCase() as keyof typeof COMPETITION_TYPES;
+  return COMPETITION_TYPES[typeKey]?.[locale] || type;
 }
 
 export interface AwardData {

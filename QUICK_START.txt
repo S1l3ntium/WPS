@@ -1,0 +1,76 @@
+# 🚀 Быстрый старт - WPS Project
+
+## ⚡ Самые частые команды
+
+### Разработка
+
+# Terminal 1 - Backend
+cd /Volumes/ADATA\ LEGEND\ 900/Work/WPS/wps-laravel
+php artisan serve --host=127.0.0.1 --port=8000
+
+# Terminal 2 - Frontend
+cd /Volumes/ADATA\ LEGEND\ 900/Work/WPS/wps-frontend
+npm run dev
+
+Доступ:
+- Frontend: http://127.0.0.1:5173/
+- Backend API: http://127.0.0.1:8000/api/
+- Hot reload: Автоматический ✅
+
+### Build для Production
+
+cd /Volumes/ADATA\ LEGEND\ 900/Work/WPS/wps-frontend
+npm run build
+
+Результат в: wps-frontend/dist/
+
+---
+
+## 🔧 Основные конфигурации
+
+Frontend (.env):
+  VITE_API_URL=https://worldpublicsummit.test
+
+Backend (.env):
+  APP_URL=https://worldpublicsummit.test
+  DB_HOST=127.0.0.1
+  DB_PORT=5432
+  CORS_ALLOWED_ORIGINS=http://localhost:5173,...
+
+Nginx:
+  Уже настроен ✅
+
+---
+
+## 📱 Проверка адаптивности
+
+1. F12 в браузере → DevTools
+2. Ctrl+Shift+M → Device mode
+3. Тестовые размеры: 375px, 640px, 768px, 1024px, 1280px
+
+Проверить:
+  ✅ Текст читаемый
+  ✅ Кнопки нажимаемы
+  ✅ Нет горизонтального скролла
+  ✅ Отступы достаточные
+
+---
+
+## 🎯 Типичный рабочий день
+
+1. Запустить backend: php artisan serve
+2. Запустить frontend: npm run dev
+3. Править код - hot reload работает автоматически
+4. Перед закрытием: npm run build
+
+---
+
+## 📚 Документация
+
+- CONFIGURATION_REPORT.md - подробный отчет о конфигурации
+- RESPONSIVE_DESIGN_GUIDE.md - гайд по адаптивному дизайну
+- FINAL_SUMMARY.md - итоговый отчет
+
+---
+
+Статус: ✅ ВСЕ ГОТОВО К РАБОТЕ

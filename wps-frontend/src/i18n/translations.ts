@@ -39,6 +39,7 @@ export const translations = {
 			readMore: 'Подробнее',
 			search: 'Поиск',
 			back: 'Назад',
+			backToHome: 'Вернуться на главную',
 			viewStream: 'Смотреть трансляции',
 			downloadFile: 'Скачать',
 			sendMessage: 'Отправить',
@@ -64,6 +65,9 @@ export const translations = {
 			provided: 'предоставлен',
 			continent: 'континента',
 			countries: 'стран мира',
+			yearsOld: 'лет',
+			yearsOldAbove: 'лет и старше',
+			yearsOldBelow: 'лет и младше',
 		},
 		// Months
 		months: {
@@ -625,6 +629,13 @@ export const translations = {
 			accreditationForm: 'Форма аккредитации',
 			submit: 'Отправить',
 		},
+		// Error pages
+		errors: {
+			notFound: 'Страница не найдена',
+			notFoundDescription: 'К сожалению, страница которую вы ищете, не существует или была удалена.',
+			forbidden: 'Доступ запрещен',
+			forbiddenDescription: 'У вас нет доступа к этой странице. Пожалуйста, проверьте свои права доступа.',
+		},
 		// GrantsCompetitionPage
 		grantsCompetitionPage: {
 			pageTitle: 'Конкурс грантов',
@@ -980,6 +991,7 @@ export const translations = {
 			submitApplication: 'Submit Application',
 			downloadRegulations: 'Download Regulations',
 			downloadDocuments: 'Download Regulations',
+			backToHome: 'Back to Home',
 		},
 		// Common text
 		common: {
@@ -993,6 +1005,9 @@ export const translations = {
 			provided: 'provided',
 			continent: 'continent',
 			countries: 'countries',
+			yearsOld: 'years',
+			yearsOldAbove: 'years and above',
+			yearsOldBelow: 'years and below',
 		},
 		// Months
 		months: {
@@ -1537,6 +1552,13 @@ export const translations = {
 			contactPress: 'Press Contacts',
 			accreditationForm: 'Accreditation Form',
 			submit: 'Submit',
+		},
+		// Error pages
+		errors: {
+			notFound: 'Page Not Found',
+			notFoundDescription: 'Sorry, the page you are looking for does not exist or has been removed.',
+			forbidden: 'Access Forbidden',
+			forbiddenDescription: 'You do not have access to this page. Please check your access rights.',
 		},
 		// GrantsCompetitionPage
 		grantsCompetitionPage: {

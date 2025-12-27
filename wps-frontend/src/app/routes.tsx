@@ -7,6 +7,7 @@ import { ParticipantsPage } from './components/ParticipantsPage';
 import { AwardPage } from './components/AwardPage';
 import { GrantsCompetitionPage } from './components/GrantsCompetitionPage';
 import { LeadershipCompetitionPage } from './components/LeadershipCompetitionPage';
+import { CompetitionPage } from './components/CompetitionPage';
 import { PressCenterPage } from './components/PressCenterPage';
 import { NewsPage } from './components/NewsPage';
 import { PhotoGalleryPage } from './components/PhotoGalleryPage';
@@ -17,6 +18,8 @@ import { MissionPage } from './components/MissionPage';
 import { OrgCommitteePage } from './components/OrgCommitteePage';
 import { OrganizersPage } from './components/OrganizersPage';
 import { MobileAppPage } from './components/MobileAppPage';
+import { NotFoundPage } from './components/NotFoundPage';
+import { ForbiddenPage } from './components/ForbiddenPage';
 
 const nestedRoutes: RouteObject[] = [
   {
@@ -50,6 +53,10 @@ const nestedRoutes: RouteObject[] = [
   {
     path: 'leadership-competition',
     element: <LeadershipCompetitionPage />,
+  },
+  {
+    path: 'competition/:id',
+    element: <CompetitionPage />,
   },
   {
     path: 'press-center',
@@ -91,6 +98,14 @@ const nestedRoutes: RouteObject[] = [
     path: 'mobile-app',
     element: <MobileAppPage />,
   },
+  {
+    path: '404',
+    element: <NotFoundPage />,
+  },
+  {
+    path: '403',
+    element: <ForbiddenPage />,
+  },
 ];
 
 export const routes: RouteObject[] = [
@@ -101,5 +116,17 @@ export const routes: RouteObject[] = [
   {
     path: '/',
     element: <HomePage />,
+  },
+  {
+    path: '/404',
+    element: <NotFoundPage />,
+  },
+  {
+    path: '/403',
+    element: <ForbiddenPage />,
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ];

@@ -50,8 +50,8 @@ export function LeadershipCompetitionPage() {
 
       {/* Breadcrumbs */}
       <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-8 py-4">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 sm:py-4">
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
             <button onClick={() => localeNavigate('/')} className="hover:text-[#4db8b8]">{t('leadershipCompetitionPage.breadcrumbHome')}</button>
             <ChevronRight className="w-4 h-4" />
             <span>{t('leadershipCompetitionPage.breadcrumbCompetitions')}</span>
@@ -62,21 +62,21 @@ export function LeadershipCompetitionPage() {
       </div>
 
       {/* Hero Section with Image */}
-      <section className="flex-1 bg-white py-16">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+      <section className="flex-1 bg-white py-8 sm:py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
             {/* Left Column - Text */}
             <div>
-              <div className="text-gray-500 mb-3">
+              <div className="text-xs sm:text-sm text-gray-500 mb-2 sm:mb-3">
                 {t('leadershipCompetitionPage.competitionLabel')}
               </div>
-              <h1 className="text-[#4db8b8] mb-6">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#4db8b8] mb-4 sm:mb-6">
                 {t('leadershipCompetitionPage.competitionTitle')}
               </h1>
-              <p className="text-gray-700 mb-8">
+              <p className="text-sm sm:text-base text-gray-700 mb-6 sm:mb-8">
                 {t('leadershipCompetitionPage.competitionDescription')}
               </p>
-              <button className="bg-[#4db8b8] text-white px-8 py-3 rounded hover:bg-[#3da0a0] transition-colors">
+              <button onClick={() => window.location.href = '/api/documents/download/leadership-competition'} className="bg-[#4db8b8] text-white px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 rounded hover:bg-[#3da0a0] transition-colors text-xs sm:text-sm font-medium">
                 {t('leadershipCompetitionPage.downloadButton')}
               </button>
             </div>
@@ -94,36 +94,36 @@ export function LeadershipCompetitionPage() {
       </section>
 
       {/* Statistics Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-white p-8 rounded-lg shadow-sm">
-              <div className="text-5xl text-[#4db8b8] mb-2">4</div>
-              <p className="text-gray-700">{t('leadershipCompetitionPage.continents')}</p>
+      <section className="bg-gray-50 py-8 sm:py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-12">
+            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-sm">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#4db8b8] mb-1 sm:mb-2">4</div>
+              <p className="text-xs sm:text-sm md:text-base text-gray-700">{t('leadershipCompetitionPage.continents')}</p>
             </div>
-            <div className="bg-white p-8 rounded-lg shadow-sm">
-              <div className="text-5xl text-[#4db8b8] mb-2">47</div>
-              <p className="text-gray-700">{t('leadershipCompetitionPage.countries')}</p>
+            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-sm">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#4db8b8] mb-1 sm:mb-2">47</div>
+              <p className="text-xs sm:text-sm md:text-base text-gray-700">{t('leadershipCompetitionPage.countries')}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Who Can Participate Section */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="grid lg:grid-cols-5 gap-12">
+      <section className="bg-white py-8 sm:py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 md:gap-12">
             {/* Left - Title */}
             <div className="lg:col-span-2">
-              <h2 className="text-[#4db8b8]">{t('leadershipCompetitionPage.participationTitle')}</h2>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#4db8b8]">{t('leadershipCompetitionPage.participationTitle')}</h2>
             </div>
 
             {/* Right - Content */}
             <div className="lg:col-span-3">
-              <p className="text-gray-700 mb-4">
+              <p className="text-sm sm:text-base text-gray-700 mb-3 sm:mb-4">
                 {t('leadershipCompetitionPage.participationDescription')}
               </p>
-              <p className="text-gray-700 italic">
+              <p className="text-xs sm:text-sm md:text-base text-gray-700 italic">
                 {t('leadershipCompetitionPage.participationNote')}
               </p>
             </div>
@@ -132,9 +132,9 @@ export function LeadershipCompetitionPage() {
       </section>
 
       {/* Participation Models Section */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="grid lg:grid-cols-5 gap-12">
+      <section className="bg-white py-8 sm:py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 md:gap-12">
             {/* Left - Title */}
             <div className="lg:col-span-2">
               <h2 className="text-[#1a1f4d]">{t('leadershipCompetitionPage.modelsTitle')}</h2>
@@ -178,9 +178,9 @@ export function LeadershipCompetitionPage() {
       </section>
 
       {/* Awards Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="grid lg:grid-cols-5 gap-12">
+      <section className="bg-gray-50 py-8 sm:py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 md:gap-12">
             {/* Left - Title */}
             <div className="lg:col-span-2">
               <h2 className="text-[#1a1f4d]">{t('leadershipCompetitionPage.awardsTitle')}</h2>
@@ -227,13 +227,13 @@ export function LeadershipCompetitionPage() {
       </section>
 
       {/* Competition Stages */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-[#1a1f4d] text-center mb-12">{t('leadershipCompetitionPage.stagesTitle')}</h2>
+      <section className="bg-white py-8 sm:py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <h2 className="text-[#1a1f4d] text-center mb-8 sm:mb-10 md:mb-12">{t('leadershipCompetitionPage.stagesTitle')}</h2>
 
           <div className="space-y-0 divide-y divide-gray-200">
             {/* Stage 1 */}
-            <div className="grid grid-cols-5 gap-12 py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-12 py-6 sm:py-7 md:py-8">
               <div className="col-span-1">
                 <div className="text-[#4db8b8]">{t('leadershipCompetitionPage.stage1Label')}</div>
               </div>
@@ -249,11 +249,11 @@ export function LeadershipCompetitionPage() {
             </div>
 
             {/* Stage 2 */}
-            <div className="grid grid-cols-5 gap-12 py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-12 py-6 sm:py-7 md:py-8">
               <div className="col-span-1">
                 <div className="text-[#4db8b8]">{t('leadershipCompetitionPage.stage2Label')}</div>
               </div>
-              <div className="col-span-4">
+              <div className="col-span-1 lg:col-span-4">
                 <h3 className="text-[#4db8b8] mb-3">
                   {t('leadershipCompetitionPage.stage2Title')}
                 </h3>
@@ -268,11 +268,11 @@ export function LeadershipCompetitionPage() {
             </div>
 
             {/* Stage 3 */}
-            <div className="grid grid-cols-5 gap-12 py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-12 py-6 sm:py-7 md:py-8">
               <div className="col-span-1">
                 <div className="text-[#4db8b8]">{t('leadershipCompetitionPage.stage3Label')}</div>
               </div>
-              <div className="col-span-4">
+              <div className="col-span-1 lg:col-span-4">
                 <h3 className="text-[#4db8b8] mb-3">
                   {t('leadershipCompetitionPage.stage3Title')}
                 </h3>
@@ -284,11 +284,11 @@ export function LeadershipCompetitionPage() {
             </div>
 
             {/* Stage 4 */}
-            <div className="grid grid-cols-5 gap-12 py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-12 py-6 sm:py-7 md:py-8">
               <div className="col-span-1">
                 <div className="text-[#4db8b8]">{t('leadershipCompetitionPage.stage4Label')}</div>
               </div>
-              <div className="col-span-4">
+              <div className="col-span-1 lg:col-span-4">
                 <h3 className="text-[#4db8b8] mb-3">
                   {t('leadershipCompetitionPage.stage4Title')}
                 </h3>
@@ -301,7 +301,7 @@ export function LeadershipCompetitionPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <button className="bg-[#1a1f4d] text-white px-8 py-3 rounded hover:bg-[#252b5e] transition-colors">
+            <button onClick={() => window.location.href = 'https://forms.worldpublicsummit.test/leadership-competition'} className="bg-[#1a1f4d] text-white px-8 py-3 rounded hover:bg-[#252b5e] transition-colors">
               {t('leadershipCompetitionPage.submitButton')}
             </button>
           </div>
@@ -309,9 +309,9 @@ export function LeadershipCompetitionPage() {
       </section>
 
       {/* Contact Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-8 text-center">
-          <h2 className="text-[#1a1f4d] mb-8">{t('leadershipCompetitionPage.contactTitle')}</h2>
+      <section className="bg-gray-50 py-8 sm:py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 text-center">
+          <h2 className="text-[#1a1f4d] mb-6 sm:mb-8 md:mb-8">{t('leadershipCompetitionPage.contactTitle')}</h2>
 
           <div className="space-y-3">
             <div>
@@ -326,26 +326,26 @@ export function LeadershipCompetitionPage() {
       </section>
 
       {/* News Section */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-[#4db8b8] mb-12">{t('leadershipCompetitionPage.newsTitle')}</h2>
+      <section className="bg-white py-8 sm:py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#4db8b8] mb-8 sm:mb-12">{t('leadershipCompetitionPage.newsTitle')}</h2>
 
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {newsItems.map((item, index) => (
-              <div key={index} className="flex gap-6 hover:opacity-80 transition-opacity cursor-pointer">
+              <div key={index} className="flex flex-col sm:flex-row gap-4 sm:gap-6 hover:opacity-80 transition-opacity cursor-pointer">
                 <img
                   src={item.image}
                   alt={t(item.titleKey)}
-                  className="w-72 h-48 object-cover rounded flex-shrink-0"
+                  className="w-full sm:w-56 md:w-72 h-32 sm:h-40 md:h-48 object-cover rounded flex-shrink-0"
                 />
                 <div className="flex-1">
-                  <p className="text-gray-500 text-sm mb-3">{item.date}</p>
-                  <h3 className="text-[#1a1f4d] mb-3">
+                  <p className="text-xs sm:text-sm text-gray-500 mb-2 sm:mb-3">{item.date}</p>
+                  <h3 className="text-sm sm:text-base md:text-lg font-semibold text-[#1a1f4d] mb-2 sm:mb-3">
                     {t(item.titleKey)}
                   </h3>
-                  <p className="text-gray-700 mb-2">{t(item.excerptKey)}</p>
+                  <p className="text-xs sm:text-sm text-gray-700 mb-1 sm:mb-2">{t(item.excerptKey)}</p>
                   {item.highlightKey && (
-                    <p className="text-[#1a1f4d]">{t(item.highlightKey)}</p>
+                    <p className="text-xs sm:text-sm font-medium text-[#1a1f4d]">{t(item.highlightKey)}</p>
                   )}
                 </div>
               </div>

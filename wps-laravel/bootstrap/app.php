@@ -12,9 +12,30 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->append(\App\Http\Middleware\CorsMiddleware::class);
         $middleware->append(\App\Http\Middleware\SetLocale::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->respond(function (Throwable $exception) {
+            if (request()->expectsJson()) {
+                // API error responses
+                $statusCode = method_exists($exception, 'getStatusCode')
+                    ? $exception->getStatusCode()
+                    : 500;
+
+                $response = [
+                    'error' => true,
+                    'message' => $exception->getMessage() ?: 'An error occurred',
+                    'status' => $statusCode,
+                ];
+
+                if (config('app.debug')) {
+                    $response['debug'] = [
+                        'exception' => class_basename($exception),
+                        'trace' => $exception->getTrace(),
+                    ];
+                }
+
+                return response()->json($response, $statusCode);
+            }
+        });
     })->create();

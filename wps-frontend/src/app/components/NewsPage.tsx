@@ -149,7 +149,7 @@ export function NewsPage() {
 
       {/* Breadcrumbs */}
       <div className="bg-white border-b">
-        <div className="max-w-4xl mx-auto px-8 py-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <button onClick={() => navigate('/')} className="hover:text-[#4db8b8]">{t('newsPage.breadcrumbHome')}</button>
             <ChevronRight className="w-4 h-4" />
@@ -161,8 +161,8 @@ export function NewsPage() {
       </div>
 
       {/* Article Content */}
-      <article className="flex-1 bg-white py-12">
-        <div className="max-w-4xl mx-auto px-8">
+      <article className="flex-1 bg-white py-8 sm:py-10 md:py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
           {loading && (
             <div className="text-center py-12 text-gray-500">
               {t('newsPage.loading')}
@@ -176,13 +176,13 @@ export function NewsPage() {
           {!loading && !error && news && (
             <>
               {/* Date */}
-              <div className="text-gray-500 text-sm mb-4">{news.date}</div>
+              <div className="text-gray-500 text-xs sm:text-sm mb-3 sm:mb-4">{news.date}</div>
 
               {/* Title */}
-              <h1 className="text-[#1a1f4d] mb-6">{news.title}</h1>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl text-[#1a1f4d] mb-4 sm:mb-5 md:mb-6">{news.title}</h1>
 
               {/* Lead */}
-              <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-700 mb-6 sm:mb-8 leading-relaxed">
                 {news.lead}
               </p>
 

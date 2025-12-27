@@ -159,9 +159,9 @@ export function ParticipantsPage() {
       <Header currentPage="participants" />
 
       <main className="flex-1 py-12">
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Tabs */}
-          <div className="flex gap-8 mb-12 border-b border-gray-200">
+          <div className="flex gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 border-b border-gray-200">
             <button
               onClick={() => setActiveTab('accommodation')}
               className={`pb-4 px-2 transition-colors relative ${
@@ -219,7 +219,7 @@ export function ParticipantsPage() {
               {!loading && !error && (
                 <>
                   {/* Title and Description */}
-                  <h1 className="text-4xl mb-6 text-[#1a1f4d]">Гостиницы</h1>
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-[#1a1f4d]">Гостиницы</h1>
                   <div className="mb-8 text-gray-600 space-y-4">
                     <p>Официальный платеж даты:</p>
                     <p>
@@ -230,25 +230,25 @@ export function ParticipantsPage() {
                   </div>
 
                   {/* Recommended Hotels */}
-                  <section className="mb-12">
-                    <h2 className="text-2xl mb-6 text-[#1a1f4d]">Рекомендуемые отели</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <section className="mb-10 sm:mb-12">
+                    <h2 className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 text-[#1a1f4d]">Рекомендуемые отели</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                       {hotelsByCategory.recommended.map(hotel => (
                     <div key={hotel.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-                      <div className="h-64 overflow-hidden">
+                      <div className="h-32 sm:h-40 md:h-48 lg:h-56 overflow-hidden">
                         <ImageWithFallback
                           src={hotel.image}
                           alt={hotel.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="p-6">
-                        <div className="text-sm text-gray-600 mb-2">
+                      <div className="p-4 sm:p-5 md:p-6">
+                        <div className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">
                           Специальный тариф: <span className="text-[#4db8b8]">предоставлен</span>
                         </div>
-                        <h3 className="text-2xl mb-3 text-[#1a1f4d]">{hotel.name}</h3>
-                        <p className="text-sm text-gray-600 mb-6">{hotel.address}</p>
-                        <button className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
+                        <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl mb-2 sm:mb-3 text-[#1a1f4d]">{hotel.name}</h3>
+                        <p className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-5 md:mb-6">{hotel.address}</p>
+                        <button onClick={() => window.open('https://payment.worldpublicsummit.test', '_blank')} className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
                           Перейти к оплате
                         </button>
                       </div>
@@ -263,7 +263,7 @@ export function ParticipantsPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {hotelsByCategory.championship.map(hotel => (
                     <div key={hotel.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-                      <div className="h-64 overflow-hidden">
+                      <div className="h-40 sm:h-48 md:h-56 lg:h-64 overflow-hidden">
                         <ImageWithFallback
                           src={hotel.image}
                           alt={hotel.name}
@@ -276,7 +276,7 @@ export function ParticipantsPage() {
                         </div>
                         <h3 className="text-2xl mb-3 text-[#1a1f4d]">{hotel.name}</h3>
                         <p className="text-sm text-gray-600 mb-6">{hotel.address}</p>
-                        <button className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
+                        <button onClick={() => window.open('https://payment.worldpublicsummit.test', '_blank')} className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
                           Перейти к оплате
                         </button>
                       </div>
@@ -291,7 +291,7 @@ export function ParticipantsPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {hotelsByCategory.verified.map(hotel => (
                     <div key={hotel.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-                      <div className="h-64 overflow-hidden">
+                      <div className="h-40 sm:h-48 md:h-56 lg:h-64 overflow-hidden">
                         <ImageWithFallback
                           src={hotel.image}
                           alt={hotel.name}
@@ -304,7 +304,7 @@ export function ParticipantsPage() {
                         </div>
                         <h3 className="text-2xl mb-3 text-[#1a1f4d]">{hotel.name}</h3>
                         <p className="text-sm text-gray-600 mb-6">{hotel.address}</p>
-                        <button className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
+                        <button onClick={() => window.open('https://payment.worldpublicsummit.test', '_blank')} className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
                           Перейти к оплате
                         </button>
                       </div>
@@ -346,7 +346,7 @@ export function ParticipantsPage() {
 
           {activeTab === 'transfer' && (
             <div>
-              <h1 className="text-4xl mb-8 text-[#1a1f4d]">Трансфер для участников</h1>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-[#1a1f4d]">Трансфер для участников</h1>
               
               <p className="text-gray-700 mb-6">Уважаемые участники!</p>
               
@@ -425,7 +425,7 @@ export function ParticipantsPage() {
 
           {activeTab === 'badges' && (
             <div>
-              <h1 className="text-4xl mb-8 text-[#1a1f4d]">Выдача бейджей</h1>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-[#1a1f4d]">Выдача бейджей</h1>
               
               <p className="text-gray-700 mb-6">Уважаемые участники!</p>
               
@@ -434,7 +434,7 @@ export function ParticipantsPage() {
               </p>
 
               <p className="text-gray-700 mb-8">
-                Для получения бейджа участника лично необходимо предъявить <span className="font-semibold">документ, удостоверяющий личность, данные которого были указаны при регистрации</span>, а также распечатанную либо электронную версию <span className="font-semibold">Согласия на обработку персональных данных</span>. Скачать согласие можно <a href="#" className="text-[#4db8b8] hover:underline">по ссылке</a>.
+                Для получения бейджа участника лично необходимо предъявить <span className="font-semibold">документ, удостоверяющий личность, данные которого были указаны при регистрации</span>, а также распечатанную либо электронную версию <span className="font-semibold">Согласия на обработку персональных данных</span>. Скачать согласие можно <a href="/api/documents/download/consent-agreement" className="text-[#4db8b8] hover:underline">по ссылке</a>.
               </p>
 
               <p className="text-gray-700 mb-12">
@@ -442,47 +442,47 @@ export function ParticipantsPage() {
               </p>
 
               {/* Badge Distribution Locations */}
-              <div className="space-y-8 mb-16">
+              <div className="space-y-6 sm:space-y-8 mb-12 md:mb-16">
                 {/* Location 1 */}
-                <div className="grid grid-cols-[200px_1fr] gap-8 items-start">
-                  <div className="text-[#4db8b8] text-lg">С 17 по 19 сентября</div>
+                <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-4 sm:gap-6 md:gap-8 items-start">
+                  <div className="text-[#4db8b8] text-sm sm:text-base md:text-lg font-medium min-w-fit">С 17 по 19 сентября</div>
                   <div>
                     <div className="flex gap-3 mb-3">
                       <MapPin className="w-5 h-5 text-gray-600 flex-shrink-0 mt-1" />
-                      <h3 className="text-xl text-[#1a1f4d]">Офис-штаб Ассамблеи Народов Мира</h3>
+                      <h3 className="text-lg sm:text-xl text-[#1a1f4d]">Офис-штаб Ассамблеи Народов Мира</h3>
                     </div>
-                    <p className="text-gray-700 mb-2 ml-8">Москва, Успенский переулок, д. 4А <span className="italic">(время работы: 10:00 — 18:00)</span></p>
-                    <a href="#" className="text-[#1a1f4d] hover:underline inline-flex items-center gap-1 ml-8">
+                    <p className="text-gray-700 mb-2 ml-8 text-sm sm:text-base">Москва, Успенский переулок, д. 4А <span className="italic">(время работы: 10:00 — 18:00)</span></p>
+                    <a href="https://yandex.ru/maps/?text=Москва%2C%20Успенский%20переулок%2C%20д.%204А" target="_blank" rel="noopener noreferrer" className="text-[#1a1f4d] hover:underline inline-flex items-center gap-1 ml-8 text-sm sm:text-base">
                       Смотреть на карте →
                     </a>
                   </div>
                 </div>
 
                 {/* Location 2 */}
-                <div className="grid grid-cols-[200px_1fr] gap-8 items-start">
-                  <div className="text-[#4db8b8] text-lg">18 сентября</div>
+                <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-4 sm:gap-6 md:gap-8 items-start">
+                  <div className="text-[#4db8b8] text-sm sm:text-base md:text-lg font-medium min-w-fit">18 сентября</div>
                   <div>
                     <div className="flex gap-3 mb-3">
                       <MapPin className="w-5 h-5 text-gray-600 flex-shrink-0 mt-1" />
-                      <h3 className="text-xl text-[#1a1f4d]">В рекомендованных отелях</h3>
+                      <h3 className="text-lg sm:text-xl text-[#1a1f4d]">В рекомендованных отелях</h3>
                     </div>
-                    <p className="text-gray-700 mb-2 ml-8">В отелях будет создан World Public Assembly в зоне ресепшн <span className="italic">(время работы: 09:00 — 20:00)</span></p>
-                    <a href="#" className="text-[#1a1f4d] hover:underline inline-flex items-center gap-1 ml-8">
+                    <p className="text-gray-700 mb-2 ml-8 text-sm sm:text-base">В отелях будет создан World Public Assembly в зоне ресепшн <span className="italic">(время работы: 09:00 — 20:00)</span></p>
+                    <a href="/hotels" className="text-[#1a1f4d] hover:underline inline-flex items-center gap-1 ml-8 text-sm sm:text-base">
                       Смотреть список отелей →
                     </a>
                   </div>
                 </div>
 
                 {/* Location 3 */}
-                <div className="grid grid-cols-[200px_1fr] gap-8 items-start">
-                  <div className="text-[#4db8b8] text-lg">С 20 по 21 сентября</div>
+                <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-4 sm:gap-6 md:gap-8 items-start">
+                  <div className="text-[#4db8b8] text-sm sm:text-base md:text-lg font-medium min-w-fit">С 20 по 21 сентября</div>
                   <div>
                     <div className="flex gap-3 mb-3">
                       <MapPin className="w-5 h-5 text-gray-600 flex-shrink-0 mt-1" />
-                      <h3 className="text-xl text-[#1a1f4d]">Центр международной торговли (ЦМТ)</h3>
+                      <h3 className="text-lg sm:text-xl text-[#1a1f4d]">Центр международной торговли (ЦМТ)</h3>
                     </div>
-                    <p className="text-gray-700 mb-2 ml-8">Москва, Краснопресненская набережная, дом 12, Конгресс-Центр <span className="italic">(время работы: 08:00 — 18:00)</span></p>
-                    <a href="#" className="text-[#1a1f4d] hover:underline inline-flex items-center gap-1 ml-8">
+                    <p className="text-gray-700 mb-2 ml-8 text-sm sm:text-base">Москва, Краснопресненская набережная, дом 12, Конгресс-Центр <span className="italic">(время работы: 08:00 — 18:00)</span></p>
+                    <a href="https://yandex.ru/maps/?text=Москва%2C%20Краснопресненская%20набережная%2C%20дом%2012" target="_blank" rel="noopener noreferrer" className="text-[#1a1f4d] hover:underline inline-flex items-center gap-1 ml-8 text-sm sm:text-base">
                       Смотреть на карте →
                     </a>
                   </div>

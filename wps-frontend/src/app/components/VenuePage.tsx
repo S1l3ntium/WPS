@@ -35,7 +35,7 @@ export function VenuePage() {
 
       {/* Breadcrumbs */}
       <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <button onClick={() => localeNavigate('/')} className="hover:text-[#4db8b8]">{t('venuePage.breadcrumbHome')}</button>
             <ChevronRight className="w-4 h-4" />
@@ -45,23 +45,23 @@ export function VenuePage() {
       </div>
 
       {/* Main Content */}
-      <section className="flex-1 bg-white py-16">
-        <div className="max-w-7xl mx-auto px-8">
+      <section className="flex-1 bg-white py-8 sm:py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Title */}
-          <h1 className="text-[#1a1f4d] text-center mb-16">{t('venuePage.pageTitle')}</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl text-[#1a1f4d] text-center mb-10 sm:mb-12 md:mb-16">{t('venuePage.pageTitle')}</h1>
 
           {/* Venue Info */}
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-12 items-center mb-12 sm:mb-16 md:mb-20">
             <div>
-              <h2 className="text-[#1a1f4d] mb-4">{t('venuePage.venueTitle')}</h2>
-              <p className="text-gray-700 mb-6">
+              <h2 className="text-lg sm:text-xl md:text-2xl text-[#1a1f4d] mb-3 sm:mb-4">{t('venuePage.venueTitle')}</h2>
+              <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6">
                 {t('venuePage.venueLocation')}
               </p>
               <a
                 href="https://maps.yandex.ru"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#4db8b8] hover:text-[#3da3a3] transition-colors"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm text-[#4db8b8] hover:text-[#3da3a3] transition-colors"
               >
                 {t('venuePage.directions')}
                 <ArrowRight className="w-4 h-4" />
@@ -71,20 +71,20 @@ export function VenuePage() {
               <img
                 src={venueImage}
                 alt={t('venuePage.venueTitle')}
-                className="w-full h-80 object-cover rounded-lg shadow-lg"
+                className="w-full h-60 sm:h-72 md:h-80 object-cover rounded-lg shadow-lg"
               />
             </div>
           </div>
 
           {/* How to Get There */}
           <div>
-            <h2 className="text-[#1a1f4d] mb-12">{t('venuePage.directions')}</h2>
+            <h2 className="text-lg sm:text-xl md:text-2xl text-[#1a1f4d] mb-6 sm:mb-8 md:mb-12">{t('venuePage.directions')}</h2>
 
-            <div className="grid md:grid-cols-2 gap-x-20 gap-y-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-x-20 md:gap-y-10">
               {/* By Metro */}
               <div>
-                <h3 className="text-[#1a1f4d] mb-4">{t('venuePage.publicTransport')}</h3>
-                <p className="text-gray-700 leading-relaxed">
+                <h3 className="text-base sm:text-lg text-[#1a1f4d] mb-2 sm:mb-3 md:mb-4">{t('venuePage.publicTransport')}</h3>
+                <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                   Метро «Улица 1905 года» (выход к ул. Красная Пресня), Автобус №323С от метро «Улица 1905 года» (заезжает на территорию ЦМТ)
                 </p>
               </div>

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate'
 import { useLocale } from '../../context/LocaleContext'
 import { useTranslation } from '../../i18n/useTranslation'
+import { competitionsAPI, CompetitionData, getLocalized } from '../../services/api'
 import logo from '../../assets/logo.svg'
 
 interface HeaderProps {
@@ -23,6 +24,8 @@ export function Header({ currentPage = '' }: HeaderProps) {
 	const [isSearchOpen, setIsSearchOpen] = useState(false)
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 	const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false)
+	const [competitions, setCompetitions] = useState<CompetitionData[]>([])
+	const [competitionsLoading, setCompetitionsLoading] = useState(true)
 	const languageDropdownRef = useRef<HTMLDivElement>(null)
 
 	// Close language dropdown when clicking outside
@@ -40,6 +43,23 @@ export function Header({ currentPage = '' }: HeaderProps) {
 			}
 		}
 	}, [isLanguageDropdownOpen])
+
+	// Load competitions from API
+	useEffect(() => {
+		const loadCompetitions = async () => {
+			try {
+				const response = await competitionsAPI.getAll({ per_page: 100 })
+				setCompetitions(response.data)
+			} catch (error) {
+				console.error('Failed to load competitions:', error)
+				setCompetitions([])
+			} finally {
+				setCompetitionsLoading(false)
+			}
+		}
+
+		loadCompetitions()
+	}, [])
 
 	// Navigation structure with translation keys
 	const navItems: NavItem[] = [
@@ -91,22 +111,19 @@ export function Header({ currentPage = '' }: HeaderProps) {
 			translationKey: 'nav.award',
 			path: '/award',
 		},
-		// 4. Grants - UNCHANGED
+		// 4. Grants - DYNAMIC COMPETITIONS
 		{
 			label: t('nav.grants'),
 			translationKey: 'nav.grants',
-			submenu: [
-				{
-					label: t('nav.grants'),
-					translationKey: 'nav.grants',
-					path: '/grants-competition',
-				},
-				{
-					label: t('nav.leadership'),
-					translationKey: 'nav.leadership',
-					path: '/leadership-competition',
-				},
-			],
+			submenu: competitionsLoading
+				? [{ label: t('common.loading'), translationKey: 'common.loading', path: '#' }]
+				: competitions.length > 0
+					? competitions.map(comp => ({
+							label: getLocalized(comp.name, locale as 'ru' | 'en'),
+							translationKey: `competition_${comp.id}`,
+							path: `/competition/${comp.id}`,
+						}))
+					: [{ label: t('common.noData'), translationKey: 'common.noData', path: '#' }],
 		},
 		// 5. Summits - NEW
 		{

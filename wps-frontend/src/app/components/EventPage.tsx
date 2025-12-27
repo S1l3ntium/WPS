@@ -184,10 +184,10 @@ export function EventPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header currentPage="program" />
 
-      <main className="flex-1 py-8">
-        <div className="max-w-7xl mx-auto px-8">
+      <main className="flex-1 py-6 sm:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 text-sm text-gray-600 mb-8">
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 mb-6 sm:mb-8">
             <button onClick={() => navigate('/')} className="hover:text-[#4db8b8] transition-colors">
               {t('eventPage.breadcrumbHome')}
             </button>
@@ -207,39 +207,43 @@ export function EventPage() {
           </button>
 
           {/* Event Type */}
-          <div className="text-sm text-gray-600 mb-4">
+          <div className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
             {event.type}
           </div>
 
           {/* Event Title */}
-          <h1 className="text-4xl mb-6 text-[#1a1f4d]">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-[#1a1f4d]">
             {event.title}
           </h1>
 
           {/* Date, Time, Location */}
-          <div className="mb-8 space-y-2">
-            <div className="flex items-center gap-3 text-gray-700">
-              <Calendar className="w-5 h-5 text-[#4db8b8]" />
-              <span>{event.date}</span>
-              <Clock className="w-5 h-5 text-[#4db8b8] ml-4" />
-              <span>{event.time}</span>
+          <div className="mb-6 sm:mb-8 space-y-2">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-700">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-[#4db8b8]" />
+                <span>{event.date}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-[#4db8b8]" />
+                <span>{event.time}</span>
+              </div>
             </div>
-            <div className="flex items-start gap-3 text-gray-700">
-              <MapPin className="w-5 h-5 text-[#4db8b8] mt-0.5" />
+            <div className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm text-gray-700">
+              <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[#4db8b8] mt-0.5 flex-shrink-0" />
               <span>{event.location}</span>
             </div>
           </div>
 
           {/* Venue */}
-          <div className="mb-8">
-            <h3 className="text-sm mb-2 text-gray-600">
+          <div className="mb-6 sm:mb-8">
+            <h3 className="text-xs sm:text-sm mb-1 sm:mb-2 text-gray-600 font-semibold">
               {t('eventPage.venue')}
             </h3>
-            <p className="text-gray-900">{event.venue}</p>
+            <p className="text-xs sm:text-sm text-gray-900">{event.venue}</p>
           </div>
 
           {/* Description */}
-          <div className="mb-8 space-y-4 text-gray-700">
+          <div className="mb-8 sm:mb-12 space-y-3 sm:space-y-4 text-xs sm:text-sm text-gray-700">
             <p>{event.description}</p>
             <p>{event.additionalInfo}</p>
           </div>
@@ -323,22 +327,22 @@ export function EventPage() {
           </section>
 
           {/* Speakers Section */}
-          <section className="mb-12">
-            <h2 className="text-2xl mb-8 text-[#4db8b8]">
+          <section className="mb-8 sm:mb-12">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-6 sm:mb-8 text-[#4db8b8]">
               {t('eventPage.speakers')}
             </h2>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {event.speakers.map((speaker, idx) => (
-                <div 
+                <div
                   key={idx}
-                  className="bg-white border border-gray-200 rounded-lg p-6 grid grid-cols-[120px_1fr] gap-6 items-start"
+                  className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-3 sm:gap-6 items-start"
                 >
-                  <div className="text-sm text-[#4db8b8]">
+                  <div className="text-xs sm:text-sm font-medium text-[#4db8b8]">
                     {speaker.country}
                   </div>
                   <div>
-                    <h3 className="text-lg mb-2 text-[#1a1f4d]">{speaker.name}</h3>
-                    <p className="text-sm text-gray-600">{speaker.description}</p>
+                    <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-1 sm:mb-2 text-[#1a1f4d]">{speaker.name}</h3>
+                    <p className="text-xs sm:text-sm text-gray-600">{speaker.description}</p>
                   </div>
                 </div>
               ))}
@@ -346,35 +350,35 @@ export function EventPage() {
           </section>
 
           {/* Discussion Topics Section */}
-          <section className="mb-12">
+          <section className="mb-8 sm:mb-12">
             <div className="bg-white rounded-lg overflow-hidden border border-gray-200">
-              <div className="flex gap-0">
+              <div className="flex flex-col md:flex-row gap-0">
                 {/* Left side - Title */}
-                <div className="flex-shrink-0 w-[45%] bg-white border-r border-gray-200 p-8">
-                  <h2 className="text-2xl text-[#4db8b8] leading-tight">
+                <div className="flex-shrink-0 w-full md:w-[300px] bg-white md:border-r border-b md:border-b-0 border-gray-200 p-4 sm:p-6 md:p-8">
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-[#4db8b8] leading-tight">
                     {t('eventPage.discussionTopics')}
                   </h2>
                 </div>
 
                 {/* Right side - Accordions */}
-                <div className="flex-1 bg-white p-8">
+                <div className="flex-1 bg-white p-4 sm:p-6 md:p-8">
                   <div className="space-y-0">
                     {event.discussionTopics.map((topic, idx) => (
                       <div key={idx} className="border-b border-gray-200">
                         <button
                           onClick={() => setOpenQuestionIndex(openQuestionIndex === idx ? null : idx)}
-                          className="w-full flex items-center justify-between py-5 hover:opacity-70 transition-opacity"
+                          className="w-full flex items-center justify-between py-3 sm:py-4 md:py-5 px-1 hover:opacity-70 transition-opacity"
                         >
-                          <span className="text-[#1a1f4d]">{topic.title}</span>
+                          <span className="text-xs sm:text-sm md:text-base font-medium text-[#1a1f4d] text-left">{topic.title}</span>
                           {openQuestionIndex === idx ? (
-                            <X className="w-5 h-5 text-[#4db8b8]" />
+                            <X className="w-4 h-4 sm:w-5 sm:h-5 text-[#4db8b8] flex-shrink-0" />
                           ) : (
-                            <Plus className="w-5 h-5 text-[#4db8b8]" />
+                            <Plus className="w-4 h-4 sm:w-5 sm:h-5 text-[#4db8b8] flex-shrink-0" />
                           )}
                         </button>
                         {openQuestionIndex === idx && topic.content && (
-                          <div className="pb-6">
-                            <p className="text-sm text-gray-600 leading-relaxed">
+                          <div className="pb-4 sm:pb-6">
+                            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                               {topic.content}
                             </p>
                           </div>

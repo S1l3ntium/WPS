@@ -194,7 +194,7 @@ export function PressCenterPage() {
 
       {/* Breadcrumbs */}
       <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <button onClick={() => navigate('/')} className="hover:text-[#4db8b8]">{t('pressCenterPage.breadcrumbHome')}</button>
             <ChevronRight className="w-4 h-4" />
@@ -210,18 +210,18 @@ export function PressCenterPage() {
       </div>
 
       {/* Main Content */}
-      <section className="bg-white py-16 flex-1">
-        <div className="max-w-7xl mx-auto px-8">
+      <section className="bg-white py-8 sm:py-12 md:py-16 flex-1">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Title */}
-          <h1 className="text-[#1a1f4d] text-center mb-12">{currentTab.title}</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl text-[#1a1f4d] text-center mb-8 sm:mb-10 md:mb-12">{currentTab.title}</h1>
 
           {/* Tabs */}
-          <div className="flex justify-center gap-4 mb-12 flex-wrap">
+          <div className="flex justify-center gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-10 md:mb-12 flex-wrap">
             {tabs.map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 rounded transition-colors ${
+                className={`px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded transition-colors text-xs sm:text-sm md:text-base ${
                   activeTab === tab.id
                     ? 'bg-[#4db8b8] text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -250,25 +250,25 @@ export function PressCenterPage() {
               {!loading && !error && (
                 <>
                   {/* Publications Grid */}
-                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                     {filteredPublications.map(item => (
                   <div key={item.id} className="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-40 sm:h-44 md:h-48 object-cover"
                     />
-                    <div className="p-6">
-                      <div className="text-[#4db8b8] text-sm mb-3">{item.category}</div>
-                      <h3 className="text-[#1a1f4d] mb-3 line-clamp-3">
+                    <div className="p-3 sm:p-4 md:p-6">
+                      <div className="text-[#4db8b8] text-xs sm:text-sm mb-2 sm:mb-3">{item.category}</div>
+                      <h3 className="text-sm sm:text-base md:text-lg text-[#1a1f4d] mb-2 sm:mb-3 line-clamp-3">
                         {item.title}
                       </h3>
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3">
                         {item.excerpt}
                       </p>
-                      <p className="text-gray-500 text-sm mb-4">{item.date}</p>
+                      <p className="text-gray-500 text-xs sm:text-sm mb-3 sm:mb-4">{item.date}</p>
                       <button
-                        className="border border-[#1a1f4d] text-[#1a1f4d] px-6 py-2 rounded hover:bg-[#1a1f4d] hover:text-white transition-colors"
+                        className="border border-[#1a1f4d] text-[#1a1f4d] px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 rounded hover:bg-[#1a1f4d] hover:text-white transition-colors text-xs sm:text-sm"
                         onClick={() => navigate(`/news/${item.id}`)}
                       >
                         {t('pressCenterPage.readMore')}
