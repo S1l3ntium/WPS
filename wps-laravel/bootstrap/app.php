@@ -15,7 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(\App\Http\Middleware\SetLocale::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->respond(function (Throwable $exception) {
+        $exceptions->render(function (Throwable $exception) {
             if (request()->expectsJson()) {
                 // API error responses
                 $statusCode = method_exists($exception, 'getStatusCode')
