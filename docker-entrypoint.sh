@@ -11,23 +11,19 @@ done
 
 echo "PostgreSQL is ready!"
 
-# Run migrations
-echo "Running migrations..."
-php artisan migrate --force
-
 # Clear and cache config
 echo "Clearing cache..."
-php artisan cache:clear
-php artisan config:clear
+php artisan cache:clear || true
+php artisan config:clear || true
 
 echo "Caching config..."
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+php artisan config:cache || true
+php artisan route:cache || true
+php artisan view:cache || true
 
 # Storage permissions
 echo "Setting permissions..."
-chmod -R 775 storage bootstrap/cache
+chmod -R 775 storage bootstrap/cache || true
 
 echo "Application started successfully!"
 
