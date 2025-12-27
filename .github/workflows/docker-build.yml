@@ -1,0 +1,52 @@
+name: Docker Build & Push
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: worldpublicsummit/wps
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Laravel image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./wps-laravel
+          push: true
+          tags: ghcr.io/worldpublicsummit/wps/laravel:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push Frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./wps-frontend
+          push: true
+          tags: ghcr.io/worldpublicsummit/wps/frontend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
