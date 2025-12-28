@@ -3,6 +3,7 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { Award, Users, Globe, TrendingUp, CheckCircle } from 'lucide-react';
 import { useTranslation } from '../../i18n/useTranslation';
+import { getBaseUrl } from '../../utils/seo';
 
 export function AwardPage() {
   const navigate = useNavigate();
@@ -142,7 +143,7 @@ export function AwardPage() {
           </div>
 
           <div className="text-center mt-8 sm:mt-10 md:mt-12">
-            <button onClick={() => window.location.href = 'https://forms.worldpublicsummit.test/award'} className="bg-[#1a1f4d] hover:bg-[#2a3580] text-white px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 rounded text-xs sm:text-sm font-medium transition-colors">
+            <button onClick={() => window.location.href = `${getBaseUrl()}/forms/award`} className="bg-[#1a1f4d] hover:bg-[#2a3580] text-white px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 rounded text-xs sm:text-sm font-medium transition-colors">
               {t('buttons.submitApplication')}
             </button>
           </div>

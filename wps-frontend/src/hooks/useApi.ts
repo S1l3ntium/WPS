@@ -1,12 +1,12 @@
 /**
  * Hook для работы с API
  *
- * Использует VITE_API_URL из переменных окружения
+ * Использует VITE_API_BASE_URL из переменных окружения
  * В режиме разработки используется proxy через vite.config.ts
  */
 
 export const useApi = () => {
-  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+  const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost/api';
 
   const fetchData = async (endpoint: string, options?: RequestInit) => {
     const url = `${apiUrl}${endpoint}`;

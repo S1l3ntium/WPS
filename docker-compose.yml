@@ -12,6 +12,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data/backups:/backups
     ports:
       - "5432:5432"
     healthcheck:
@@ -47,27 +48,16 @@ services:
       context: ./wps-laravel
       dockerfile: Dockerfile
     container_name: wps-laravel
+    env_file:
+      - .env.docker
     environment:
-      - APP_NAME=WPS
-      - APP_ENV=${APP_ENV:-production}
-      - APP_DEBUG=${APP_DEBUG:-false}
-      - APP_KEY=${APP_KEY}
-      - APP_URL=${APP_URL:-http://localhost}
-      - DB_CONNECTION=pgsql
       - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_DATABASE=${DB_DATABASE:-wps}
-      - DB_USERNAME=${DB_USERNAME:-postgres}
-      - DB_PASSWORD=${DB_PASSWORD:-postgres}
-      - CACHE_DRIVER=redis
       - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - QUEUE_CONNECTION=redis
-      - SESSION_DRIVER=redis
     volumes:
       - ./wps-laravel:/app
       - laravel_storage:/app/storage
       - laravel_bootstrap:/app/bootstrap/cache
+      - ./data/uploads:/app/storage/uploads
     depends_on:
       postgres:
         condition: service_healthy
@@ -78,7 +68,7 @@ services:
     restart: unless-stopped
     command: >
       sh -c "
-      php artisan migrate --force &&
+      php artisan migrate --force 2>&1 || true &&
       php artisan cache:clear &&
       php artisan config:cache &&
       php-fpm

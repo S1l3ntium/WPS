@@ -8,6 +8,7 @@ import { getLocalized, newsAPI } from '../../services/api'
 import {
 	generateEventSchema,
 	generateOrganizationSchema,
+	getBaseUrl,
 } from '../../utils/seo'
 import { Footer } from './Footer'
 import { Header } from './Header'
@@ -102,6 +103,7 @@ export function HomePage() {
 	}
 
 	// Event schema data
+	const baseUrl = getBaseUrl()
 	const eventData = {
 		name:
 			locale === 'ru'
@@ -112,14 +114,14 @@ export function HomePage() {
 		endDate: '2025-12-17T18:00:00Z',
 		location: locale === 'ru' ? 'Москва, Россия' : 'Moscow, Russia',
 		image: seoConfig.image,
-		url: `https://worldpublicsummit.test/${locale}/`,
+		url: `${baseUrl}/${locale}/`,
 	}
 
 	const organizationData = {
 		name: 'World Public Assembly',
 		description: seoConfig.description,
-		url: 'https://worldpublicsummit.test',
-		logo: 'https://worldpublicsummit.test/logo.svg',
+		url: baseUrl,
+		logo: `${baseUrl}/logo.svg`,
 		contactPoint: {
 			type: 'ContactPoint',
 			telephone: '+7-800-XXX-XXXX',

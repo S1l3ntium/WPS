@@ -6,6 +6,7 @@ import { eventsAPI, getLocalized } from '../../services/api';
 import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 import { useSEO } from '../../hooks/useSEO';
+import { getBaseUrl } from '../../utils/seo';
 import { Helmet } from 'react-helmet-async';
 
 interface Event {
@@ -250,7 +251,7 @@ export function ProgramPage() {
                               <button onClick={() => navigate(`/event/${event.id}`)} className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-[#1a1f4d] text-white rounded-full text-xs sm:text-sm hover:bg-[#2c3570] transition-colors">
                                 {t('programPage.programButton')}
                               </button>
-                              <button onClick={() => window.open(`https://worldpublicsummit.test/stream/${event.id}`, '_blank')} className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-[#1a1f4d] text-white rounded-full text-xs sm:text-sm hover:bg-[#2c3570] transition-colors">
+                              <button onClick={() => window.open(`${getBaseUrl()}/stream/${event.id}`, '_blank')} className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-[#1a1f4d] text-white rounded-full text-xs sm:text-sm hover:bg-[#2c3570] transition-colors">
                                 {t('programPage.streamButton')}
                               </button>
                             </div>

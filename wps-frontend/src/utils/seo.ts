@@ -22,7 +22,23 @@ export interface SEOConfig {
   }>;
 }
 
-const BASE_URL = 'https://worldpublicsummit.test';
+/**
+ * Get BASE_URL dynamically from current browser location
+ * Falls back to environment variable or hardcoded value
+ */
+export function getBaseUrl(): string {
+  // If running in browser, use current domain
+  if (typeof window !== 'undefined') {
+    const protocol = window.location.protocol;
+    const hostname = window.location.hostname;
+    const port = window.location.port;
+    return `${protocol}//${hostname}${port ? ':' + port : ''}`;
+  }
+  // Fallback for SSR or build time
+  return 'https://wps.test';
+}
+
+const BASE_URL = getBaseUrl();
 
 export function generateCanonicalUrl(pathname: string): string {
   const cleanPath = pathname.replace(/^\/(ru|en)/, '');

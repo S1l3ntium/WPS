@@ -1,5 +1,5 @@
 import { Search, ChevronDown, Menu, X } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate'
 import { useLocale } from '../../context/LocaleContext'
 import { useTranslation } from '../../i18n/useTranslation'
@@ -61,8 +61,8 @@ export function Header({ currentPage = '' }: HeaderProps) {
 		loadCompetitions()
 	}, [])
 
-	// Navigation structure with translation keys
-	const navItems: NavItem[] = [
+	// Navigation structure with translation keys - MEMOIZED to update when competitions load
+	const navItems: NavItem[] = useMemo(() => [
 		// 1. About - EXPANDED SUBMENU
 		{
 			label: t('nav.about'),
@@ -171,7 +171,7 @@ export function Header({ currentPage = '' }: HeaderProps) {
 			translationKey: 'nav.contacts',
 			path: '/contacts',
 		},
-	]
+	], [t, competitions, competitionsLoading, locale])
 
 	const handleNavClick = (path?: string) => {
 		if (path) {

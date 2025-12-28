@@ -3,7 +3,7 @@
  * Handles all communication with the backend API
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost/api';
 
 // ==================== TYPES ====================
 
@@ -190,7 +190,7 @@ export const eventsAPI = {
    * Get all events with optional filtering, search, and pagination
    */
   getAll: async (options?: { date?: string; tags?: string } & PaginationParams): Promise<PaginatedResponse<EventData>> => {
-    let url = `${API_BASE_URL}/api/events`;
+    let url = `${API_BASE_URL}/events`;
     const params = new URLSearchParams();
 
     if (options?.date) params.append('date', options.date);
@@ -212,7 +212,7 @@ export const eventsAPI = {
    * Get specific event by ID
    */
   getById: async (id: number): Promise<EventData> => {
-    const response = await fetch(`${API_BASE_URL}/api/events/${id}`);
+    const response = await fetch(`${API_BASE_URL}/events/${id}`);
     const data = await parseResponse(response);
     return data.data;
   },
@@ -224,7 +224,7 @@ export const newsAPI = {
    * Get all news with optional filtering, search, and pagination
    */
   getAll: async (options?: { type?: 'news' | 'article' } & PaginationParams): Promise<PaginatedResponse<NewsData>> => {
-    let url = `${API_BASE_URL}/api/news`;
+    let url = `${API_BASE_URL}/news`;
     const params = new URLSearchParams();
 
     if (options?.type) params.append('type', options.type);
@@ -245,7 +245,7 @@ export const newsAPI = {
    * Get specific news by ID
    */
   getById: async (id: number): Promise<NewsData> => {
-    const response = await fetch(`${API_BASE_URL}/api/news/${id}`);
+    const response = await fetch(`${API_BASE_URL}/news/${id}`);
     const data = await parseResponse(response);
     return data.data;
   },
@@ -257,7 +257,7 @@ export const hotelsAPI = {
    * Get all hotels with optional filtering, search, and pagination
    */
   getAll: async (options?: { category?: string } & PaginationParams): Promise<PaginatedResponse<HotelData>> => {
-    let url = `${API_BASE_URL}/api/hotels`;
+    let url = `${API_BASE_URL}/hotels`;
     const params = new URLSearchParams();
 
     if (options?.category) params.append('category', options.category);
@@ -278,7 +278,7 @@ export const hotelsAPI = {
    * Get specific hotel by ID
    */
   getById: async (id: number): Promise<HotelData> => {
-    const response = await fetch(`${API_BASE_URL}/api/hotels/${id}`);
+    const response = await fetch(`${API_BASE_URL}/hotels/${id}`);
     const data = await parseResponse(response);
     return data.data;
   },
@@ -290,7 +290,7 @@ export const committeeMembersAPI = {
    * Get all committee members with optional search and pagination
    */
   getAll: async (options?: PaginationParams): Promise<PaginatedResponse<CommitteeMemberData>> => {
-    let url = `${API_BASE_URL}/api/committee-members`;
+    let url = `${API_BASE_URL}/committee-members`;
     const params = new URLSearchParams();
 
     if (options?.page) params.append('page', options.page.toString());
@@ -310,7 +310,7 @@ export const committeeMembersAPI = {
    * Get specific committee member by ID
    */
   getById: async (id: number): Promise<CommitteeMemberData> => {
-    const response = await fetch(`${API_BASE_URL}/api/committee-members/${id}`);
+    const response = await fetch(`${API_BASE_URL}/committee-members/${id}`);
     const data = await parseResponse(response);
     return data.data;
   },
@@ -322,7 +322,7 @@ export const partnerPackagesAPI = {
    * Get all partner packages with optional filtering, search, and pagination
    */
   getAll: async (options?: { category?: string } & PaginationParams): Promise<PaginatedResponse<PartnerPackageData>> => {
-    let url = `${API_BASE_URL}/api/partner-packages`;
+    let url = `${API_BASE_URL}/partner-packages`;
     const params = new URLSearchParams();
 
     if (options?.category) params.append('category', options.category);
@@ -343,7 +343,7 @@ export const partnerPackagesAPI = {
    * Get specific package by ID
    */
   getById: async (id: number): Promise<PartnerPackageData> => {
-    const response = await fetch(`${API_BASE_URL}/api/partner-packages/${id}`);
+    const response = await fetch(`${API_BASE_URL}/partner-packages/${id}`);
     const data = await parseResponse(response);
     return data.data;
   },
@@ -355,7 +355,7 @@ export const competitionsAPI = {
    * Get all competitions with optional search and pagination
    */
   getAll: async (options?: PaginationParams): Promise<PaginatedResponse<CompetitionData>> => {
-    let url = `${API_BASE_URL}/api/competitions`;
+    let url = `${API_BASE_URL}/competitions`;
     const params = new URLSearchParams();
 
     if (options?.page) params.append('page', options.page.toString());
@@ -375,7 +375,7 @@ export const competitionsAPI = {
    * Get specific competition by ID (includes FAQ)
    */
   getById: async (id: number): Promise<CompetitionData & { faqItems?: CompetitionFaqData[] }> => {
-    const response = await fetch(`${API_BASE_URL}/api/competitions/${id}`);
+    const response = await fetch(`${API_BASE_URL}/competitions/${id}`);
     const data = await parseResponse(response);
     return data.data;
   },
@@ -384,7 +384,7 @@ export const competitionsAPI = {
    * Get FAQ for a specific competition
    */
   getFaq: async (id: number, options?: PaginationParams): Promise<PaginatedResponse<CompetitionFaqData>> => {
-    let url = `${API_BASE_URL}/api/competitions/${id}/faq`;
+    let url = `${API_BASE_URL}/competitions/${id}/faq`;
     const params = new URLSearchParams();
 
     if (options?.page) params.append('page', options.page.toString());
@@ -407,7 +407,7 @@ export const awardsAPI = {
    * Get all awards with optional filtering, search, and pagination
    */
   getAll: async (options?: { year?: string } & PaginationParams): Promise<PaginatedResponse<AwardData>> => {
-    let url = `${API_BASE_URL}/api/awards`;
+    let url = `${API_BASE_URL}/awards`;
     const params = new URLSearchParams();
 
     if (options?.year) params.append('year', options.year);
@@ -428,7 +428,7 @@ export const awardsAPI = {
    * Get specific award by ID
    */
   getById: async (id: number): Promise<AwardData> => {
-    const response = await fetch(`${API_BASE_URL}/api/awards/${id}`);
+    const response = await fetch(`${API_BASE_URL}/awards/${id}`);
     const data = await parseResponse(response);
     return data.data;
   },
@@ -440,7 +440,7 @@ export const partnersAPI = {
    * Get all partners with optional search and pagination
    */
   getAll: async (options?: PaginationParams): Promise<PaginatedResponse<PartnerData>> => {
-    let url = `${API_BASE_URL}/api/partners`;
+    let url = `${API_BASE_URL}/partners`;
     const params = new URLSearchParams();
 
     if (options?.page) params.append('page', options.page.toString());
@@ -460,7 +460,7 @@ export const partnersAPI = {
    * Get specific partner by ID
    */
   getById: async (id: number): Promise<PartnerData> => {
-    const response = await fetch(`${API_BASE_URL}/api/partners/${id}`);
+    const response = await fetch(`${API_BASE_URL}/partners/${id}`);
     const data = await parseResponse(response);
     return data.data;
   },

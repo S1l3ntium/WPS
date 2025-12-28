@@ -7,6 +7,7 @@ import { hotelsAPI, getLocalized } from '../../services/api';
 import { useTranslation } from '../../i18n/useTranslation';
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate';
 import { useSEO } from '../../hooks/useSEO';
+import { getBaseUrl } from '../../utils/seo';
 import { Helmet } from 'react-helmet-async';
 
 type Tab = 'accommodation' | 'transfer' | 'badges';
@@ -248,7 +249,7 @@ export function ParticipantsPage() {
                         </div>
                         <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl mb-2 sm:mb-3 text-[#1a1f4d]">{hotel.name}</h3>
                         <p className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-5 md:mb-6">{hotel.address}</p>
-                        <button onClick={() => window.open('https://payment.worldpublicsummit.test', '_blank')} className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
+                        <button onClick={() => window.open(`${getBaseUrl()}/payment`, '_blank')} className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
                           Перейти к оплате
                         </button>
                       </div>
@@ -276,7 +277,7 @@ export function ParticipantsPage() {
                         </div>
                         <h3 className="text-2xl mb-3 text-[#1a1f4d]">{hotel.name}</h3>
                         <p className="text-sm text-gray-600 mb-6">{hotel.address}</p>
-                        <button onClick={() => window.open('https://payment.worldpublicsummit.test', '_blank')} className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
+                        <button onClick={() => window.open(`${getBaseUrl()}/payment`, '_blank')} className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
                           Перейти к оплате
                         </button>
                       </div>
@@ -304,7 +305,7 @@ export function ParticipantsPage() {
                         </div>
                         <h3 className="text-2xl mb-3 text-[#1a1f4d]">{hotel.name}</h3>
                         <p className="text-sm text-gray-600 mb-6">{hotel.address}</p>
-                        <button onClick={() => window.open('https://payment.worldpublicsummit.test', '_blank')} className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
+                        <button onClick={() => window.open(`${getBaseUrl()}/payment`, '_blank')} className="border border-[#1a1f4d] hover:bg-[#1a1f4d] hover:text-white text-[#1a1f4d] px-6 py-3 rounded transition-colors">
                           Перейти к оплате
                         </button>
                       </div>
