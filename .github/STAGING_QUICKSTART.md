@@ -44,8 +44,8 @@ APP_ENV=staging
 APP_DEBUG=false
 APP_KEY=base64:2FPjQajGEZfwEOPNm1Kb0xUA9ZeMh7WdpG8/4hJio2k=
 
-DOMAIN_NAME=staging-wps.your-domain.com
-APP_URL=https://staging-wps.your-domain.com
+DOMAIN_NAME=staging.wps.test
+APP_URL=https://staging.wps.test
 
 DB_CONNECTION=pgsql
 DB_HOST=postgres
@@ -66,8 +66,8 @@ REDIS_PORT_EXTERNAL=6380
 HTTP_PORT_EXTERNAL=8080
 HTTPS_PORT_EXTERNAL=8443
 
-VITE_API_BASE_URL=https://staging-wps.your-domain.com/api
-CORS_ALLOWED_ORIGINS=https://staging-wps.your-domain.com
+VITE_API_BASE_URL=https://staging.wps.test/api
+CORS_ALLOWED_ORIGINS=https://staging.wps.test
 
 ADMIN_EMAIL=admin
 ADMIN_PASSWORD=secret
@@ -131,7 +131,7 @@ git push origin develop
 
 После первого успешного deploy:
 
-- Staging доступен на `https://staging-wps.your-domain.com`
+- Staging доступен на `https://staging.wps.test`
 - Каждый push в develop автоматически обновляет staging
 - БД мигрирует автоматически
 - Заказчик может согласовывать изменения

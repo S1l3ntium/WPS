@@ -76,7 +76,7 @@ Run Tests
     ↓
 Deploy to Staging Server
     ↓
-Доступно на: https://staging-wps.example.com
+Доступно на: https://staging.wps.test
 ```
 
 ### Production

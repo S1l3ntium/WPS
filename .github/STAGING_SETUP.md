@@ -101,8 +101,8 @@ APP_ENV=staging
 APP_DEBUG=false
 APP_KEY=base64:2FPjQajGEZfwEOPNm1Kb0xUA9ZeMh7WdpG8/4hJio2k=
 
-DOMAIN_NAME=staging-wps.your-domain.com
-APP_URL=https://staging-wps.your-domain.com
+DOMAIN_NAME=staging.wps.test
+APP_URL=https://staging.wps.test
 
 APP_LOCALE=ru
 APP_FALLBACK_LOCALE=ru
@@ -135,8 +135,8 @@ HTTP_PORT_EXTERNAL=8080
 HTTPS_PORT_EXTERNAL=8443
 
 # API & CORS
-VITE_API_BASE_URL=https://staging-wps.your-domain.com/api
-CORS_ALLOWED_ORIGINS=https://staging-wps.your-domain.com,https://wps.your-domain.com,http://localhost:3000
+VITE_API_BASE_URL=https://staging.wps.test/api
+CORS_ALLOWED_ORIGINS=https://staging.wps.test,https://wps.test,http://localhost:3000
 
 # Mail
 MAIL_MAILER=log
@@ -234,7 +234,7 @@ services:
       dockerfile: Dockerfile
     container_name: wps-staging-frontend
     environment:
-      - VITE_API_BASE_URL=${VITE_API_BASE_URL:-https://staging-wps.your-domain.com/api}
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL:-https://staging.wps.test/api}
       - NODE_ENV=production
     depends_on:
       - laravel
@@ -279,20 +279,20 @@ cp nginx/conf.d/app.conf nginx/conf.d/app-staging.conf
 ```
 
 Отредактировать `nginx/conf.d/app-staging.conf`:
-- Заменить `wps.test` на `staging-wps.your-domain.com`
+- Заменить `wps.test` на `staging.wps.test`
 - Обновить пути к SSL сертификатам
 
 ### 3.4 SSL Сертификаты
 
 ```bash
 # На сервере, если есть Let's Encrypt:
-sudo certbot certonly -d staging-wps.your-domain.com
+sudo certbot certonly -d staging.wps.test
 
 # Скопировать в nginx/ssl:
-sudo cp /etc/letsencrypt/live/staging-wps.your-domain.com/fullchain.pem \
-        nginx/ssl/staging-wps.your-domain.com.crt
-sudo cp /etc/letsencrypt/live/staging-wps.your-domain.com/privkey.pem \
-        nginx/ssl/staging-wps.your-domain.com.key
+sudo cp /etc/letsencrypt/live/staging.wps.test/fullchain.pem \
+        nginx/ssl/staging.wps.test.crt
+sudo cp /etc/letsencrypt/live/staging.wps.test/privkey.pem \
+        nginx/ssl/staging.wps.test.key
 
 # Дать права:
 sudo chown $USER:$USER nginx/ssl/*.key
@@ -548,7 +548,7 @@ docker compose -f docker-compose.staging.yml exec nginx cat /var/log/nginx/error
 3. **На сервере**:
    - Контейнеры запускаются
    - БД мигрирует
-   - Staging доступен на `https://staging-wps.your-domain.com`
+   - Staging доступен на `https://staging.wps.test`
 
 4. **Заказчик**:
    - Может смотреть staging 24/7
