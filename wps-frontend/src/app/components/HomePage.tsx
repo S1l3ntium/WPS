@@ -4,7 +4,7 @@ import Slider from 'react-slick'
 import { useLocaleNavigate } from '../../hooks/useLocaleNavigate'
 import { useSEO } from '../../hooks/useSEO'
 import { useTranslation } from '../../i18n/useTranslation'
-import { getLocalized, newsAPI } from '../../services/api'
+import { getLocalized, newsAPI, heroSlideAPI, HeroSlideData, HeroSlideButton } from '../../services/api'
 import {
 	generateEventSchema,
 	generateOrganizationSchema,
@@ -27,8 +27,27 @@ interface NewsItem {
 export function HomePage() {
 	const navigate = useLocaleNavigate()
 	const { t, locale } = useTranslation()
+	const [heroSlides, setHeroSlides] = useState<HeroSlideData[]>([])
+	const [loadingSlides, setLoadingSlides] = useState(true)
 	const [newsItems, setNewsItems] = useState<NewsItem[]>([])
 	const [loading, setLoading] = useState(true)
+
+	useEffect(() => {
+		const loadHeroSlides = async () => {
+			try {
+				setLoadingSlides(true)
+				const response = await heroSlideAPI.getAll()
+				setHeroSlides(response.data)
+			} catch (err) {
+				console.error('Failed to fetch hero slides:', err)
+				setHeroSlides([])
+			} finally {
+				setLoadingSlides(false)
+			}
+		}
+
+		loadHeroSlides()
+	}, [])
 
 	useEffect(() => {
 		const loadNews = async () => {

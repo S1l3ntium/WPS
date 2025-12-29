@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "wps-api-collection",
     "name": "WPS API",
-    "description": "World Public Assembly API Collection",
+    "description": "World Public Assembly API Collection - Complete API Documentation",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -15,11 +15,15 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{api_url}}/events",
+              "raw": "{{api_url}}/events?page=1&per_page=15",
               "host": ["{{api_url}}"],
-              "path": ["events"]
+              "path": ["events"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "per_page", "value": "15"}
+              ]
             },
-            "description": "Get list of all published events"
+            "description": "Get list of all published events with pagination"
           }
         },
         {
@@ -28,17 +32,16 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{api_url}}/events?date=2025-09-20",
+              "raw": "{{api_url}}/events?date=2025-09-20&sort_by=start_date&sort_order=asc",
               "host": ["{{api_url}}"],
               "path": ["events"],
               "query": [
-                {
-                  "key": "date",
-                  "value": "2025-09-20"
-                }
+                {"key": "date", "value": "2025-09-20"},
+                {"key": "sort_by", "value": "start_date"},
+                {"key": "sort_order", "value": "asc"}
               ]
             },
-            "description": "Filter events by date (YYYY-MM-DD format)"
+            "description": "Filter events by date (YYYY-MM-DD format) and sort"
           }
         },
         {
@@ -47,14 +50,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{api_url}}/events?tags=culture,education",
+              "raw": "{{api_url}}/events?tags=culture,education&per_page=20",
               "host": ["{{api_url}}"],
               "path": ["events"],
               "query": [
-                {
-                  "key": "tags",
-                  "value": "culture,education"
-                }
+                {"key": "tags", "value": "culture,education"},
+                {"key": "per_page", "value": "20"}
               ]
             },
             "description": "Filter events by tags (comma-separated)"
@@ -70,7 +71,7 @@
               "host": ["{{api_url}}"],
               "path": ["events", "1"]
             },
-            "description": "Get detailed information about a specific event"
+            "description": "Get detailed information about a specific event including relationships"
           }
         },
         {
@@ -78,18 +79,12 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": {\"ru\": \"Новое событие\", \"en\": \"New Event\"},\n  \"description\": {\"ru\": \"Описание события\", \"en\": \"Event description\"},\n  \"type\": \"ПАНЕЛЬНАЯ ДИСКУССИЯ\",\n  \"start_date\": \"2025-09-22 09:00:00\",\n  \"end_date\": \"2025-09-22 10:30:00\",\n  \"location\": {\"ru\": \"Конгресс-центр\", \"en\": \"Congress Center\"},\n  \"venue\": {\"ru\": \"Зал А\", \"en\": \"Hall A\"},\n  \"tags\": [\"culture\", \"education\"],\n  \"goals\": [\"Goal 1\", \"Goal 2\"],\n  \"format\": {\"ru\": \"Формат события\", \"en\": \"Event format\"},\n  \"discussion_questions\": [\"Question 1\", \"Question 2\"],\n  \"download_link\": \"https://example.com/doc.pdf\"\n}"
+              "raw": "{\n  \"title\": {\"ru\": \"Новое событие\", \"en\": \"New Event\"},\n  \"description\": {\"ru\": \"Описание\", \"en\": \"Description\"},\n  \"type\": \"workshop\",\n  \"start_date\": \"2025-12-22 09:00:00\",\n  \"end_date\": \"2025-12-22 18:00:00\",\n  \"location\": {\"ru\": \"Москва\", \"en\": \"Moscow\"},\n  \"venue\": {\"ru\": \"Зал\", \"en\": \"Hall\"},\n  \"tags\": [\"education\"],\n  \"goals\": [{\"ru\": \"Цель\", \"en\": \"Goal\"}]\n}"
             },
             "url": {
               "raw": "{{api_url}}/events",
@@ -100,41 +95,10 @@
           }
         },
         {
-          "name": "Update Event",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"title\": {\"ru\": \"Обновленное событие\", \"en\": \"Updated Event\"},\n  \"description\": {\"ru\": \"Обновленное описание\", \"en\": \"Updated description\"}\n}"
-            },
-            "url": {
-              "raw": "{{api_url}}/events/1",
-              "host": ["{{api_url}}"],
-              "path": ["events", "1"]
-            },
-            "description": "Update an existing event (requires authentication)"
-          }
-        },
-        {
           "name": "Delete Event",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
             "url": {
               "raw": "{{api_url}}/events/1",
               "host": ["{{api_url}}"],
@@ -154,9 +118,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{api_url}}/news",
+              "raw": "{{api_url}}/news?page=1&per_page=15",
               "host": ["{{api_url}}"],
-              "path": ["news"]
+              "path": ["news"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "per_page", "value": "15"}
+              ]
             },
             "description": "Get list of all published news articles"
           }
@@ -167,14 +135,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{api_url}}/news?type=article",
+              "raw": "{{api_url}}/news?type=article&sort_by=published_at&sort_order=desc",
               "host": ["{{api_url}}"],
               "path": ["news"],
               "query": [
-                {
-                  "key": "type",
-                  "value": "article"
-                }
+                {"key": "type", "value": "article"},
+                {"key": "sort_by", "value": "published_at"},
+                {"key": "sort_order", "value": "desc"}
               ]
             },
             "description": "Filter news by type (news or article)"
@@ -198,18 +165,12 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": {\"ru\": \"Новая новость\", \"en\": \"New News\"},\n  \"excerpt\": {\"ru\": \"Краткое описание\", \"en\": \"Brief description\"},\n  \"content\": {\"ru\": \"Полный текст статьи\", \"en\": \"Full article text\"},\n  \"type\": \"news\",\n  \"published_at\": \"2025-12-20\",\n  \"image\": \"https://example.com/image.jpg\",\n  \"category\": \"НОВОСТИ\"\n}"
+              "raw": "{\n  \"title\": {\"ru\": \"Новая статья\", \"en\": \"New Article\"},\n  \"excerpt\": {\"ru\": \"Краткое описание\", \"en\": \"Brief\"},\n  \"content\": {\"ru\": \"Текст статьи\", \"en\": \"Article text\"},\n  \"type\": \"news\",\n  \"published_at\": \"2025-12-20\",\n  \"image\": \"/storage/news/image.jpg\",\n  \"category\": \"общество\"\n}"
             },
             "url": {
               "raw": "{{api_url}}/news",
@@ -217,6 +178,171 @@
               "path": ["news"]
             },
             "description": "Create a new news article (requires authentication)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Competitions",
+      "item": [
+        {
+          "name": "Get All Competitions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}/competitions?page=1&per_page=15",
+              "host": ["{{api_url}}"],
+              "path": ["competitions"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "per_page", "value": "15"}
+              ]
+            },
+            "description": "Get list of all competitions"
+          }
+        },
+        {
+          "name": "Get Competition Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}/competitions/1",
+              "host": ["{{api_url}}"],
+              "path": ["competitions", "1"]
+            },
+            "description": "Get detailed information about a specific competition with all fields"
+          }
+        },
+        {
+          "name": "Get Competition FAQ",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}/competitions/1/faq?page=1&per_page=10",
+              "host": ["{{api_url}}"],
+              "path": ["competitions", "1", "faq"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "per_page", "value": "10"}
+              ]
+            },
+            "description": "Get FAQ for a specific competition with pagination"
+          }
+        },
+        {
+          "name": "Create Competition",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"grant\",\n  \"name\": {\"ru\": \"Конкурс Грантов\", \"en\": \"Grants Competition\"},\n  \"description\": {\"ru\": \"Описание\", \"en\": \"Description\"},\n  \"logo_path\": \"/storage/competitions/logo.png\",\n  \"timeline_opening\": \"2025-07-01\",\n  \"timeline_opening_end_date\": \"2025-07-30\",\n  \"timeline_closing\": \"2025-08-01\",\n  \"timeline_closing_end_date\": \"2025-08-31\",\n  \"timeline_announcement\": \"2025-09-01\",\n  \"timeline_announcement_end_date\": \"2025-09-15\",\n  \"eligibility_age_min\": 18,\n  \"eligibility_age_max\": 35,\n  \"eligibility_requirements\": [{\"ru\": \"Требование 1\", \"en\": \"Requirement 1\"}],\n  \"support_areas\": [{\"ru\": \"Область 1\", \"en\": \"Area 1\"}]\n}"
+            },
+            "url": {
+              "raw": "{{api_url}}/competitions",
+              "host": ["{{api_url}}"],
+              "path": ["competitions"]
+            },
+            "description": "Create a new competition with new fields"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Awards",
+      "item": [
+        {
+          "name": "Get All Awards",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}/awards?page=1&per_page=15",
+              "host": ["{{api_url}}"],
+              "path": ["awards"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "per_page", "value": "15"}
+              ]
+            },
+            "description": "Get list of all awards"
+          }
+        },
+        {
+          "name": "Get Award Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}/awards/1",
+              "host": ["{{api_url}}"],
+              "path": ["awards", "1"]
+            },
+            "description": "Get detailed information about a specific award"
+          }
+        },
+        {
+          "name": "Create Award",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": {\"ru\": \"Премия за совершенство\", \"en\": \"Excellence Award\"},\n  \"description\": {\"ru\": \"Описание премии\", \"en\": \"Award description\"},\n  \"winner_name\": \"John Doe\",\n  \"award_year\": \"2025\",\n  \"award_type\": \"individual\",\n  \"image\": \"/storage/awards/image.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{api_url}}/awards",
+              "host": ["{{api_url}}"],
+              "path": ["awards"]
+            },
+            "description": "Create a new award (requires authentication)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hotels",
+      "item": [
+        {
+          "name": "Get All Hotels",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}/hotels?page=1&per_page=15",
+              "host": ["{{api_url}}"],
+              "path": ["hotels"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "per_page", "value": "15"}
+              ]
+            },
+            "description": "Get list of all hotels"
+          }
+        },
+        {
+          "name": "Get Hotels by Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}/hotels?category=recommended",
+              "host": ["{{api_url}}"],
+              "path": ["hotels"],
+              "query": [
+                {"key": "category", "value": "recommended"}
+              ]
+            },
+            "description": "Filter hotels by category (recommended, championship, verified)"
           }
         }
       ]
@@ -230,9 +356,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{api_url}}/partners",
+              "raw": "{{api_url}}/partners?page=1&per_page=15",
               "host": ["{{api_url}}"],
-              "path": ["partners"]
+              "path": ["partners"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "per_page", "value": "15"}
+              ]
             },
             "description": "Get list of all active partners"
           }
@@ -253,80 +383,6 @@
       ]
     },
     {
-      "name": "Partner Packages",
-      "item": [
-        {
-          "name": "Get All Partner Packages",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{api_url}}/partner-packages",
-              "host": ["{{api_url}}"],
-              "path": ["partner-packages"]
-            },
-            "description": "Get list of all partnership packages"
-          }
-        },
-        {
-          "name": "Get Packages by Category",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{api_url}}/partner-packages?category=strategic",
-              "host": ["{{api_url}}"],
-              "path": ["partner-packages"],
-              "query": [
-                {
-                  "key": "category",
-                  "value": "strategic"
-                }
-              ]
-            },
-            "description": "Filter packages by category"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Hotels",
-      "item": [
-        {
-          "name": "Get All Hotels",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{api_url}}/hotels",
-              "host": ["{{api_url}}"],
-              "path": ["hotels"]
-            },
-            "description": "Get list of all hotels"
-          }
-        },
-        {
-          "name": "Get Hotels by Category",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{api_url}}/hotels?category=recommended",
-              "host": ["{{api_url}}"],
-              "path": ["hotels"],
-              "query": [
-                {
-                  "key": "category",
-                  "value": "recommended"
-                }
-              ]
-            },
-            "description": "Filter hotels by category (recommended, championship, verified)"
-          }
-        }
-      ]
-    },
-    {
       "name": "Committee Members",
       "item": [
         {
@@ -335,125 +391,45 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{api_url}}/committee-members",
+              "raw": "{{api_url}}/committee-members?page=1&per_page=15",
               "host": ["{{api_url}}"],
-              "path": ["committee-members"]
+              "path": ["committee-members"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "per_page", "value": "15"}
+              ]
             },
             "description": "Get list of all committee members"
           }
-        },
-        {
-          "name": "Get Committee Member Details",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{api_url}}/committee-members/1",
-              "host": ["{{api_url}}"],
-              "path": ["committee-members", "1"]
-            },
-            "description": "Get detailed information about a specific committee member"
-          }
         }
       ]
     },
     {
-      "name": "Competitions",
+      "name": "Partner Packages",
       "item": [
         {
-          "name": "Get All Competitions",
+          "name": "Get All Partner Packages",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{api_url}}/competitions",
+              "raw": "{{api_url}}/partner-packages?page=1&per_page=15",
               "host": ["{{api_url}}"],
-              "path": ["competitions"]
-            },
-            "description": "Get list of all competitions"
-          }
-        },
-        {
-          "name": "Get Competition Details with FAQ",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{api_url}}/competitions/1",
-              "host": ["{{api_url}}"],
-              "path": ["competitions", "1"]
-            },
-            "description": "Get detailed information about a specific competition including FAQ"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Awards",
-      "item": [
-        {
-          "name": "Get All Awards",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{api_url}}/awards",
-              "host": ["{{api_url}}"],
-              "path": ["awards"]
-            },
-            "description": "Get list of all awards"
-          }
-        },
-        {
-          "name": "Get Awards by Year",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{api_url}}/awards?year=2025",
-              "host": ["{{api_url}}"],
-              "path": ["awards"],
+              "path": ["partner-packages"],
               "query": [
-                {
-                  "key": "year",
-                  "value": "2025"
-                }
+                {"key": "page", "value": "1"},
+                {"key": "per_page", "value": "15"}
               ]
             },
-            "description": "Filter awards by year"
-          }
-        },
-        {
-          "name": "Get Award Details",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{api_url}}/awards/1",
-              "host": ["{{api_url}}"],
-              "path": ["awards", "1"]
-            },
-            "description": "Get detailed information about a specific award"
+            "description": "Get list of all partnership packages"
           }
         }
       ]
     }
   ],
   "variable": [
-    {
-      "key": "api_url",
-      "value": "http://localhost:8000/api",
-      "type": "string"
-    },
-    {
-      "key": "base_url",
-      "value": "http://localhost:8000",
-      "type": "string"
-    },
-    {
-      "key": "token",
-      "value": "",
-      "type": "string"
-    }
+    {"key": "api_url", "value": "https://wps.test/api", "type": "string"},
+    {"key": "base_url", "value": "https://wps.test", "type": "string"},
+    {"key": "token", "value": "", "type": "string"}
   ]
 }

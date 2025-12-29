@@ -144,6 +144,33 @@ export interface PartnerData {
   websiteUrl: string;
 }
 
+export interface HeroSlideButton {
+  text: { ru: string; en: string };
+  link: string;
+  style: 'primary' | 'secondary' | 'outline';
+  order: number;
+}
+
+export interface HeroSlideData {
+  id: number;
+  title: { ru: string; en: string };
+  subtitle: { ru: string; en: string };
+  subtitle_highlight?: { ru: string; en: string };
+  subtitle_end?: { ru: string; en: string };
+  description: { ru: string; en: string };
+  background_image?: string;
+  background_gradient?: string;
+  event_info?: {
+    date?: { ru: string; en: string };
+    venue?: { ru: string; en: string };
+    location?: { ru: string; en: string };
+  };
+  buttons?: HeroSlideButton[];
+  is_active: boolean;
+  order: number;
+  status: 'published' | 'draft';
+}
+
 // ==================== UTILITY FUNCTIONS ====================
 
 /**
@@ -463,5 +490,17 @@ export const partnersAPI = {
     const response = await fetch(`${API_BASE_URL}/partners/${id}`);
     const data = await parseResponse(response);
     return data.data;
+  },
+};
+
+// ===== HERO SLIDES =====
+export const heroSlideAPI = {
+  /**
+   * Get all published hero slides sorted by order
+   */
+  getAll: async (): Promise<{ data: HeroSlideData[] }> => {
+    const response = await fetch(`${API_BASE_URL}/hero-slides`);
+    const data = await parseResponse(response);
+    return data;
   },
 };

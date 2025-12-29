@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\Contracts\Core\DependencyInjection\ConfiguratorContract;
+use App\MoonShine\Resources\HeroSlideResource;
 use App\MoonShine\Resources\EventResource;
 use App\MoonShine\Resources\NewsResource;
 use App\MoonShine\Resources\PartnerResource;
@@ -28,6 +29,7 @@ class MoonShineServiceProvider extends ServiceProvider
             ->resources([
                 MoonShineUserResource::class,
                 MoonShineUserRoleResource::class,
+                HeroSlideResource::class,
                 EventResource::class,
                 NewsResource::class,
                 PartnerResource::class,

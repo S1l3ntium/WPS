@@ -11,6 +11,7 @@ use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\ColorManager\PaletteContract;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\MenuManager\MenuGroup;
+use App\MoonShine\Resources\HeroSlideResource;
 use App\MoonShine\Resources\EventResource;
 use App\MoonShine\Resources\NewsResource;
 use App\MoonShine\Resources\PartnerResource;
@@ -37,6 +38,7 @@ final class MoonShineLayout extends AppLayout
     {
         return [
             MenuGroup::make(static fn () => 'Контент', [
+                MenuItem::make(HeroSlideResource::class),
                 MenuItem::make(EventResource::class),
                 MenuItem::make(NewsResource::class),
                 MenuItem::make(AwardResource::class),

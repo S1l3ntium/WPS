@@ -10,6 +10,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\CommitteeMemberController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\AwardController;
+use App\Http\Controllers\HeroSlideController;
 
 Route::get('/health', function () {
     return response()->json(['status' => 'ok']);
@@ -24,6 +25,7 @@ Route::apiResource('hotels', HotelController::class)->only(['index', 'show']);
 Route::apiResource('committee-members', CommitteeMemberController::class)->only(['index', 'show']);
 Route::apiResource('competitions', CompetitionController::class)->only(['index', 'show']);
 Route::apiResource('awards', AwardController::class)->only(['index', 'show']);
+Route::get('hero-slides', [HeroSlideController::class, 'index']);
 
 // Additional endpoints
 Route::get('competitions/{competition}/faq', [CompetitionController::class, 'faq']);
