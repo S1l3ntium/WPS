@@ -425,6 +425,24 @@
           }
         }
       ]
+    },
+    {
+      "name": "Hero Slides",
+      "item": [
+        {
+          "name": "Get All Hero Slides",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}/hero-slides",
+              "host": ["{{api_url}}"],
+              "path": ["hero-slides"]
+            },
+            "description": "Get all published and active hero slides for the homepage (sorted by order)"
+          }
+        }
+      ]
     }
   ],
   "variable": [

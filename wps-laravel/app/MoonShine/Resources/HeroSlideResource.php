@@ -112,9 +112,9 @@ class HeroSlideResource extends ModelResource
                 ->object()
                 ->nullable(),
 
-            // Кнопки действия (массив)
+            // Кнопки действия (массив с JSON редактором)
             Json::make('Кнопки', 'buttons')
-                ->hint('Список кнопок с текстом, ссылкой и стилем')
+                ->hint('JSON массив с кнопками. Пример: [{"text": {"ru": "Текст", "en": "Text"}, "link": "/program", "style": "primary", "order": 1}]')
                 ->nullable(),
 
             // Управление слайдом
