@@ -121,8 +121,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Разверните на staging сервер через SSH
+      # Deploy на staging сервер через SSH
       # Требуется настройка: SSH_PRIVATE_KEY, STAGING_HOST, STAGING_USER
+      # Смотри: .github/STAGING_SETUP.md для инструкций
       - name: Deploy to Staging
         if: secrets.STAGING_HOST != ''
         uses: appleboy/ssh-action@v1.0.3
@@ -131,23 +132,30 @@ jobs:
           username: ${{ secrets.STAGING_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/wps || exit 1
+            cd /home/docker/wps-staging || exit 1
             git fetch origin
             git checkout develop
             git pull origin develop
-            # Задайте переменные для staging окружения
-            export DOMAIN_NAME=staging-wps.example.com
-            export HTTP_PORT_EXTERNAL=8080
-            export HTTPS_PORT_EXTERNAL=8443
+
+            # Используйте переменные из .env.staging на сервере
             export DB_PORT_EXTERNAL=5433
             export REDIS_PORT_EXTERNAL=6380
+            export HTTP_PORT_EXTERNAL=8080
+            export HTTPS_PORT_EXTERNAL=8443
+
             # Соберите и запустите контейнеры
-            docker compose down || true
-            docker compose build
-            docker compose up -d
-            docker compose exec -T laravel php artisan migrate --force
-            docker compose exec -T laravel php artisan cache:clear
-            docker compose exec -T laravel php artisan config:cache
+            docker compose -f docker-compose.staging.yml down || true
+            docker compose -f docker-compose.staging.yml build
+            docker compose -f docker-compose.staging.yml up -d
+
+            # Дождитесь готовности БД
+            sleep 10
+
+            # Запустите миграции и прогрейте кэш
+            docker compose -f docker-compose.staging.yml exec -T laravel php artisan migrate --force
+            docker compose -f docker-compose.staging.yml exec -T laravel php artisan cache:clear
+            docker compose -f docker-compose.staging.yml exec -T laravel php artisan config:cache
+            docker compose -f docker-compose.staging.yml exec -T laravel php artisan cache:warmup
 
       # Отправить уведомление в Slack (опционально)
       - name: Notify Slack
