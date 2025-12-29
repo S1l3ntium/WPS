@@ -2,6 +2,7 @@ name: Staging Build & Deploy
 
 # Trigger на push в develop branch (для пре-релиза)
 on:
+  workflow_dispatch:
   push:
     branches:
       - develop
