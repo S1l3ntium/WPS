@@ -54,15 +54,6 @@ class HeroSlideResource extends ModelResource
                 ->object()
                 ->nullable(),
 
-            // Окончание подзаголовка
-            Json::make('Окончание подзаголовка', 'subtitle_end')
-                ->fields([
-                    Text::make('Русский', 'ru'),
-                    Text::make('English', 'en'),
-                ])
-                ->object()
-                ->nullable(),
-
             // Описание
             Json::make('Описание', 'description')
                 ->fields([
