@@ -1,0 +1,96 @@
+############################
+# Git
+############################
+.git
+.gitignore
+.gitattributes
+.github
+
+############################
+# Environment & Secrets
+############################
+.env*
+*.pem
+*.key
+
+############################
+# Documentation
+############################
+README.md
+CHANGELOG.md
+*.md
+docs/
+
+############################
+# IDE & Editors
+############################
+.vscode/
+.idea/
+.fleet/
+.nova/
+*.swp
+*.swo
+*~
+
+############################
+# OS
+############################
+.DS_Store
+Thumbs.db
+.AppleDouble
+
+############################
+# Node
+############################
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+############################
+# Composer
+############################
+vendor/
+composer.lock
+
+############################
+# Build outputs not needed in Docker
+############################
+dist/
+build/
+coverage/
+.coverage/
+.phpunit.cache/
+.phpunit.result.cache
+
+############################
+# Testing
+############################
+tests/
+phpunit.xml
+jest.config.js
+
+############################
+# CI/CD
+############################
+.github/workflows
+.gitlab-ci.yml
+.travis.yml
+Jenkinsfile
+
+############################
+# Configuration
+############################
+.editorconfig
+.prettierrc*
+.eslintrc*
+.styleci.yml
+
+############################
+# Misc
+############################
+.claude/
+Makefile
+.history/
+.DS_Store
+Thumbs.db

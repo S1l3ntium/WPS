@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+vendor/
+wps-laravel/vendor/
+wps-frontend/node_modules/
+
+# Build outputs
+dist/
+build/
+public/build/
+wps-frontend/dist/
+wps-laravel/public/build/
+
+# Environment files
+.env
+.env.*
+*.pem
+*.key
+
+# IDE
+.vscode/
+.idea/
+.fleet/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+.coverage/
+
+# Logs
+*.log
+logs/
+
+# Docker
+data/
+
+# PHP specific
+storage/
+bootstrap/cache/
+wps-laravel/storage/
+wps-laravel/bootstrap/cache/
+
+# Misc
+.git/
+.gitignore
+.gitattributes
+.editorconfig
+.prettierignore
+.prettierrc
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+composer.lock
+
+# Lock files for package managers
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+composer.lock
+
+# Markdown (preserve formatting)
+*.md
+
+# Configuration files
+*.yml
+*.yaml
+Dockerfile
+docker-compose*.yml

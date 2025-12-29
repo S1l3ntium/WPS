@@ -1,0 +1,143 @@
+############################
+# Auto detect text files and normalize line endings to LF
+############################
+* text=auto eol=lf
+
+############################
+# PHP
+############################
+*.php diff=php
+*.blade.php diff=html
+
+############################
+# JavaScript & TypeScript
+############################
+*.js diff=javascript
+*.jsx diff=javascript
+*.ts diff=javascript
+*.tsx diff=javascript
+*.vue diff=javascript
+
+############################
+# CSS & Styling
+############################
+*.css diff=css
+*.scss diff=css
+*.sass diff=css
+*.less diff=css
+
+############################
+# Markup & Templates
+############################
+*.html diff=html
+*.htm diff=html
+*.md diff=markdown
+*.json diff=json
+*.xml diff=xml
+*.yaml diff=yaml
+*.yml diff=yaml
+*.toml diff=toml
+
+############################
+# Shell Scripts
+############################
+*.sh eol=lf
+*.bash eol=lf
+*.zsh eol=lf
+
+############################
+# Git & Version Control
+############################
+.gitattributes export-ignore
+.gitignore export-ignore
+
+############################
+# Documentation
+############################
+*.md export-ignore
+README.md export-ignore
+CHANGELOG.md export-ignore
+LICENSE export-ignore
+CONTRIBUTING.md export-ignore
+
+############################
+# CI/CD
+############################
+.github export-ignore
+.gitlab-ci.yml export-ignore
+.travis.yml export-ignore
+Jenkinsfile export-ignore
+
+############################
+# Configuration Files
+############################
+.editorconfig export-ignore
+.prettierrc* export-ignore
+.eslintrc* export-ignore
+.styleci.yml export-ignore
+phpstan.neon export-ignore
+phpcs.xml export-ignore
+psalm.xml export-ignore
+
+############################
+# IDE & Editor
+############################
+.vscode export-ignore
+.idea export-ignore
+*.swp export-ignore
+*.swo export-ignore
+*~ export-ignore
+
+############################
+# Images (Binary - do not diff)
+############################
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.webp binary
+
+############################
+# Archives (Binary)
+############################
+*.zip binary
+*.tar binary
+*.tar.gz binary
+*.rar binary
+*.7z binary
+
+############################
+# Fonts (Binary)
+############################
+*.ttf binary
+*.otf binary
+*.eot binary
+*.woff binary
+*.woff2 binary
+
+############################
+# Docker
+############################
+Dockerfile export-ignore
+docker-compose*.yml diff=yaml
+.dockerignore export-ignore
+
+############################
+# Laravel & Composer
+############################
+composer.lock diff=php
+composer.json diff=json
+package-lock.json diff=json
+package.json diff=json
+pnpm-lock.yaml diff=yaml
+yarn.lock diff=yaml
+
+############################
+# Misc Build Files
+############################
+.DS_Store export-ignore
+Thumbs.db export-ignore
+.env.example export-ignore
+Makefile export-ignore

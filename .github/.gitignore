@@ -1,0 +1,20 @@
+# GitHub workflow secrets should never be committed
+*.secret
+*.key
+*.pem
+.env
+.env.local
+*.backup
+
+# Temporary workflow files
+*.tmp
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/

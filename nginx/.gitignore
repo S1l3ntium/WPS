@@ -1,0 +1,27 @@
+# SSL certificates and keys (never commit these!)
+ssl/*.pem
+ssl/*.key
+ssl/*.crt
+ssl/*.csr
+ssl/*.p12
+ssl/*.pfx
+ssl/*.jks
+!ssl/.gitkeep
+
+# Nginx cache and temp files
+cache/
+temp/
+*.tmp
+*.bak
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

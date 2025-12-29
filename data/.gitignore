@@ -1,0 +1,28 @@
+# User uploads
+uploads/*
+!uploads/.gitkeep
+
+# Database backups
+backups/*
+!backups/.gitkeep
+
+# Database data directories
+postgres_data/
+redis_data/
+*.sql
+*.sql.gz
+*.sql.bak
+*.dump
+
+# Log files
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.tmp
+
+# IDE
+.vscode/
+.idea/
