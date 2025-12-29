@@ -71,6 +71,8 @@ services:
       php artisan migrate --force 2>&1 || true &&
       php artisan cache:clear &&
       php artisan config:cache &&
+      rm -f /app/public/storage &&
+      ln -s /app/storage/app/public /app/public/storage &&
       php-fpm
       "
 
@@ -100,6 +102,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/ssl:/etc/nginx/ssl
       - ./wps-laravel:/app:ro
+      - laravel_storage:/app/storage
     depends_on:
       - laravel
       - frontend
