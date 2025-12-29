@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Call new structured seeders
+        $this->call(HeroSlideSeeder::class);
         $this->call(EventSeeder::class);
         $this->call(NewsSeeder::class);
         $this->call(PartnerSeeder::class);
