@@ -93,8 +93,12 @@ services:
 
   # Nginx Reverse Proxy
   nginx:
-    image: nginx:alpine
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     container_name: wps-nginx
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME:-wps.test}
     ports:
       - "${HTTP_PORT_EXTERNAL:-8080}:80"
       - "${HTTPS_PORT_EXTERNAL:-8443}:443"
