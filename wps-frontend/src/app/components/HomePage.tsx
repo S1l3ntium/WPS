@@ -164,165 +164,176 @@ export function HomePage() {
 				{/* Hero section with carousel */}
 				<section className='relative h-screen'>
 					<Slider {...sliderSettings} className='h-full'>
-						{/* Slide 1 */}
-						<div className='h-screen relative'>
-							<div className='absolute inset-0 bg-gradient-to-r from-[#1a1f4d] to-[#2c3570]'>
-								<div
-									className='absolute inset-0 opacity-10'
-									style={{
-										backgroundImage:
-											"url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-									}}
-								/>
-							</div>
+						{heroSlides.length > 0
+							? heroSlides.map((slide) => (
+									<div key={slide.id} className='h-screen relative'>
+										{/* Background */}
+										<div
+											className='absolute inset-0'
+											style={{
+												background:
+													slide.background_gradient ||
+													(slide.background_image
+														? `url(${slide.background_image}) center/cover`
+														: 'linear-gradient(to right, #1a1f4d, #2c3570)'),
+											}}>
+											{!slide.background_image && (
+												<div
+													className='absolute inset-0 opacity-10'
+													style={{
+														backgroundImage:
+															"url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+													}}
+												/>
+											)}
+										</div>
 
-							{/* Date info in top left */}
-							<div className='absolute top-4 sm:top-6 md:top-8 left-4 sm:left-6 md:left-8 text-white z-10'>
-								<div className='text-xs sm:text-sm opacity-90'>
-									{t('homePage.eventDate')}
-								</div>
-								<div className='text-xs sm:text-sm opacity-90'>
-									{t('homePage.eventVenue')}
-								</div>
-								<div className='text-xs sm:text-sm opacity-90'>
-									{t('homePage.eventLocation')}
-								</div>
-							</div>
+										{/* Event info in top left */}
+										{slide.event_info && (slide.event_info.date || slide.event_info.venue || slide.event_info.location) && (
+											<div className='absolute top-4 sm:top-6 md:top-8 left-4 sm:left-6 md:left-8 text-white z-10'>
+												{slide.event_info.date && (
+													<div className='text-xs sm:text-sm opacity-90'>
+														{getLocalized(slide.event_info.date, locale as 'ru' | 'en')}
+													</div>
+												)}
+												{slide.event_info.venue && (
+													<div className='text-xs sm:text-sm opacity-90'>
+														{getLocalized(slide.event_info.venue, locale as 'ru' | 'en')}
+													</div>
+												)}
+												{slide.event_info.location && (
+													<div className='text-xs sm:text-sm opacity-90'>
+														{getLocalized(slide.event_info.location, locale as 'ru' | 'en')}
+													</div>
+												)}
+											</div>
+										)}
 
-							<div className='relative h-full flex flex-col items-center justify-center text-white z-10 px-4 sm:px-6 md:px-8'>
-								<div className='text-center max-w-4xl'>
-									<h1 className='text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-4'>{t('homePage.mainTitle')}</h1>
-									<h2 className='text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-4'>
-										{t('homePage.mainSubtitle')}{' '}
-										<span className='text-[#4db8b8]'>
-											{t('homePage.mainSubtitleHighlight')}
-										</span>{' '}
-										{t('homePage.mainSubtitleEnd')}
-									</h2>
-									<p className='text-base sm:text-lg md:text-xl mb-8 sm:mb-12 opacity-90'>
-										{t('homePage.mainDescription')}
-									</p>
+										{/* Content */}
+										<div className='relative h-full flex flex-col items-center justify-center text-white z-10 px-4 sm:px-6 md:px-8'>
+											<div className='text-center max-w-4xl'>
+												<h1 className='text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-4'>
+													{getLocalized(slide.title, locale as 'ru' | 'en')}
+												</h1>
+												{(slide.subtitle || slide.subtitle_highlight) && (
+													<h2 className='text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-4'>
+														{slide.subtitle &&
+															getLocalized(slide.subtitle, locale as 'ru' | 'en')}{' '}
+														{slide.subtitle_highlight && (
+															<span className='text-[#4db8b8]'>
+																{getLocalized(
+																	slide.subtitle_highlight,
+																	locale as 'ru' | 'en'
+																)}
+															</span>
+														)}
+													</h2>
+												)}
+												{slide.description && (
+													<p className='text-base sm:text-lg md:text-xl mb-8 sm:mb-12 opacity-90'>
+														{getLocalized(slide.description, locale as 'ru' | 'en')}
+													</p>
+												)}
 
-									<div className='flex gap-2 sm:gap-4 justify-center flex-wrap'>
-										<button onClick={() => navigate('/program')} className='bg-[#4db8b8] hover:bg-[#3da8a8] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors text-sm sm:text-base'>
-											{t('homePage.watchStream')}
-										</button>
-										<button onClick={() => navigate('/partners')} className='bg-[#1a1f4d] hover:bg-[#0f1333] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors border border-white/20 text-sm sm:text-base'>
-											{t('homePage.becomePartner')}
-										</button>
-										<button onClick={() => navigate('/mobile-app')} className='bg-white hover:bg-gray-100 text-[#1a1f4d] px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors text-sm sm:text-base'>
-											{t('homePage.downloadApp')}
-										</button>
+												{/* Buttons */}
+												{slide.buttons && slide.buttons.length > 0 && (
+													<div className='flex gap-2 sm:gap-4 justify-center flex-wrap'>
+														{slide.buttons
+															.sort((a, b) => a.order - b.order)
+															.map((button, idx) => {
+																const buttonText = getLocalized(
+																	button.text,
+																	locale as 'ru' | 'en'
+																)
+																const buttonLink = button.link
+
+																const styleClasses = {
+																	primary:
+																		'bg-[#4db8b8] hover:bg-[#3da8a8] text-white',
+																	secondary:
+																		'bg-[#1a1f4d] hover:bg-[#0f1333] text-white border border-white/20',
+																	outline:
+																		'bg-white hover:bg-gray-100 text-[#1a1f4d]',
+																}[button.style] ||
+																	'bg-[#4db8b8] hover:bg-[#3da8a8] text-white'
+
+																return (
+																	<button
+																		key={idx}
+																		onClick={() => navigate(buttonLink)}
+																		className={`${styleClasses} px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors text-sm sm:text-base`}>
+																		{buttonText}
+																	</button>
+																)
+															})}
+													</div>
+												)}
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-						</div>
+							  ))
+							: // Fallback to default slide if no slides loaded
+							  [1].map((i) => (
+									<div key={i} className='h-screen relative'>
+										<div className='absolute inset-0 bg-gradient-to-r from-[#1a1f4d] to-[#2c3570]'>
+											<div
+												className='absolute inset-0 opacity-10'
+												style={{
+													backgroundImage:
+														"url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+												}}
+											/>
+										</div>
 
-						{/* Slide 2 */}
-						<div className='h-screen relative'>
-							<div className='absolute inset-0 bg-gradient-to-br from-[#2c3570] to-[#1a1f4d]'>
-								<div
-									className='absolute inset-0 opacity-10'
-									style={{
-										backgroundImage:
-											"url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-									}}
-								/>
-							</div>
+										<div className='absolute top-4 sm:top-6 md:top-8 left-4 sm:left-6 md:left-8 text-white z-10'>
+											<div className='text-xs sm:text-sm opacity-90'>
+												{t('homePage.eventDate')}
+											</div>
+											<div className='text-xs sm:text-sm opacity-90'>
+												{t('homePage.eventVenue')}
+											</div>
+											<div className='text-xs sm:text-sm opacity-90'>
+												{t('homePage.eventLocation')}
+											</div>
+										</div>
 
-							<div className='absolute top-4 sm:top-8 left-4 sm:left-8 text-white z-10'>
-								<div className='text-xs sm:text-sm opacity-90'>
-									{t('homePage.eventDate')}
-								</div>
-								<div className='text-xs sm:text-sm opacity-90'>
-									{t('homePage.eventVenue')}
-								</div>
-								<div className='text-xs sm:text-sm opacity-90'>
-									{t('homePage.eventLocation')}
-								</div>
-							</div>
+										<div className='relative h-full flex flex-col items-center justify-center text-white z-10 px-4 sm:px-6 md:px-8'>
+											<div className='text-center max-w-4xl'>
+												<h1 className='text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-4'>
+													{t('homePage.mainTitle')}
+												</h1>
+												<h2 className='text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-4'>
+													{t('homePage.mainSubtitle')}{' '}
+													<span className='text-[#4db8b8]'>
+														{t('homePage.mainSubtitleHighlight')}
+													</span>{' '}
+													{t('homePage.mainSubtitleEnd')}
+												</h2>
+												<p className='text-base sm:text-lg md:text-xl mb-8 sm:mb-12 opacity-90'>
+													{t('homePage.mainDescription')}
+												</p>
 
-							<div className='relative h-full flex flex-col items-center justify-center text-white z-10 px-4 sm:px-6 md:px-8'>
-								<div className='text-center max-w-4xl'>
-									<h1 className='text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-4'>{t('homePage.mainTitle')}</h1>
-									<h2 className='text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-4'>
-										{t('homePage.mainSubtitle')}{' '}
-										<span className='text-[#4db8b8]'>
-											{t('homePage.mainSubtitleHighlight')}
-										</span>{' '}
-										{t('homePage.mainSubtitleEnd')}
-									</h2>
-									<p className='text-base sm:text-lg md:text-xl mb-8 sm:mb-12 opacity-90'>
-										{t('homePage.mainDescription')}
-									</p>
-
-									<div className='flex gap-2 sm:gap-4 justify-center flex-wrap'>
-										<button onClick={() => navigate('/program')} className='bg-[#4db8b8] hover:bg-[#3da8a8] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors text-sm sm:text-base'>
-											{t('homePage.watchStream')}
-										</button>
-										<button onClick={() => navigate('/partners')} className='bg-[#1a1f4d] hover:bg-[#0f1333] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors border border-white/20 text-sm sm:text-base'>
-											{t('homePage.becomePartner')}
-										</button>
-										<button onClick={() => navigate('/mobile-app')} className='bg-white hover:bg-gray-100 text-[#1a1f4d] px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors text-sm sm:text-base'>
-											{t('homePage.downloadApp')}
-										</button>
+												<div className='flex gap-2 sm:gap-4 justify-center flex-wrap'>
+													<button
+														onClick={() => navigate('/program')}
+														className='bg-[#4db8b8] hover:bg-[#3da8a8] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors text-sm sm:text-base'>
+														{t('homePage.watchStream')}
+													</button>
+													<button
+														onClick={() => navigate('/partners')}
+														className='bg-[#1a1f4d] hover:bg-[#0f1333] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors border border-white/20 text-sm sm:text-base'>
+														{t('homePage.becomePartner')}
+													</button>
+													<button
+														onClick={() => navigate('/mobile-app')}
+														className='bg-white hover:bg-gray-100 text-[#1a1f4d] px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors text-sm sm:text-base'>
+														{t('homePage.downloadApp')}
+													</button>
+												</div>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-						</div>
-
-						{/* Slide 3 */}
-						<div className='h-screen relative'>
-							<div className='absolute inset-0 bg-gradient-to-bl from-[#1a1f4d] via-[#2c3570] to-[#1a1f4d]'>
-								<div
-									className='absolute inset-0 opacity-10'
-									style={{
-										backgroundImage:
-											"url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-									}}
-								/>
-							</div>
-
-							<div className='absolute top-4 sm:top-8 left-4 sm:left-8 text-white z-10'>
-								<div className='text-xs sm:text-sm opacity-90'>
-									{t('homePage.eventDate')}
-								</div>
-								<div className='text-xs sm:text-sm opacity-90'>
-									{t('homePage.eventVenue')}
-								</div>
-								<div className='text-xs sm:text-sm opacity-90'>
-									{t('homePage.eventLocation')}
-								</div>
-							</div>
-
-							<div className='relative h-full flex flex-col items-center justify-center text-white z-10 px-4 sm:px-6 md:px-8'>
-								<div className='text-center max-w-4xl'>
-									<h1 className='text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-4'>{t('homePage.mainTitle')}</h1>
-									<h2 className='text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-4'>
-										{t('homePage.mainSubtitle')}{' '}
-										<span className='text-[#4db8b8]'>
-											{t('homePage.mainSubtitleHighlight')}
-										</span>{' '}
-										{t('homePage.mainSubtitleEnd')}
-									</h2>
-									<p className='text-base sm:text-lg md:text-xl mb-8 sm:mb-12 opacity-90'>
-										{t('homePage.mainDescription')}
-									</p>
-
-									<div className='flex gap-2 sm:gap-4 justify-center flex-wrap'>
-										<button onClick={() => navigate('/program')} className='bg-[#4db8b8] hover:bg-[#3da8a8] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors text-sm sm:text-base'>
-											{t('homePage.watchStream')}
-										</button>
-										<button onClick={() => navigate('/partners')} className='bg-[#1a1f4d] hover:bg-[#0f1333] text-white px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors border border-white/20 text-sm sm:text-base'>
-											{t('homePage.becomePartner')}
-										</button>
-										<button onClick={() => navigate('/mobile-app')} className='bg-white hover:bg-gray-100 text-[#1a1f4d] px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded transition-colors text-sm sm:text-base'>
-											{t('homePage.downloadApp')}
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
+							  ))}
 					</Slider>
 				</section>
 

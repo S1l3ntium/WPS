@@ -19,7 +19,7 @@ use MoonShine\UI\Fields\Switcher;
 class HeroSlideResource extends ModelResource
 {
     protected string $model = HeroSlide::class;
-    protected string $title = 'Hero Слайды';
+    protected string $title = 'Слайдер на главной';
     protected string $column = 'title->ru';
 
     public function fields(): array
