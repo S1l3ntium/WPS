@@ -99,8 +99,7 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/ssl:/etc/nginx/ssl
-      - laravel_storage:/app/storage
-      - ./wps-laravel/public:/app/public:ro
+      - ./wps-laravel:/app:ro
     depends_on:
       - laravel
       - frontend
